@@ -6,7 +6,7 @@ export function VideoCard({ index, item, action, onAction }: { index: number; it
   const tileClass = `tile tile-${index % 5} card-tile`;
   const tile = (
     <>
-      {item.thumbnail && <img src={item.thumbnail} alt="" />}
+      {item.thumbnail && <img src={item.thumbnail} alt="" onError={(event) => event.currentTarget.remove()} />}
       <span className="card-rank">{index + 1}</span>
       <span className="card-views">{item.views === null ? "Views unknown" : `${compact(item.views)} ${item.unit}`}</span>
       <span className="card-quote">

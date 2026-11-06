@@ -8,6 +8,7 @@ const SKELETONS = [0, 1, 2, 3, 4, 5];
 export interface ScanItem {
   text: string;
   term: string;
+  thumbnail?: string | null;
 }
 
 /** Plays between search and results. It also holds the screen while a live search runs. */
@@ -53,6 +54,7 @@ export function Scan({
           {reel.length > 0
             ? [...reel, ...reel].map((item, index) => (
                 <div key={index} className={`tile tile-${index % 5} scan-tile`}>
+                  {item.thumbnail && <img src={item.thumbnail} alt="" onError={(event) => event.currentTarget.remove()} />}
                   <p>
                     “<Highlight text={item.text} term={item.term} />”
                   </p>

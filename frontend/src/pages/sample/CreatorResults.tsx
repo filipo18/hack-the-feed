@@ -30,7 +30,7 @@ export function CreatorResults() {
         <Scan
           title={`@${handle}`}
           stages={SCAN_STAGES.creators}
-          items={brands.map((entry) => ({ text: entry.top.snippet, term: entry.top.brand }))}
+          items={brands.map((entry) => ({ text: entry.top.snippet, term: entry.top.brand, thumbnail: entry.top.thumbnail }))}
           ready={Boolean(data)}
           onDone={finish}
         />

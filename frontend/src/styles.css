@@ -418,7 +418,8 @@ button, input, textarea { font: inherit; }
   border-radius: 20px;
   text-align: left;
 }
-.scan-tile p { color: var(--white); font-size: 15px; font-weight: 700; line-height: 1.3; text-shadow: 0 1px 10px rgb(5 21 66 / 0.6); }
+.scan-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.scan-tile p { position: relative; color: var(--white); font-size: 15px; font-weight: 700; line-height: 1.3; text-shadow: 0 1px 10px rgb(5 21 66 / 0.6); }
 .scan-bar { display: block; height: 10px; border-radius: 6px; background: rgb(255 255 255 / 0.55); }
 .scan-bar-short { width: 62%; }
 .scan-beam {
@@ -557,6 +558,8 @@ button, input, textarea { font: inherit; }
   font-size: 14px;
   font-weight: 700;
 }
+.card-tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(5 21 66 / 0.08) 45%, rgb(5 21 66 / 0.75) 100%); pointer-events: none; }
+.card-tile .card-rank, .card-tile .card-views, .card-tile .card-quote { z-index: 1; }
 .card-quote { font-size: 18px; font-weight: 700; line-height: 1.28; text-shadow: 0 1px 12px rgb(5 21 66 / 0.6); }
 .card-quote small { display: block; margin-top: 6px; font-size: 14px; font-weight: 500; }
 .card-body { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }

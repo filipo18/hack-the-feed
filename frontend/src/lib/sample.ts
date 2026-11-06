@@ -30,6 +30,15 @@ const CREATORS: (Creator & { line: string; views: number[]; stamps: (string | nu
   { handle: "sample.marco", platform: "tiktok", followers: 8_900, market: "US", brandDeals: 0, line: "the {brand} that started it all", views: [79_000], stamps: ["0:15"] },
 ];
 
+/** Generated UGC-style stills in public/ugc/<set>/<n>.webp. Unknown brands use the generic set. */
+const THUMB_SETS: Record<string, number> = { birkenstock: 8, owala: 6, ryanair: 3, generic: 3 };
+
+function thumbnail(brand: string, index: number): string {
+  const key = brand.trim().toLowerCase().replace(/[^a-z]/g, "");
+  const set = key in THUMB_SETS ? key : "generic";
+  return `/ugc/${set}/${(index % THUMB_SETS[set]) + 1}.webp`;
+}
+
 const CHANNEL_SETS: Mention["channels"][] = [
   ["spoken", "caption"],
   ["on_screen"],
@@ -50,6 +59,7 @@ function mentionsFor(creator: (typeof CREATORS)[number], brand: string, offset: 
     channels: CHANNEL_SETS[(offset + index) % CHANNEL_SETS.length],
     snippet: (index === 0 ? creator.line : FOLLOW_UP_LINES[(index - 1) % FOLLOW_UP_LINES.length]).replace("{brand}", brand),
     timestamp: creator.stamps[index],
+    thumbnail: thumbnail(brand, offset * 3 + index),
   }));
 }
 

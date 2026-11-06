@@ -125,7 +125,7 @@ function BrandWorkspace({ session, view }: { session: Session; view: View }) {
       items={items}
       mentions={mentions}
       title={session.name}
-      scanItems={creators.map((creator) => ({ text: creator.top.snippet, term: creator.top.brand }))}
+      scanItems={creators.map((creator) => ({ text: creator.top.snippet, term: creator.top.brand, thumbnail: creator.top.thumbnail }))}
       list={(open) => (
         <>
           <div className="filter" role="group" aria-label="Filter by market">
@@ -199,7 +199,7 @@ function CreatorWorkspace({ session, view }: { session: Session; view: View }) {
       items={items}
       mentions={mentions}
       title={`@${session.name}`}
-      scanItems={brands.map((entry) => ({ text: entry.top.snippet, term: entry.top.brand }))}
+      scanItems={brands.map((entry) => ({ text: entry.top.snippet, term: entry.top.brand, thumbnail: entry.top.thumbnail }))}
       list={(open) => <BrandCards brands={brands} onPitch={(entry: RankedBrand) => open(entry.brand)} />}
     />
   );
