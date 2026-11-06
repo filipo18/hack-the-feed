@@ -1,20 +1,18 @@
 # Frontend
 
-This folder is the location for production frontend code. No production frontend exists in the repo yet, so this file is what keeps the folder tracked.
+Two audiences, one app: `/for-brands` and `/for-creators`, each with a search that leads to results at `/brands/:brand` and `/creators/:handle`.
 
-When the Lovable app is added, put all of it here:
+After login, `/app` is the dashboard for each side: overview, a ranked list, and an outreach or pitch board. Log in at `/login`.
 
-- the Lovable-generated app
-- components
-- routes
-- styling
-- assets
-- frontend build configs and dependencies (`package.json`, the lockfile, and the bundler config for this app)
+```bash
+npm install
+npm run dev     # http://localhost:5180
+npm run build
+```
 
-Backend code stays outside this folder. That includes the GMI backend. Do not put secrets, API keys, or auth headers here.
-
-`pilots/review-ui` is a historical synthetic pilot with its own Vite app. It stays under `pilots/` and is not this folder. Do not move it here.
-
-The product is brand-facing across all mentions, with this Lovable frontend and a GMI backend outside it, and it ranks the highest-reach relevant creators. This folder does not implement that. Do not scaffold a framework here ahead of the Lovable app.
-
-Placement rules for agents are in the root [`AGENTS.md`](../AGENTS.md).
+- Runs on synthetic sample data until the backend answers: copy `.env.example` to `.env` and set `VITE_API_URL`. Live data then overrides it, one endpoint at a time. The contract is in [`API.md`](API.md).
+- Hosting: send every route to `index.html`, or links like `/for-creators` will 404 on refresh.
+- Copy for both pages: `src/content.ts`. The working name is `PRODUCT_NAME` there.
+- Pricing: `src/lib/value.ts`. The numbers are placeholders.
+- This repo is public, so keep real creator handles out of `src/lib/sample.ts`.
+- Backend code stays outside this folder. Do not put secrets, API keys, or auth headers here.
