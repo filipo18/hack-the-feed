@@ -12,9 +12,15 @@ The response is the backend contract: `assessment`, `assessmentReason`, `gmiMode
 
 ## Creator report
 
-`POST /api/creator-report` is not implemented in this change. `frontend/src/creator/availability.ts` stays `CREATOR_REPORT_READY = false`. `/creators/:handle` and the creator demo workspace explain that the report is unavailable. They do not show sample creators.
+`POST /api/creator-report` is live. `CREATOR_REPORT_READY` is true. `/creators/:handle` and the creator workspace call it on the same origin. They do not fall back to sample rows.
 
-The old sample client remains in `src/lib/api.ts` for the unmounted PR5 creator components. Do not route those components until the creator endpoint is integrated.
+```json
+{ "handle": "lukadoncic", "platform": "instagram", "maxPosts": 5 }
+```
+
+`platform` is `instagram`, `tiktok`, or `youtube`. Optional `cpm` is an explicit illustrative rate. There is no brand field. `retrieval` reports `indexedTotalCount`, `returnedCount`, `cap`, `offset`, and `paginationComplete`. `viewsCount` stays null when missing. `entities` use `entityType` of `brand`, `team`, `product`, `person`, or `platform_distribution`. Disclosure is `disclosed` or `unknown`. Evidence keeps `snippet`, `field`, `timestampSeconds`, and `frameId`. Vision rows have a null snippet and `reviewStatus` `unreviewed`. `illustrativeCpm` is null unless the request or `CREATOR_ILLUSTRATIVE_CPM` sets it. `invoice` is null. `paymentOwed` is false. Text status is `complete`, `failed`, or `unassessed`. Vision status is `complete`, `failed`, or `blocked`. Zero indexed posts use the message `no indexed content found`.
+
+The old sample client in `src/lib/api.ts` is not mounted. `CreatorResults` and `CreatorWorkspace` stay unmounted.
 
 ## Local dev
 

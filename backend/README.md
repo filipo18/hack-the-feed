@@ -1,6 +1,6 @@
 # Backend
 
-One Python service for brand search. It asks Oriane for a bounded sample, then asks GMI whether those posts are relevant. There is no database, queue, account system, or second service.
+One Python service for brand search and `POST /api/creator-report`. Brand search asks Oriane for a bounded sample, then asks GMI whether those posts are relevant. The creator report asks Oriane for one handle on one platform, with no brand filter, then asks GMI for grounded names only when a key and model are set. There is no database, queue, account system, or second service. Live GMI inference is not claimed from tests that inject a fake response.
 
 `Dockerfile` in this directory is the API-only image. The image that also serves `frontend/` is the Dockerfile at the repo root. See [DEPLOY.md](DEPLOY.md).
 

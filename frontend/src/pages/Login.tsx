@@ -24,12 +24,12 @@ export function Login() {
         {PRODUCT_NAME}
       </Link>
       <form className="login-card" onSubmit={submit}>
-        <h1 className="display">{isBrand ? "Demo access" : "Creator report is not live"}</h1>
+        <h1 className="display">{isBrand ? "Demo access" : "Creator report"}</h1>
         <p className="login-note">
           This stores a name in this browser and does not check a password.
           {isBrand
             ? " The brand workspace runs a real search."
-            : " Opening a creator workspace does not look up posts."}
+            : " The creator workspace requests indexed posts for that handle. It does not send a pitch."}
         </p>
         <div className="switch switch-light" role="group" aria-label="Choose your side">
           <button type="button" className={isBrand ? "active" : undefined} onClick={() => setAudience("brands")}>
@@ -49,7 +49,7 @@ export function Login() {
           required
         />
         <button type="submit" className="pill pill-primary">
-          {isBrand ? "Open demo workspace" : "Show the unavailable creator screen"}
+          {isBrand ? "Open demo workspace" : "Open creator workspace"}
         </button>
       </form>
     </main>

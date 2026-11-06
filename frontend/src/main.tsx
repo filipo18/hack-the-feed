@@ -19,7 +19,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/for-creators" element={<Landing audience="creators" />} />
         <Route path="/brands/:brand" element={<BrandResults />} />
         <Route path="/demo/brand-search" element={<DemoBrandSearch />} />
-        {/* CreatorResults still falls back to sample rows. Keep it unmounted until POST /api/creator-report is integrated. */}
+        {/* Sample CreatorResults stays unmounted. This route posts /api/creator-report. */}
         <Route path="/creators/:handle" element={<CreatorHeld />} />
         <Route path="/login" element={<Login />} />
         <Route path="/app" element={<AppPage view="overview" />} />

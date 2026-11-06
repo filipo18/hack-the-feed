@@ -435,6 +435,7 @@ button, input, textarea { font: inherit; }
 .brand-value { font-family: var(--display); font-size: 48px; font-stretch: 62%; font-weight: 900; line-height: 1.05; }
 .mention-list { display: grid; gap: 10px; }
 .brand-row .pill { justify-self: end; }
+.brand-actions { display: grid; justify-items: end; gap: 8px; }
 
 /* Outreach */
 .outreach {

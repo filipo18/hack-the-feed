@@ -1,7 +1,6 @@
 /**
- * Seam for the creator-report change. That work owns POST /api/creator-report
- * and the creator screens. This build does not call the endpoint and does not
- * invent its rows. Leave CREATOR_REPORT_READY false until that contract is integrated.
+ * Creator screens call POST /api/creator-report. They do not mount the old sample workspace.
+ * A missing model stays unassessed in the response. This flag does not invent rows.
  */
 export const CREATOR_REPORT_PATH = "/api/creator-report";
-export const CREATOR_REPORT_READY = false;
+export const CREATOR_REPORT_READY = true;
