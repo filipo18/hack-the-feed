@@ -28,9 +28,10 @@ jobs:
       - name: Push one immutable tag
         env:
           OWNER: ${{ github.repository_owner }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           name="ghcr.io/$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')/hack-the-feed"
-          echo "$GITHUB_TOKEN" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          printf '%s' "$REGISTRY_TOKEN" | docker login ghcr.io -u "$OWNER" --password-stdin
           docker tag hack-the-feed:ci "${name}:${GITHUB_SHA}"
           docker push "${name}:${GITHUB_SHA}"
           echo "pushed ${name}:${GITHUB_SHA}"
