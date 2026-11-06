@@ -54,6 +54,7 @@ Brands found in this creator's videos. `handle` has no leading `@`.
 - `views`: `null` when unknown, never `0`
 - `timestamp`: `null` when the mention has no time, such as a caption
 - `brandDeals`: posts on the account with an ad marker
+- `thumbnail`: optional URL of a frame from the video, shown on the creator card
 - `market`: `US`, `UK`, `CA`, `AU`, `DE`, `FR`, `ES` or `Other`
 - Dedupe by `postUrl`, and exclude brand accounts and collaborators
 - Send CORS headers for the front-end origin

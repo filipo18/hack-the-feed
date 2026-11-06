@@ -28,24 +28,24 @@ export function AppShell({ children }: { children: (session: Session) => ReactNo
 
   return (
     <div className="app">
-      <aside className="rail">
+      <header className="nav app-nav">
         <Link className="wordmark" to="/app">
           {PRODUCT_NAME}
         </Link>
-        <nav aria-label="Dashboard">
+        <nav className="switch" aria-label="Dashboard">
           {LINKS[session.audience].map((link) => (
             <NavLink key={link.to} to={link.to} end={link.end}>
               {link.label}
             </NavLink>
           ))}
         </nav>
-        <div className="rail-foot">
-          <p>{session.audience === "brands" ? session.name : `@${session.name}`}</p>
+        <div className="app-account">
+          <span>{session.audience === "brands" ? session.name : `@${session.name}`}</span>
           <button type="button" onClick={logOut}>
             Log out
           </button>
         </div>
-      </aside>
+      </header>
       <main className="workspace">{children(session)}</main>
     </div>
   );

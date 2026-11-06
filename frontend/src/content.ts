@@ -2,6 +2,11 @@ export const PRODUCT_NAME = "Unpaid";
 
 export type Audience = "brands" | "creators";
 
+export const SCAN_STAGES: Record<Audience, string[]> = {
+  brands: ["Reading captions", "Listening to speech", "Reading on-screen text", "Checking the visuals", "Ranking creators by views"],
+  creators: ["Reading your captions", "Listening to your videos", "Reading on-screen text", "Matching brands", "Working out what they’re worth"],
+};
+
 export interface Copy {
   path: string;
   resultsPath: string;

@@ -1,104 +1,61 @@
 import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Nav } from "../components/Nav";
+import { CreatorCards } from "../components/Cards";
 import { Footer } from "../components/Footer";
+import { MoneyHero } from "../components/MoneyHero";
+import { Nav } from "../components/Nav";
 import { OutreachDialog, type OutreachDraft } from "../components/OutreachDialog";
-import { Empty, Loading } from "../components/ResultState";
+import { Empty } from "../components/ResultState";
+import { Scan } from "../components/Scan";
+import { useScan } from "../components/motion";
 import { useResult } from "../components/useResult";
+import { SCAN_STAGES } from "../content";
 import { searchBrand } from "../lib/api";
-import { CHANNEL_LABEL, compact, money } from "../lib/format";
 import { brandOutreach } from "../lib/messages";
 import { rankCreators } from "../lib/rank";
 
 export function BrandResults() {
   const brand = decodeURIComponent(useParams().brand ?? "");
   const loaded = useResult(() => searchBrand(brand), brand);
-  const data = loaded?.data;
+  const { scanning, finish } = useScan(`brand:${brand}`, false);
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
+  const data = loaded?.data;
   const creators = useMemo(() => (data ? rankCreators(data) : []), [data]);
-  const views = creators.reduce((sum, creator) => sum + creator.views, 0);
-  const cost = creators.reduce((sum, creator) => sum + creator.cost, 0);
+  const showing = Boolean(data) && !scanning;
 
   return (
     <div className="page">
-      <section className="result-head">
-        <Nav audience="brands" />
-        <h1 className="display">{brand}</h1>
-        {data && creators.length > 0 && (
-          <dl className="totals">
-            <div>
-              <dt>Creators with no ad marker</dt>
-              <dd>At least {creators.length}</dd>
-            </div>
-            <div>
-              <dt>Views on your brand</dt>
-              <dd>At least {compact(views)}</dd>
-            </div>
-            <div>
-              <dt>Cost to buy that reach</dt>
-              <dd>{money(cost)}</dd>
-            </div>
-          </dl>
-        )}
-      </section>
-
+      {scanning && (
+        <Scan
+          title={brand}
+          stages={SCAN_STAGES.brands}
+          items={creators.map((creator) => ({ text: creator.top.snippet, term: creator.top.brand }))}
+          ready={Boolean(data)}
+          onDone={finish}
+        />
+      )}
       <section className="results">
-        {!data && <Loading term={brand} />}
-        {data && creators.length === 0 && <Empty term={brand} back="/for-brands" />}
-        {creators.length > 0 && (
+        <Nav audience="brands" />
+        {showing && creators.length === 0 && <Empty term={brand} back="/for-brands" />}
+        {showing && creators.length > 0 && (
           <>
-            <p className="results-meta">
-              Sorted by views. {data?.paidPostsRemoved} posts with an ad marker were removed.
-              {loaded?.sample && <span className="sample-tag">Sample data</span>}
-            </p>
-            <table className="rank">
-              <thead>
-                <tr>
-                  <th scope="col">Rank</th>
-                  <th scope="col">Creator</th>
-                  <th scope="col">Top mention</th>
-                  <th scope="col" className="num">Views</th>
-                  <th scope="col" className="num">Cost to buy</th>
-                  <th scope="col"><span className="visually-hidden">Action</span></th>
-                </tr>
-              </thead>
-              <tbody>
-                {creators.map((creator, index) => (
-                  <tr key={creator.handle}>
-                    <td className="rank-number" data-label="Rank">{index + 1}</td>
-                    <td data-label="Creator">
-                      <strong>@{creator.handle}</strong>
-                      <span className="sub">
-                        {compact(creator.followers)} followers, {creator.market}
-                      </span>
-                    </td>
-                    <td data-label="Top mention">
-                      “{creator.top.snippet}”
-                      <span className="sub">
-                        {creator.top.channels.map((channel) => CHANNEL_LABEL[channel]).join(", ")}
-                        {creator.top.timestamp && ` at ${creator.top.timestamp}`}
-                      </span>
-                    </td>
-                    <td className="num" data-label="Views">
-                      <strong>{compact(creator.views)}</strong>
-                      <span className="sub">
-                        {creator.mentions.length} {creator.mentions.length === 1 ? "video" : "videos"}
-                      </span>
-                    </td>
-                    <td className="num" data-label="Cost to buy">{money(creator.cost)}</td>
-                    <td className="action">
-                      <button
-                        type="button"
-                        className="pill pill-primary"
-                        onClick={() => setDraft(brandOutreach(brand, creator))}
-                      >
-                        Reach out
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <MoneyHero
+              title={brand}
+              active={showing}
+              amount={creators.reduce((sum, creator) => sum + creator.cost, 0)}
+              stats={[
+                { label: "Creators with no ad marker", value: creators.length, prefix: "At least " },
+                { label: "Views on your brand", value: creators.reduce((sum, creator) => sum + creator.views, 0), prefix: "At least " },
+                { label: "Ad posts removed", value: data?.paidPostsRemoved ?? 0 },
+              ]}
+            />
+            <div className="results-body">
+              <div className="results-head">
+                <h2>Reach out to these first</h2>
+                {loaded?.sample && <span className="sample-tag">Sample data</span>}
+              </div>
+              <CreatorCards creators={creators} onContact={(creator) => setDraft(brandOutreach(brand, creator))} />
+            </div>
           </>
         )}
       </section>
