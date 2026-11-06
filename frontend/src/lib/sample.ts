@@ -44,7 +44,7 @@ function mentionsFor(creator: (typeof CREATORS)[number], brand: string, offset: 
   return creator.views.map((views, index) => ({
     postUrl: `https://example.com/sample/${creator.handle}/${index + 1}`,
     platform: creator.platform,
-    publishedAt: `2026-${String(10 - index).padStart(2, "0")}-${String(3 + offset * 3).padStart(2, "0")}`,
+    publishedAt: `2026-${String(8 + ((offset + index) % 3)).padStart(2, "0")}-${String(1 + ((offset * 5 + index * 9) % 28)).padStart(2, "0")}`,
     views,
     brand,
     channels: CHANNEL_SETS[(offset + index) % CHANNEL_SETS.length],
