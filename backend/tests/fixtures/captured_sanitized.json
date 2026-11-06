@@ -1,0 +1,24 @@
+{
+  "origin": "captured_sanitized",
+  "note": "Trimmed from the 6 Nov 2026 sanitized evidence summary. This is not a raw Oriane payload and it is not a synthetic caption.",
+  "row": {
+    "id": "cnt_71248345bb885dbfb6fea356673f",
+    "platform": "instagram",
+    "platformId": "DfHWl8YTWWx",
+    "profileHandle": "travel.kamel",
+    "profilePlatformId": "travel-kamel-id",
+    "viewsCount": 13226443,
+    "publishedAt": "2026-10-11T00:00:00.000Z",
+    "caption": "Ryanair doesn’t just focus on ticket prices. #Ryanair #Boeing737",
+    "hashtags": ["#ryanair", "#boeing737"],
+    "mentions": [],
+    "media": [
+      {
+        "transcript": null,
+        "transcriptChunks": [],
+        "onScreenText": [],
+        "frames": []
+      }
+    ]
+  }
+}
