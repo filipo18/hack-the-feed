@@ -11,6 +11,7 @@ import { useScan } from "../components/motion";
 import { useResult } from "../components/useResult";
 import { SCAN_STAGES } from "../content";
 import { searchBrand } from "../lib/api";
+import { compact } from "../lib/format";
 import { brandOutreach } from "../lib/messages";
 import { rankCreators } from "../lib/rank";
 
@@ -42,10 +43,12 @@ export function BrandResults() {
             <MoneyHero
               title={brand}
               active={showing}
-              amount={creators.reduce((sum, creator) => sum + creator.cost, 0)}
+              amount={creators.reduce((sum, creator) => sum + creator.views, 0)}
+              line={(shown) => `${compact(shown)} impressions you missed.`}
+              note="Video views on posts with no ad marker. Only part of each profile is indexed, so the real number is higher."
               stats={[
                 { label: "Creators with no ad marker", value: creators.length, prefix: "At least " },
-                { label: "Views on your brand", value: creators.reduce((sum, creator) => sum + creator.views, 0), prefix: "At least " },
+                { label: "Videos showing your brand", value: creators.reduce((sum, creator) => sum + creator.mentions.length, 0), prefix: "At least " },
                 { label: "Ad posts removed", value: data?.paidPostsRemoved ?? 0 },
               ]}
             />

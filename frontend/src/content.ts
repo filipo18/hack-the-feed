@@ -3,7 +3,7 @@ export const PRODUCT_NAME = "Unpaid";
 export type Audience = "brands" | "creators";
 
 export const SCAN_STAGES: Record<Audience, string[]> = {
-  brands: ["Reading captions", "Listening to speech", "Reading on-screen text", "Checking the visuals", "Ranking creators by views"],
+  brands: ["Reading captions", "Listening to speech", "Reading on-screen text", "Checking the visuals", "Ranking creators by impressions"],
   creators: ["Reading your captions", "Listening to your videos", "Reading on-screen text", "Matching brands", "Working out what they’re worth"],
 };
 
@@ -35,7 +35,7 @@ export const COPY: Record<Audience, Copy> = {
     resultsPath: "/brands",
     lineOne: "They post you.",
     lineTwo: "Nobody paid them.",
-    lede: "Find creators who already show your brand in their videos. Rank them by views, then reach out to the best ones first.",
+    lede: "Find creators who already show your brand in their videos. See the impressions they get you, then reach out to the best ones first.",
     placeholder: "Your brand, like Birkenstock",
     inputLabel: "Your brand",
     action: "Find creators",
@@ -52,10 +52,10 @@ export const COPY: Record<Audience, Copy> = {
       },
       {
         name: "Rank",
-        text: "See every creator with no ad marker on the post, sorted by views.",
+        text: "See every creator with no ad marker on the post, sorted by impressions.",
         panel: [
-          { label: "Top creator", value: "4.1M", note: "Views across 2 videos" },
-          { label: "Cost to buy that reach", value: "$74,196", note: "Estimate, based on market rates" },
+          { label: "Top creator", value: "4.1M", note: "Impressions across 2 videos" },
+          { label: "All creators", value: "9.9M", note: "Impressions you didn’t know about" },
         ],
       },
       {
@@ -81,7 +81,7 @@ export const COPY: Record<Audience, Copy> = {
       { label: "Who you contact", old: "Strangers", next: "People already posting you" },
       { label: "Proof they fit", old: "Follower count", next: "Their own video" },
       { label: "First message", old: "Would you try us?", next: "We saw your video" },
-      { label: "Price talk", old: "Their rate card", next: "Real views on your brand" },
+      { label: "Price talk", old: "Their rate card", next: "Real impressions on your brand" },
     ],
     closeTitle: ["Your best creators", "are already here."],
     crossTitle: "Creator?",
@@ -91,8 +91,8 @@ export const COPY: Record<Audience, Copy> = {
       caption: "“I take my Owala everywhere, honestly”",
       toastTitle: "Spoken at 0:14",
       toastText: "Owala found. No ad marker on this post.",
-      valueLabel: "Cost to buy this reach",
-      value: "$57,240",
+      valueLabel: "Impressions on this video",
+      value: "3.2M",
     },
   },
   creators: {

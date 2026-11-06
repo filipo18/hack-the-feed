@@ -12,7 +12,9 @@ export function CreatorCards({ creators, onContact }: { creators: RankedCreator[
           mention={creator.top}
           title={`@${creator.handle}`}
           subtitle={`${compact(creator.followers)} followers, ${creator.market}`}
-          amount={money(creator.cost)}
+          amount={compact(creator.views)}
+          amountNote="total"
+          unit="impressions"
           action="Reach out"
           actionLabel={`Reach out to @${creator.handle}`}
           onAction={() => onContact(creator)}
@@ -33,6 +35,7 @@ export function BrandCards({ brands, onPitch }: { brands: RankedBrand[]; onPitch
           title={entry.brand}
           subtitle={`${compact(entry.views)} views, ${entry.mentions.length} ${entry.mentions.length === 1 ? "video" : "videos"}`}
           amount={money(entry.value)}
+          unit="views"
           action="Pitch"
           actionLabel={`Pitch ${entry.brand}`}
           onAction={() => onPitch(entry)}

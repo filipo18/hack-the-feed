@@ -11,6 +11,7 @@ import { useScan } from "../components/motion";
 import { useResult } from "../components/useResult";
 import { SCAN_STAGES } from "../content";
 import { searchCreator } from "../lib/api";
+import { money } from "../lib/format";
 import { creatorPitch } from "../lib/messages";
 import { rankBrands } from "../lib/rank";
 
@@ -44,6 +45,8 @@ export function CreatorResults() {
               keepCase
               active={showing}
               amount={brands.reduce((sum, entry) => sum + entry.value, 0)}
+              line={(shown) => `${money(shown)} on the table.`}
+              note="What this reach would cost to buy. It is an estimate, not money owed."
               stats={[
                 { label: "Brands in your videos", value: brands.length, prefix: "At least " },
                 { label: "Views on those brands", value: brands.reduce((sum, entry) => sum + entry.views, 0), prefix: "At least " },

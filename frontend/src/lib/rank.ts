@@ -6,7 +6,7 @@ export function rankCreators(result: BrandResult) {
     .map((creator) => {
       const views = totalViews(creator.mentions);
       const top = [...creator.mentions].sort((a, b) => (b.views ?? 0) - (a.views ?? 0))[0];
-      return { ...creator, views, cost: reachCost(views, creator), top };
+      return { ...creator, views, top };
     })
     .sort((a, b) => b.views - a.views);
 }

@@ -8,6 +8,8 @@ export function VideoCard({
   title,
   subtitle,
   amount,
+  amountNote,
+  unit,
   action,
   actionLabel,
   onAction,
@@ -17,6 +19,8 @@ export function VideoCard({
   title: string;
   subtitle: string;
   amount: string;
+  amountNote?: string;
+  unit: string;
   action: string;
   actionLabel: string;
   onAction: () => void;
@@ -28,7 +32,7 @@ export function VideoCard({
       <a className={`tile tile-${index % 5} card-tile`} href={mention.postUrl} target="_blank" rel="noreferrer">
         {mention.thumbnail && <img src={mention.thumbnail} alt="" />}
         <span className="card-rank">{index + 1}</span>
-        <span className="card-views">{mention.views === null ? "Views unknown" : `${compact(mention.views)} views`}</span>
+        <span className="card-views">{mention.views === null ? `${unit} unknown` : `${compact(mention.views)} ${unit}`}</span>
         <span className="card-quote">
           “<Highlight text={mention.snippet} term={mention.brand} />”
           <small>
@@ -42,7 +46,10 @@ export function VideoCard({
           <h3>{title}</h3>
           <p>{subtitle}</p>
         </div>
-        <p className="card-amount">{amount}</p>
+        <p className="card-amount">
+          {amount}
+          {amountNote && <small>{amountNote}</small>}
+        </p>
       </div>
       <button type="button" className="pill pill-primary" aria-label={actionLabel} onClick={onAction}>
         {action}

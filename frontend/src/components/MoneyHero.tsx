@@ -1,15 +1,20 @@
-import { money, compact } from "../lib/format";
+import { compact } from "../lib/format";
 import { useCountUp } from "./motion";
 
 export function MoneyHero({
   title,
   amount,
+  line,
+  note,
   active,
   stats,
   keepCase,
 }: {
   title: string;
   amount: number;
+  /** The second headline line, built from the counting number. */
+  line: (shown: number) => string;
+  note: string;
   active: boolean;
   stats: { label: string; value: number; prefix?: string }[];
   keepCase?: boolean;
@@ -25,7 +30,7 @@ export function MoneyHero({
         >
           {title}.
         </span>
-        <span className="money-amount">{money(shown)} on the table.</span>
+        <span className="money-amount">{line(shown)}</span>
       </h1>
       <div className="money-foot">
         <dl className="money-stats">
@@ -33,7 +38,7 @@ export function MoneyHero({
             <Stat key={stat.label} {...stat} active={active} />
           ))}
         </dl>
-        <p className="money-note">What this reach would cost to buy. It is an estimate, not money owed.</p>
+        <p className="money-note">{note}</p>
       </div>
     </div>
   );

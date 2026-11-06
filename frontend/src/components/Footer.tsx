@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="footer">
       <p className="footer-mark">{PRODUCT_NAME}</p>
       <p>
-        Reach estimates show what the same views would cost to buy. They are not money owed.
+        Impressions are video views on posts with no ad marker. Dollar values are estimates of what that reach would cost to buy, not money owed.
       </p>
     </footer>
   );

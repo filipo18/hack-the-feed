@@ -5,7 +5,15 @@ export interface OutreachDraft {
   message: string;
 }
 
-export function OutreachDialog({ draft, onClose }: { draft: OutreachDraft | null; onClose: () => void }) {
+export function OutreachDialog({
+  draft,
+  onClose,
+  onSent,
+}: {
+  draft: OutreachDraft | null;
+  onClose: () => void;
+  onSent?: () => void;
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
@@ -39,6 +47,18 @@ export function OutreachDialog({ draft, onClose }: { draft: OutreachDraft | null
         <button type="button" className="pill pill-primary" onClick={copy}>
           {copied ? "Copied" : "Copy message"}
         </button>
+        {onSent && (
+          <button
+            type="button"
+            className="pill pill-quiet"
+            onClick={() => {
+              onSent();
+              dialog.current?.close();
+            }}
+          >
+            Mark as sent
+          </button>
+        )}
         <button type="button" className="pill pill-quiet" onClick={() => dialog.current?.close()}>
           Close
         </button>
