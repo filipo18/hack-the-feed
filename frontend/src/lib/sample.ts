@@ -49,6 +49,11 @@ const CHANNEL_SETS: Mention["channels"][] = [
 
 const FOLLOW_UP_LINES = ["{brand} again, same as last time", "told you, {brand} on every trip"];
 
+/** Creator positions by total views, so the top-ranked creators get distinct stills. */
+const RANK = [...CREATORS.keys()]
+  .sort((a, b) => CREATORS[b].views.reduce((x, y) => x + y, 0) - CREATORS[a].views.reduce((x, y) => x + y, 0))
+  .reduce<Record<number, number>>((map, position, rank) => ({ ...map, [position]: rank }), {});
+
 function mentionsFor(creator: (typeof CREATORS)[number], brand: string, offset: number): Mention[] {
   return creator.views.map((views, index) => ({
     postUrl: `https://example.com/sample/${creator.handle}/${index + 1}`,
@@ -59,7 +64,7 @@ function mentionsFor(creator: (typeof CREATORS)[number], brand: string, offset: 
     channels: CHANNEL_SETS[(offset + index) % CHANNEL_SETS.length],
     snippet: (index === 0 ? creator.line : FOLLOW_UP_LINES[(index - 1) % FOLLOW_UP_LINES.length]).replace("{brand}", brand),
     timestamp: creator.stamps[index],
-    thumbnail: thumbnail(brand, offset * 3 + index),
+    thumbnail: thumbnail(brand, (RANK[offset] ?? offset) + index * 5),
   }));
 }
 
