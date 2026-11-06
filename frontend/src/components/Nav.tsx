@@ -24,7 +24,7 @@ export function Nav({ audience, sections }: { audience: Audience; sections?: boo
         </nav>
       )}
       <Link className="pill pill-nav" to={`/login?as=${audience}`}>
-        Demo access
+        Log in
       </Link>
     </header>
   );
