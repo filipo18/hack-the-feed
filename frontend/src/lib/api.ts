@@ -1,9 +1,3 @@
-/**
- * Legacy sample client from the two-sided UI.
- * Brand search does not use this file. See brandSearch.ts.
- * searchCreator still returns sample rows. Do not mount the screens that call it.
- * The live creator route stays on CreatorUnavailable until POST /api/creator-report lands.
- */
 import { sampleBrand, sampleCreator } from "./sample";
 import type { BrandResult, CreatorResult } from "./types";
 

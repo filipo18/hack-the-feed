@@ -2,6 +2,11 @@ export const PRODUCT_NAME = "Unpaid";
 
 export type Audience = "brands" | "creators";
 
+export const SCAN_STAGES: Record<Audience, string[]> = {
+  brands: ["Reading captions", "Listening to speech", "Reading on-screen text", "Checking the visuals", "Ranking creators by impressions"],
+  creators: ["Reading your captions", "Listening to your videos", "Reading on-screen text", "Matching brands", "Working out what they’re worth"],
+};
+
 export interface Copy {
   path: string;
   resultsPath: string;
@@ -28,9 +33,9 @@ export const COPY: Record<Audience, Copy> = {
   brands: {
     path: "/for-brands",
     resultsPath: "/brands",
-    lineOne: "They post you.",
-    lineTwo: "Nobody paid them.",
-    lede: "Find creators who already show your brand in their videos. Rank them by views, then reach out to the best ones first.",
+    lineOne: "Your best creators",
+    lineTwo: "already post you.",
+    lede: "Stop searching for creators who might fit. Find the ones already showing your brand, see how their videos did, and turn one-off posts into paid collabs.",
     placeholder: "Your brand, like Birkenstock",
     inputLabel: "Your brand",
     action: "Find creators",
@@ -42,28 +47,28 @@ export const COPY: Record<Audience, Copy> = {
         text: "Type your brand. We read captions, speech and on-screen text in short videos.",
         panel: [
           { label: "Videos read", value: "883", note: "Instagram and TikTok" },
-          { label: "Ad posts removed", value: "14", note: "Marked #ad or paid partnership" },
+          { label: "Ad posts removed", value: "41", note: "Marked #ad or paid partnership" },
         ],
       },
       {
         name: "Rank",
-        text: "See every creator with no ad marker on the post, sorted by views.",
+        text: "See every creator with no ad marker on the post, sorted by impressions.",
         panel: [
-          { label: "Top creator", value: "4.1M", note: "Views across 2 videos" },
-          { label: "Cost to buy that reach", value: "$74,196", note: "Estimate, based on market rates" },
+          { label: "Top creator", value: "4.1M", note: "Impressions across 2 videos" },
+          { label: "All creators", value: "30.1M", note: "Impressions you didn’t know about" },
         ],
       },
       {
         name: "Reach out",
         text: "Open a creator and send a message that names the video they already made.",
         panel: [
-          { label: "Opening line", value: "“We saw your video.”", note: "Written from the real post" },
+          { label: "Opening line", value: "“Let’s do a paid collab.”", note: "Written from the video they already made" },
           { label: "Proof attached", value: "Link and views", note: "No cold pitch" },
         ],
       },
       {
         name: "Keep them",
-        text: "Turn the creators who already love you into regular partners.",
+        text: "Turn one-off posts from creators who already love you into regular partnerships.",
         panel: [
           { label: "Next step", value: "Monthly collab", note: "Start with your top 10" },
           { label: "New mentions", value: "Every week", note: "Search again as new videos land" },
@@ -76,9 +81,9 @@ export const COPY: Record<Audience, Copy> = {
       { label: "Who you contact", old: "Strangers", next: "People already posting you" },
       { label: "Proof they fit", old: "Follower count", next: "Their own video" },
       { label: "First message", old: "Would you try us?", next: "We saw your video" },
-      { label: "Price talk", old: "Their rate card", next: "Real views on your brand" },
+      { label: "Price talk", old: "Their rate card", next: "Real impressions on your brand" },
     ],
-    closeTitle: ["Your best creators", "are already here."],
+    closeTitle: ["Turn one-off posts", "into partnerships."],
     crossTitle: "Creator?",
     crossText: "Find the brands in your videos and see what those mentions are worth.",
     crossAction: "See your mentions",
@@ -86,16 +91,16 @@ export const COPY: Record<Audience, Copy> = {
       caption: "“I take my Owala everywhere, honestly”",
       toastTitle: "Spoken at 0:14",
       toastText: "Owala found. No ad marker on this post.",
-      valueLabel: "Cost to buy this reach",
-      value: "$57,240",
+      valueLabel: "Impressions on this video",
+      value: "3.2M",
     },
   },
   creators: {
     path: "/for-creators",
     resultsPath: "/creators",
     lineOne: "You post them.",
-    lineTwo: "They didn’t pay.",
-    lede: "Find the brands in your videos, see what those mentions are worth, and pitch them with your own numbers.",
+    lineTwo: "Now get paid.",
+    lede: "Find the brands in your videos, see what those mentions are worth, and pitch a paid collab with your own numbers.",
     placeholder: "Your handle, like yourname",
     inputLabel: "Your handle",
     action: "Find my mentions",

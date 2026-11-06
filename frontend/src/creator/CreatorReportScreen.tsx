@@ -63,22 +63,17 @@ export function CreatorReportScreen({
     <CreatorReportView report={loaded.report} sample={false} platform={platform} onPlatform={onPlatform} showPipeline={false} />
   );
 
-  if (layout === "workspace") {
-    return (
-      <>
-        <h1 className="display display-handle app-title">@{handle}</h1>
-        {body}
-      </>
-    );
-  }
+  if (layout === "workspace") return <div className="live-panel">{body}</div>;
 
   return (
     <div className="page">
-      <section className="result-head">
+      <section className="results">
         <Nav audience="creators" />
-        <h1 className="display display-handle">@{handle}</h1>
+        <div className="results-body">
+          <h1 className="display live-title display-handle">@{handle}</h1>
+          <div className="live-panel">{body}</div>
+        </div>
       </section>
-      <section className="results">{body}</section>
       <Footer />
     </div>
   );

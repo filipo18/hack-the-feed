@@ -9,12 +9,14 @@ import { CreatorReportScreen } from "../creator/CreatorReportScreen";
 export function DemoBrandSearch() {
   return (
     <div className="page">
-      <section className="result-head">
-        <Nav audience="brands" />
-        <h1 className="display">{DEMO_SEARCH.brand}</h1>
-      </section>
       <section className="results">
-        <BrandReport data={DEMO_SEARCH} demoLabel={DEMO_LABEL} />
+        <Nav audience="brands" />
+        <div className="results-body">
+          <h1 className="display live-title">{DEMO_SEARCH.brand}</h1>
+          <div className="live-panel">
+            <BrandReport data={DEMO_SEARCH} demoLabel={DEMO_LABEL} />
+          </div>
+        </div>
       </section>
       <Footer />
     </div>

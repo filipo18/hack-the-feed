@@ -10,6 +10,8 @@ export interface Mention {
   channels: Channel[];
   snippet: string;
   timestamp: string | null;
+  /** Optional frame from the video. Without one, the card shows a painted tile. */
+  thumbnail?: string | null;
 }
 
 export interface Creator {
