@@ -104,7 +104,7 @@ fi
 if sudo docker info >/dev/null 2>&1; then
   cid=""
   if sudo docker build -t hack-the-feed:local "$root"; then
-    cid="$(sudo docker run -d --rm -p 127.0.0.1:8877:8000 -e ORIANE_API_KEY= -e GMI_API_KEY= -e GMI_MODEL= hack-the-feed:local)"
+    cid="$(sudo docker run -d --rm -p 127.0.0.1:8877:8080 -e ORIANE_API_KEY= -e GMI_API_KEY= -e GMI_MAAS_API_KEY= -e GMI_MODEL= hack-the-feed:local)"
     booted=0
     for _ in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30; do
       if curl -fsS http://127.0.0.1:8877/health >/dev/null 2>&1; then
@@ -116,7 +116,7 @@ if sudo docker info >/dev/null 2>&1; then
     if [[ "$booted" -eq 1 ]] \
       && curl -fsS http://127.0.0.1:8877/health | grep -q '"status":"ok"' \
       && curl -fsS http://127.0.0.1:8877/brands/Ryanair | grep -q 'id="root"'; then
-      if sudo docker logs "$cid" 2>&1 | grep -E -q 'ORIANE_API_KEY=.+|GMI_API_KEY=.+'; then
+      if sudo docker logs "$cid" 2>&1 | grep -E -q 'ORIANE_API_KEY=.+|GMI_API_KEY=.+|GMI_MAAS_API_KEY=.+'; then
         note "FAIL container-boot-secret-log"
         fail=1
       else

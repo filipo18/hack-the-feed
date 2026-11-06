@@ -1,8 +1,35 @@
-# Host the UI and API on GMI
+# Host the UI and API on GMI Agentbox
 
-One image serves both. The browser loads the frontend and calls `POST /api/search` on the same origin, so an HTTPS page does not call an HTTP API. `GET /health` stays on that origin. Unknown paths such as `/brands/Ryanair` return `index.html`.
+The image to register is the repo-root Dockerfile. It serves the compiled frontend and the API in one process. Agentbox terminates HTTPS and forwards to the internal port. This image binds `0.0.0.0:${PORT:-8080}`.
 
-`backend/Dockerfile` is the API-only image from the packaging change. Do not put the public site on that image. Build the repo-root image instead:
+Agentbox injects `GMI_MAAS_API_KEY` at runtime. The process uses that value for inference when it is set, and otherwise uses `GMI_API_KEY`. `GMI_MODEL` is still required and is not chosen by the image. Neither key is logged. Whether an older inference key is accepted by `https://api.gmi-serving.com/v1` is unverified.
+
+Registration, launching a sandbox, and marketplace publication are separate. This repo does not register a template or start a sandbox. A launch is paid. Do not publish the image as a public package from here.
+
+## Registry
+
+The repository `filipo18/hack-the-feed` is public. No container package was listed for it from this environment, and the Actions permission setting that allows `GITHUB_TOKEN` to write packages could not be read. `.github/workflows/image.yml` builds on pull requests and, on a push to `main` only, pushes one tag:
+
+`ghcr.io/<repository owner lowercased>/hack-the-feed:<full git sha>`
+
+That name follows GitHub's container registry convention. The package does not exist until that job succeeds. The workflow does not push `:latest` and does not change package visibility. A private package is the intended result. Agentbox can pull a private image only if registration has Requires sign-in with a registry username and a token that can read packages. This change does not create that token.
+
+## Local image check
+
+```bash
+docker build -t hack-the-feed:local .
+docker run --rm -p 8080:8080 hack-the-feed:local
+```
+
+Do not pass keys as build args. For a manual run, export `ORIANE_API_KEY`, `GMI_API_KEY` or `GMI_MAAS_API_KEY`, and `GMI_MODEL` in the shell.
+
+`backend/Dockerfile` remains the API-only image. Do not register that one.
+
+## Cluster Engine is not this path
+
+`scripts/gmi-deploy.sh` orders a Cluster Engine container. That is not Agentbox. Do not run it for this hosting choice.
+
+## Run locally without Agentbox
 
 ```bash
 docker build -t hack-the-feed:local .
