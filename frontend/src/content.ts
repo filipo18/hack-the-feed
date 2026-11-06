@@ -39,7 +39,7 @@ export const COPY: Record<Audience, Copy> = {
     placeholder: "Your brand, like Birkenstock",
     inputLabel: "Your brand",
     action: "Find creators",
-    examples: ["Birkenstock", "Owala", "Ryanair"],
+    examples: ["Birkenstock", "Starbucks", "Ryanair"],
     stepsTitle: ["Stop looking", "for strangers."],
     steps: [
       {
@@ -88,9 +88,9 @@ export const COPY: Record<Audience, Copy> = {
     crossText: "Find the brands in your videos and see what those mentions are worth.",
     crossAction: "See your mentions",
     frame: {
-      caption: "“I take my Owala everywhere, honestly”",
+      caption: "“my Starbucks order, every single morning”",
       toastTitle: "Spoken at 0:14",
-      toastText: "Owala found. No ad marker on this post.",
+      toastText: "Starbucks found. No ad marker on this post.",
       valueLabel: "Impressions on this video",
       value: "3.2M",
     },

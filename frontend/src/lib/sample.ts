@@ -30,13 +30,13 @@ const CREATORS: (Creator & { line: string; views: number[]; stamps: (string | nu
   { handle: "sample.marco", platform: "tiktok", followers: 8_900, market: "US", brandDeals: 0, line: "the {brand} that started it all", views: [79_000], stamps: ["0:15"] },
 ];
 
-/** Generated UGC-style stills in public/ugc/<set>/<n>.webp. Unknown brands use the generic set. */
-const THUMB_SETS: Record<string, number> = { birkenstock: 8, owala: 6, ryanair: 3, generic: 3 };
+/** Generated UGC-style stills in public/ugc/<set>/<n>.jpg. Unknown brands use the generic set. */
+const THUMB_SETS: Record<string, number> = { birkenstock: 8, starbucks: 6, ryanair: 3, generic: 3 };
 
 function thumbnail(brand: string, index: number): string {
   const key = brand.trim().toLowerCase().replace(/[^a-z]/g, "");
   const set = key in THUMB_SETS ? key : "generic";
-  return `/ugc/${set}/${(index % THUMB_SETS[set]) + 1}.webp`;
+  return `/ugc/${set}/${(index % THUMB_SETS[set]) + 1}.jpg`;
 }
 
 const CHANNEL_SETS: Mention["channels"][] = [
@@ -74,7 +74,7 @@ export function sampleBrand(brand: string): BrandResult {
   };
 }
 
-const SAMPLE_BRANDS = ["Birkenstock", "Owala", "Ryanair", "Hydro Flask"];
+const SAMPLE_BRANDS = ["Birkenstock", "Starbucks", "Ryanair", "Hydro Flask"];
 
 export function sampleCreator(handle: string): CreatorResult {
   const clean = handle.replace(/^@/, "");
