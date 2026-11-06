@@ -3,7 +3,10 @@ node_modules/
 __pycache__/
 *.pyc
 .pytest_cache/
+.venv/
 .vite/
+playwright-report/
+test-results/
 dist/
 coverage/
 .env

@@ -2,11 +2,11 @@
 
 One Python service for brand search. It asks Oriane for a bounded sample, then asks GMI whether those posts are relevant. There is no database, queue, account system, or second service.
 
-This directory does not include `Dockerfile`, `.dockerignore`, `DEPLOY.md`, or `scripts/backend-smoke.sh`. Those belong to the hosting change.
+`Dockerfile` in this directory is the API-only image. The image that also serves `frontend/` is the Dockerfile at the repo root. See [DEPLOY.md](DEPLOY.md).
 
 The browser never receives `ORIANE_API_KEY` or `GMI_API_KEY`.
 
-The production UI is the self-hosted app in this repo's `frontend/` directory. This service does not assume that UI is hosted by Lovable. The browser calls this API. Provider keys stay in this process.
+The production UI is the self-hosted app in this repo's `frontend/` directory. Hosted, it is served by this process from `STATIC_DIR` so the page and `/api/search` share an origin. Provider keys stay in this process.
 
 ## Run
 

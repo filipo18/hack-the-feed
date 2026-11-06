@@ -1,10 +1,16 @@
 # hack-the-feed
 
-Prep for the 6 Nov 2026 build window (2:00–5:30 PM PT). Two preliminary pilots sit under `pilots/`. Each was tested on its own before import. Together they are a local starting point: a pinned public API snapshot, a keyless 401 record, synthetic fixtures, and review rules. Filip owns the Lovable UI. Tilen owns pricing and copy.
+Brand search is the production path. The UI in [`frontend/`](frontend/) and the API in [`backend/`](backend/) are served together from the repo-root image. See [`ACCEPTANCE.md`](ACCEPTANCE.md) and [`backend/DEPLOY.md`](backend/DEPLOY.md).
+
+```bash
+bash scripts/acceptance.sh
+```
+
+The creator report is not connected. `/creators/:handle` says so. A separate creator-discovery pilot is not an endpoint and is not part of this branch.
+
+Two preliminary pilots sit under `pilots/`. Each was tested on its own before import. Together they are a local starting point: a pinned public API snapshot, a keyless 401 record, synthetic fixtures, and review rules. Tilen owns pricing and copy.
 
 No API key and no auth header are in this repo. Nothing here is an authenticated Oriane result.
-
-Production frontend code goes in [`frontend/`](frontend/). That covers the Lovable-generated app, components, routes, styling, assets, and frontend build configs and dependencies. Backend, including the GMI backend, stays outside that folder. Secrets stay out of it. The placement rule is in [`AGENTS.md`](AGENTS.md). The product is brand-facing across all mentions and ranks the highest-reach relevant creators. This repo does not implement that yet.
 
 ## Where the pilots live
 

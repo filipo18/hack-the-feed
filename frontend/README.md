@@ -1,20 +1,20 @@
 # Frontend
 
-This folder is the location for production frontend code. No production frontend exists in the repo yet, so this file is what keeps the folder tracked.
+Production UI for brand search. It runs from this folder without Lovable. The API is the Python service outside this folder. Do not put secrets, API keys, or auth headers here.
 
-When the Lovable app is added, put all of it here:
+```bash
+npm ci
+npm test
+npm run build
+npm run dev    # http://127.0.0.1:5180
+```
 
-- the Lovable-generated app
-- components
-- routes
-- styling
-- assets
-- frontend build configs and dependencies (`package.json`, the lockfile, and the bundler config for this app)
+Brand search posts `/api/search`. In dev, Vite proxies that path to the local API. The hosted image serves this build and the API on one origin, so the browser does not call a separate HTTP host.
 
-Backend code stays outside this folder. That includes the GMI backend. Do not put secrets, API keys, or auth headers here.
+`/demo/brand-search` is a labeled fixture, not a live result.
 
-`pilots/review-ui` is a historical synthetic pilot with its own Vite app. It stays under `pilots/` and is not this folder. Do not move it here.
+`/creators/:handle` says the creator report is not connected. That endpoint is a separate change. This folder does not invent creator rows.
 
-The product is brand-facing across all mentions, with this Lovable frontend and a GMI backend outside it, and it ranks the highest-reach relevant creators. This folder does not implement that. Do not scaffold a framework here ahead of the Lovable app.
+Demo access at `/login` stores a name in the browser and checks no password. The brand workspace then runs a real search. The creator workspace does not.
 
-Placement rules for agents are in the root [`AGENTS.md`](../AGENTS.md).
+Hosting has to send unknown paths to `index.html`. The combined image does that. Copy lives in `src/content.ts`. The working name is `PRODUCT_NAME`.

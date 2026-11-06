@@ -1,6 +1,5 @@
-# Build context is backend/ (the directory that contains this file).
-# The core API branch supplies requirements.txt and app/main.py.
-# Until those files exist, docker build stops at COPY. That is expected.
+# API-only image. The public site is the repo-root Dockerfile, which serves this
+# API and the frontend on one origin. This file stays the API packaging check.
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \

@@ -1,0 +1,158 @@
+export const PRODUCT_NAME = "Unpaid";
+
+export type Audience = "brands" | "creators";
+
+export interface Copy {
+  path: string;
+  resultsPath: string;
+  lineOne: string;
+  lineTwo: string;
+  lede: string;
+  placeholder: string;
+  inputLabel: string;
+  action: string;
+  examples: string[];
+  stepsTitle: [string, string];
+  steps: { name: string; text: string; panel: { label: string; value: string; note: string }[] }[];
+  compareTitle: [string, string];
+  compareOld: string;
+  compareRows: { label: string; old: string; next: string }[];
+  closeTitle: [string, string];
+  crossTitle: string;
+  crossText: string;
+  crossAction: string;
+  frame: { caption: string; toastTitle: string; toastText: string; valueLabel: string; value: string };
+}
+
+export const COPY: Record<Audience, Copy> = {
+  brands: {
+    path: "/for-brands",
+    resultsPath: "/brands",
+    lineOne: "They post you.",
+    lineTwo: "Nobody paid them.",
+    lede: "Find creators who already show your brand in their videos. Rank them by views, then reach out to the best ones first.",
+    placeholder: "Your brand, like Birkenstock",
+    inputLabel: "Your brand",
+    action: "Find creators",
+    examples: ["Birkenstock", "Owala", "Ryanair"],
+    stepsTitle: ["Stop looking", "for strangers."],
+    steps: [
+      {
+        name: "Search",
+        text: "Type your brand. We read captions, speech and on-screen text in short videos.",
+        panel: [
+          { label: "Videos read", value: "883", note: "Instagram and TikTok" },
+          { label: "Ad posts removed", value: "14", note: "Marked #ad or paid partnership" },
+        ],
+      },
+      {
+        name: "Rank",
+        text: "See every creator with no ad marker on the post, sorted by views.",
+        panel: [
+          { label: "Top creator", value: "4.1M", note: "Views across 2 videos" },
+          { label: "Cost to buy that reach", value: "$74,196", note: "Estimate, based on market rates" },
+        ],
+      },
+      {
+        name: "Reach out",
+        text: "Open a creator and send a message that names the video they already made.",
+        panel: [
+          { label: "Opening line", value: "“We saw your video.”", note: "Written from the real post" },
+          { label: "Proof attached", value: "Link and views", note: "No cold pitch" },
+        ],
+      },
+      {
+        name: "Keep them",
+        text: "Turn the creators who already love you into regular partners.",
+        panel: [
+          { label: "Next step", value: "Monthly collab", note: "Start with your top 10" },
+          { label: "New mentions", value: "Every week", note: "Search again as new videos land" },
+        ],
+      },
+    ],
+    compareTitle: ["Cold lists guess.", "Their videos prove it."],
+    compareOld: "Creator database",
+    compareRows: [
+      { label: "Who you contact", old: "Strangers", next: "People already posting you" },
+      { label: "Proof they fit", old: "Follower count", next: "Their own video" },
+      { label: "First message", old: "Would you try us?", next: "We saw your video" },
+      { label: "Price talk", old: "Their rate card", next: "Real views on your brand" },
+    ],
+    closeTitle: ["Your best creators", "are already here."],
+    crossTitle: "Creator?",
+    crossText: "Find the brands in your videos and see what those mentions are worth.",
+    crossAction: "See your mentions",
+    frame: {
+      caption: "“I take my Owala everywhere, honestly”",
+      toastTitle: "Spoken at 0:14",
+      toastText: "Owala found. No ad marker on this post.",
+      valueLabel: "Cost to buy this reach",
+      value: "$57,240",
+    },
+  },
+  creators: {
+    path: "/for-creators",
+    resultsPath: "/creators",
+    lineOne: "You post them.",
+    lineTwo: "They didn’t pay.",
+    lede: "Find the brands in your videos, see what those mentions are worth, and pitch them with your own numbers.",
+    placeholder: "Your handle, like yourname",
+    inputLabel: "Your handle",
+    action: "Find my mentions",
+    examples: ["sample.sofia", "sample.kenji"],
+    stepsTitle: ["You already", "did the work."],
+    steps: [
+      {
+        name: "Search",
+        text: "Type your handle. We read your captions, speech and on-screen text.",
+        panel: [
+          { label: "Brands found", value: "4", note: "Including ones you never tagged" },
+          { label: "Ad posts removed", value: "3", note: "Deals you already have" },
+        ],
+      },
+      {
+        name: "Value",
+        text: "See what each mention would cost the brand to buy, based on your views, market, account size and past brand deals.",
+        panel: [
+          { label: "Best mention", value: "3.2M views", note: "Spoken at 0:14" },
+          { label: "Cost to buy that reach", value: "$57,240", note: "An estimate, not money owed" },
+        ],
+      },
+      {
+        name: "Pitch",
+        text: "Send the brand a short message with the video and the numbers.",
+        panel: [
+          { label: "Opening line", value: "“You’re in my videos.”", note: "Written from your real post" },
+          { label: "Proof attached", value: "Link and views", note: "They can check it" },
+        ],
+      },
+      {
+        name: "Get paid",
+        text: "Turn one free mention into a regular deal.",
+        panel: [
+          { label: "Next step", value: "Monthly collab", note: "Start with your top brand" },
+          { label: "New mentions", value: "Every week", note: "Search again as you post" },
+        ],
+      },
+    ],
+    compareTitle: ["Cold pitches beg.", "Your videos prove it."],
+    compareOld: "Cold pitch",
+    compareRows: [
+      { label: "What you send", old: "A media kit", next: "A video already live" },
+      { label: "Your proof", old: "Follower count", next: "Views on their product" },
+      { label: "Your price", old: "A guess", next: "What that reach costs to buy" },
+      { label: "Their first thought", old: "Who is this?", next: "They already use us" },
+    ],
+    closeTitle: ["Your next deal", "is already posted."],
+    crossTitle: "Brand?",
+    crossText: "Find the creators already showing your product and work with the best ones.",
+    crossAction: "Find your creators",
+    frame: {
+      caption: "“Packing list: Birkenstock, passport, nothing else”",
+      toastTitle: "On screen at 0:22",
+      toastText: "Birkenstock found. You never tagged it.",
+      valueLabel: "Worth to the brand",
+      value: "$13,005",
+    },
+  },
+};
