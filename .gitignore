@@ -13,3 +13,6 @@ coverage/
 .env.*
 !.env.example
 *.local
+
+# Local Vercel link for a sample static host. Not used by the GMI image.
+.vercel/

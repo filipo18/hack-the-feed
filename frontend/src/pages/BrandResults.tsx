@@ -2,7 +2,9 @@ import { useParams } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { BrandReport } from "../components/BrandReport";
+import { Scan } from "../components/Scan";
 import { Loading } from "../components/ResultState";
+import { SCAN_STAGES } from "../content";
 import { useBrandSearch } from "../lib/useBrandSearch";
 
 export function BrandResults() {
@@ -11,6 +13,9 @@ export function BrandResults() {
 
   return (
     <div className="page">
+      {state.status === "loading" && (
+        <Scan title={brand} stages={SCAN_STAGES.brands} items={[]} ready={false} onDone={() => undefined} />
+      )}
       <section className="result-head">
         <Nav audience="brands" />
         <h1 className="display">{brand}</h1>

@@ -2,6 +2,23 @@ export const PRODUCT_NAME = "Unpaid";
 
 export type Audience = "brands" | "creators";
 
+export const SCAN_STAGES: Record<Audience, string[]> = {
+  brands: [
+    "Reading captions",
+    "Listening to speech",
+    "Reading on-screen text",
+    "Checking the visuals",
+    "Ranking creators by post views",
+  ],
+  creators: [
+    "Reading captions",
+    "Listening to speech",
+    "Reading on-screen text",
+    "Matching names",
+    "Waiting for the report",
+  ],
+};
+
 export interface Copy {
   path: string;
   resultsPath: string;
@@ -28,9 +45,9 @@ export const COPY: Record<Audience, Copy> = {
   brands: {
     path: "/for-brands",
     resultsPath: "/brands",
-    lineOne: "They post you.",
-    lineTwo: "Nobody paid them.",
-    lede: "Find creators who already show your brand in their videos. Rank them by views, then reach out to the best ones first.",
+    lineOne: "Your best creators",
+    lineTwo: "already post you.",
+    lede: "Find the people already showing your brand, see how those posts did, and start from the videos that exist.",
     placeholder: "Your brand, like Birkenstock",
     inputLabel: "Your brand",
     action: "Find creators",
@@ -94,8 +111,8 @@ export const COPY: Record<Audience, Copy> = {
     path: "/for-creators",
     resultsPath: "/creators",
     lineOne: "You post them.",
-    lineTwo: "They didn’t pay.",
-    lede: "Find the brands in your videos, see what those mentions are worth, and pitch them with your own numbers.",
+    lineTwo: "Now get paid.",
+    lede: "The creator report reads indexed posts. Review the names, then an illustrative value and a joke invoice stay behind your confirmation.",
     placeholder: "Your handle, like yourname",
     inputLabel: "Your handle",
     action: "Find my mentions",

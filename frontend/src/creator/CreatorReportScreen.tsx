@@ -5,6 +5,8 @@ import { Footer } from "../components/Footer";
 import { CreatorReportView } from "../components/CreatorReportView";
 import { Loading } from "../components/ResultState";
 import { useResult } from "../components/useResult";
+import { SCAN_STAGES } from "../content";
+import { Scan } from "../components/Scan";
 import { CREATOR_REPORT_PATH } from "./availability";
 import type { CreatorReport, ReportPlatform } from "../lib/types";
 
@@ -54,7 +56,10 @@ export function CreatorReportScreen({
   }
 
   const body = !loaded ? (
-    <Loading term={`@${handle}`} />
+    <>
+      <Scan title={`@${handle}`} stages={SCAN_STAGES.creators} items={[]} ready={false} onDone={() => undefined} />
+      <Loading term={`@${handle}`} />
+    </>
   ) : loaded.ok === false ? (
     <p className="result-note" data-testid="creator-report-error">
       The creator report did not load ({loaded.message}). Sample brands were not substituted.

@@ -17,4 +17,6 @@ Brand search posts `/api/search`. In dev, Vite proxies that path to the local AP
 
 Demo access at `/login` stores a name in the browser and checks no password. The brand workspace runs a real search. The creator workspace requests the creator report.
 
-Hosting has to send unknown paths to `index.html`. The combined image does that. Copy lives in `src/content.ts`. The working name is `PRODUCT_NAME`.
+Hosting has to send unknown paths to `index.html`. The combined image does that. `frontend/vercel.json` is only a rewrite for a static demo host. It is not the live GMI deployment, and it does not turn sample rows into live results.
+
+Copy lives in `src/content.ts`. The working name is `PRODUCT_NAME`. The landing figures are examples.
