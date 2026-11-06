@@ -1,6 +1,8 @@
 # API the front end expects
 
-Set `VITE_API_URL` to the backend's base URL. Without it the app runs on synthetic rows and shows a "Sample data" tag. Types are in `src/lib/types.ts`.
+Set `VITE_API_URL` to the backend's base URL. Types are in `src/lib/types.ts`.
+
+Live data overrides sample data one endpoint at a time. If there is no backend, or an endpoint is missing or returns another shape, that side stays on synthetic rows, shows a "Sample data" tag, and logs the reason to the browser console. So when the tag disappears, that side is live.
 
 ## `GET /brands/:brand/creators`
 

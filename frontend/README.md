@@ -10,7 +10,7 @@ npm run dev     # http://localhost:5180
 npm run build
 ```
 
-- Runs on synthetic sample data until `VITE_API_URL` is set: copy `.env.example` to `.env`. The backend contract is in [`API.md`](API.md).
+- Runs on synthetic sample data until the backend answers: copy `.env.example` to `.env` and set `VITE_API_URL`. Live data then overrides it, one endpoint at a time. The contract is in [`API.md`](API.md).
 - Hosting: send every route to `index.html`, or links like `/for-creators` will 404 on refresh.
 - Copy for both pages: `src/content.ts`. The working name is `PRODUCT_NAME` there.
 - Pricing: `src/lib/value.ts`. The numbers are placeholders.

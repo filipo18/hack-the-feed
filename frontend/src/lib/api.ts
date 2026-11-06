@@ -3,26 +3,43 @@ import type { BrandResult, CreatorResult } from "./types";
 
 const API_URL: string | undefined = import.meta.env.VITE_API_URL;
 
-/** Without VITE_API_URL the app runs on synthetic rows and says so on screen. */
-export const USING_SAMPLE_DATA = !API_URL;
+export interface Loaded<T> {
+  data: T;
+  /** True when these are sample rows. The screen must show the "Sample data" tag. */
+  sample: boolean;
+}
 
-async function get<T>(path: string): Promise<T> {
-  let response: Response;
+/**
+ * Live data overrides sample data, one endpoint at a time.
+ * Without a backend, or when an endpoint is missing or returns another shape, the screen stays on sample rows.
+ */
+async function load<T>(path: string, isValid: (body: T) => boolean, sample: () => T): Promise<Loaded<T>> {
+  if (!API_URL) return { data: sample(), sample: true };
   try {
-    response = await fetch(`${API_URL}${path}`);
-  } catch {
-    throw new Error("The search could not reach the backend.");
+    const response = await fetch(`${API_URL}${path}`);
+    if (!response.ok) throw new Error(`status ${response.status}`);
+    const body = (await response.json()) as T;
+    if (!isValid(body)) throw new Error("unexpected response shape");
+    return { data: body, sample: false };
+  } catch (reason) {
+    console.warn(`Using sample data for ${path}: ${(reason as Error).message}`);
+    return { data: sample(), sample: true };
   }
-  if (!response.ok) throw new Error(`The search failed with status ${response.status}.`);
-  return response.json();
 }
 
-export function searchBrand(brand: string): Promise<BrandResult> {
-  if (USING_SAMPLE_DATA) return Promise.resolve(sampleBrand(brand));
-  return get(`/brands/${encodeURIComponent(brand)}/creators`);
+export function searchBrand(brand: string): Promise<Loaded<BrandResult>> {
+  return load(
+    `/brands/${encodeURIComponent(brand)}/creators`,
+    (body) => Array.isArray(body?.creators),
+    () => sampleBrand(brand),
+  );
 }
 
-export function searchCreator(handle: string): Promise<CreatorResult> {
-  if (USING_SAMPLE_DATA) return Promise.resolve(sampleCreator(handle));
-  return get(`/creators/${encodeURIComponent(handle.replace(/^@/, ""))}/mentions`);
+export function searchCreator(handle: string): Promise<Loaded<CreatorResult>> {
+  const clean = handle.replace(/^@/, "");
+  return load(
+    `/creators/${encodeURIComponent(clean)}/mentions`,
+    (body) => Array.isArray(body?.brands) && Boolean(body?.creator),
+    () => sampleCreator(clean),
+  );
 }

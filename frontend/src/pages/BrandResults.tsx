@@ -3,16 +3,17 @@ import { useParams } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { OutreachDialog, type OutreachDraft } from "../components/OutreachDialog";
-import { Empty, Failed, Loading } from "../components/ResultState";
+import { Empty, Loading } from "../components/ResultState";
 import { useResult } from "../components/useResult";
-import { USING_SAMPLE_DATA, searchBrand } from "../lib/api";
+import { searchBrand } from "../lib/api";
 import { CHANNEL_LABEL, compact, money } from "../lib/format";
 import { brandOutreach } from "../lib/messages";
 import { rankCreators } from "../lib/rank";
 
 export function BrandResults() {
   const brand = decodeURIComponent(useParams().brand ?? "");
-  const { data, error } = useResult(() => searchBrand(brand), brand);
+  const loaded = useResult(() => searchBrand(brand), brand);
+  const data = loaded?.data;
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
   const creators = useMemo(() => (data ? rankCreators(data) : []), [data]);
   const views = creators.reduce((sum, creator) => sum + creator.views, 0);
@@ -42,14 +43,13 @@ export function BrandResults() {
       </section>
 
       <section className="results">
-        {error && <Failed message={error} back="/for-brands" />}
-        {!data && !error && <Loading term={brand} />}
+        {!data && <Loading term={brand} />}
         {data && creators.length === 0 && <Empty term={brand} back="/for-brands" />}
         {creators.length > 0 && (
           <>
             <p className="results-meta">
               Sorted by views. {data?.paidPostsRemoved} posts with an ad marker were removed.
-              {USING_SAMPLE_DATA && <span className="sample-tag">Sample data</span>}
+              {loaded?.sample && <span className="sample-tag">Sample data</span>}
             </p>
             <table className="rank">
               <thead>

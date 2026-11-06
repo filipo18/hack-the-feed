@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 import { PRODUCT_NAME } from "../content";
-import { USING_SAMPLE_DATA } from "../lib/api";
 import { clearSession, readSession, type Session } from "../lib/session";
 
 const LINKS = {
@@ -47,10 +46,7 @@ export function AppShell({ children }: { children: (session: Session) => ReactNo
           </button>
         </div>
       </aside>
-      <main className="workspace">
-        {USING_SAMPLE_DATA && <p className="sample-tag workspace-tag">Sample data</p>}
-        {children(session)}
-      </main>
+      <main className="workspace">{children(session)}</main>
     </div>
   );
 }

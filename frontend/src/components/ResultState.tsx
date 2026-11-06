@@ -4,17 +4,6 @@ export function Loading({ term }: { term: string }) {
   return <p className="result-note">Reading videos for {term}.</p>;
 }
 
-export function Failed({ message, back }: { message: string; back: string }) {
-  return (
-    <div className="result-note">
-      <p>{message} Check that the backend is running, then search again.</p>
-      <Link className="pill pill-quiet-dark" to={back}>
-        Search again
-      </Link>
-    </div>
-  );
-}
-
 export function Empty({ term, back }: { term: string; back: string }) {
   return (
     <div className="result-note">

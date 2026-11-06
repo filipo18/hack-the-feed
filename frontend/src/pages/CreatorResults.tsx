@@ -3,16 +3,17 @@ import { useParams } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { OutreachDialog, type OutreachDraft } from "../components/OutreachDialog";
-import { Empty, Failed, Loading } from "../components/ResultState";
+import { Empty, Loading } from "../components/ResultState";
 import { useResult } from "../components/useResult";
-import { USING_SAMPLE_DATA, searchCreator } from "../lib/api";
+import { searchCreator } from "../lib/api";
 import { CHANNEL_LABEL, compact, money } from "../lib/format";
 import { creatorPitch } from "../lib/messages";
 import { rankBrands } from "../lib/rank";
 
 export function CreatorResults() {
   const handle = decodeURIComponent(useParams().handle ?? "").replace(/^@/, "");
-  const { data, error } = useResult(() => searchCreator(handle), handle);
+  const loaded = useResult(() => searchCreator(handle), handle);
+  const data = loaded?.data;
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
 
   const brands = useMemo(() => (data ? rankBrands(data) : []), [data]);
@@ -44,15 +45,14 @@ export function CreatorResults() {
       </section>
 
       <section className="results">
-        {error && <Failed message={error} back="/for-creators" />}
-        {!data && !error && <Loading term={`@${handle}`} />}
+        {!data && <Loading term={`@${handle}`} />}
         {data && brands.length === 0 && <Empty term={`@${handle}`} back="/for-creators" />}
         {data && brands.length > 0 && (
           <>
             <p className="results-meta">
               Based on your views, market, account size and {data.creator.brandDeals} past brand deals.{" "}
               {data.paidPostsRemoved} posts with an ad marker were removed.
-              {USING_SAMPLE_DATA && <span className="sample-tag">Sample data</span>}
+              {loaded?.sample && <span className="sample-tag">Sample data</span>}
             </p>
             <div className="brand-list">
               {brands.map((entry) => {

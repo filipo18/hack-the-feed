@@ -1,4 +1,3 @@
-import { USING_SAMPLE_DATA } from "../lib/api";
 import { PRODUCT_NAME } from "../content";
 
 export function Footer() {
@@ -7,7 +6,6 @@ export function Footer() {
       <p className="footer-mark">{PRODUCT_NAME}</p>
       <p>
         Reach estimates show what the same views would cost to buy. They are not money owed.
-        {USING_SAMPLE_DATA && " Results shown here are sample data."}
       </p>
     </footer>
   );

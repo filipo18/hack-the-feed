@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AppShell } from "../components/AppShell";
 import { OutreachDialog, type OutreachDraft } from "../components/OutreachDialog";
 import { Pipeline } from "../components/Pipeline";
-import { Empty, Failed, Loading } from "../components/ResultState";
+import { Empty, Loading } from "../components/ResultState";
 import { useResult } from "../components/useResult";
 import { searchBrand, searchCreator } from "../lib/api";
 import { CHANNEL_LABEL, compact, money } from "../lib/format";
@@ -48,13 +48,13 @@ function Totals({ items }: { items: { label: string; value: string }[] }) {
 }
 
 function BrandWorkspace({ session, view }: { session: Session; view: View }) {
-  const { data, error } = useResult(() => searchBrand(session.name), session.name);
+  const loaded = useResult(() => searchBrand(session.name), session.name);
+  const data = loaded?.data;
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
   const [placement, setPlacement] = usePlacement(session);
   const [market, setMarket] = useState("All");
   const creators = useMemo(() => (data ? rankCreators(data) : []), [data]);
 
-  if (error) return <Failed message={error} back="/login" />;
   if (!data) return <Loading term={session.name} />;
   if (creators.length === 0) return <Empty term={session.name} back="/login" />;
 
@@ -70,6 +70,7 @@ function BrandWorkspace({ session, view }: { session: Session; view: View }) {
 
   return (
     <>
+      {loaded?.sample && <p className="sample-tag workspace-tag">Sample data</p>}
       {view === "overview" && (
         <>
           <h1 className="display app-title">{session.name}</h1>
@@ -154,13 +155,13 @@ function CreatorRows({ creators, onContact }: { creators: RankedCreator[]; onCon
 }
 
 function CreatorWorkspace({ session, view }: { session: Session; view: View }) {
-  const { data, error } = useResult(() => searchCreator(session.name), session.name);
+  const loaded = useResult(() => searchCreator(session.name), session.name);
+  const data = loaded?.data;
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
   const [placement, setPlacement] = usePlacement(session);
   const brands = useMemo(() => (data ? rankBrands(data) : []), [data]);
   const label = `@${session.name}`;
 
-  if (error) return <Failed message={error} back="/login" />;
   if (!data) return <Loading term={label} />;
   if (brands.length === 0) return <Empty term={label} back="/login" />;
 
@@ -174,6 +175,7 @@ function CreatorWorkspace({ session, view }: { session: Session; view: View }) {
 
   return (
     <>
+      {loaded?.sample && <p className="sample-tag workspace-tag">Sample data</p>}
       {view === "overview" && (
         <>
           <h1 className="display display-handle app-title">{label}</h1>
