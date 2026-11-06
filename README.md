@@ -4,12 +4,14 @@ Prep for the 6 Nov 2026 build window (2:00–5:30 PM PT). Two preliminary pilots
 
 No API key and no auth header are in this repo. Nothing here is an authenticated Oriane result.
 
+Production frontend code goes in [`frontend/`](frontend/). That covers the Lovable-generated app, components, routes, styling, assets, and frontend build configs and dependencies. Backend, including the GMI backend, stays outside that folder. Secrets stay out of it. The placement rule is in [`AGENTS.md`](AGENTS.md). The product is brand-facing across all mentions and ranks the highest-reach relevant creators. This repo does not implement that yet.
+
 ## Where the pilots live
 
 | Path | Role |
 | --- | --- |
 | [`pilots/oriane-api`](pilots/oriane-api) | Probe. Public OpenAPI snapshot, keyless 401 evidence, one synthetic content fixture, offline unit tests. `execute()` refuses to send. |
-| [`pilots/review-ui`](pilots/review-ui) | Review UI and domain rules on synthetic rows. Disclosure, lexicon matching, and an illustrative view split. |
+| [`pilots/review-ui`](pilots/review-ui) | Historical synthetic pilot. Review rules on synthetic rows, an illustrative view split, and its own Vite config. It stays here. It is not the production frontend. |
 
 Scope for the first brand pass, including the test plan, is in [`SCOPE.md`](SCOPE.md).
 
