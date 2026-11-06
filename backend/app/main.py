@@ -112,7 +112,7 @@ class _RedactSecrets(logging.Filter):
     def filter(self, record: logging.LogRecord) -> bool:
         message = record.getMessage()
         redacted = re.sub(r"Bearer\s+\S+", "Bearer [redacted]", message)
-        for name in ("ORIANE_API_KEY", "GMI_API_KEY"):
+        for name in ("ORIANE_API_KEY", "GMI_API_KEY", "GMI_MAAS_API_KEY", "GMI_COMPUTE_API_KEY"):
             secret = os.environ.get(name)
             if secret:
                 redacted = redacted.replace(secret, "[redacted]")
@@ -122,8 +122,27 @@ class _RedactSecrets(logging.Filter):
         return True
 
 
+_REDACTION_INSTALLED = False
+
+
+def _install_redaction() -> None:
+    """Redact secrets on every logger. A filter on the root logger does not see propagated records."""
+    global _REDACTION_INSTALLED
+    if _REDACTION_INSTALLED:
+        return
+    _REDACTION_INSTALLED = True
+    original = logging.Logger.handle
+    redact = _RedactSecrets()
+
+    def handle(self, record):
+        redact.filter(record)
+        return original(self, record)
+
+    logging.Logger.handle = handle
+
+
 def create_app() -> FastAPI:
-    logging.getLogger().addFilter(_RedactSecrets())
+    _install_redaction()
     settings = load_settings()
     app = FastAPI(title="hack-the-feed", version="0.1.0")
     app.add_middleware(

@@ -42,6 +42,17 @@ def _int(name: str, default: int) -> int:
     return int(raw)
 
 
+def _gmi_api_key() -> str | None:
+    """Agentbox injects GMI_MAAS_API_KEY. GMI_API_KEY remains the manual fallback.
+
+    When both are set, the injected key is the one for this process. Neither
+    value is logged.
+    """
+    injected = os.environ.get("GMI_MAAS_API_KEY", "").strip()
+    manual = os.environ.get("GMI_API_KEY", "").strip()
+    return injected or manual or None
+
+
 def load_settings() -> Settings:
     origins = [
         item.strip()
@@ -55,7 +66,7 @@ def load_settings() -> Settings:
     return Settings(
         oriane_api_key=os.environ.get("ORIANE_API_KEY", "").strip() or None,
         oriane_base_url=os.environ.get("ORIANE_BASE_URL", "https://connect.oriane.xyz").rstrip("/"),
-        gmi_api_key=os.environ.get("GMI_API_KEY", "").strip() or None,
+        gmi_api_key=_gmi_api_key(),
         gmi_model=model,
         gmi_base_url=os.environ.get("GMI_BASE_URL", "https://api.gmi-serving.com/v1").rstrip("/"),
         cors_origins=origins,

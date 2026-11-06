@@ -11,7 +11,8 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    STATIC_DIR=/app/static
+    STATIC_DIR=/app/static \
+    PORT=8080
 WORKDIR /app
 
 RUN apt-get update \
@@ -34,7 +35,7 @@ RUN chmod 755 /entrypoint.sh \
     && chown -R appuser:appuser /app /home/appuser
 
 USER appuser
-EXPOSE 8000 80 443
+EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=25s --retries=3 \
-    CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+    CMD ["python", "-c", "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:%s/health' % os.environ.get('PORT','8080'), timeout=3)"]
 ENTRYPOINT ["/entrypoint.sh"]

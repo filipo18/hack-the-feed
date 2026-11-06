@@ -8,6 +8,7 @@ from app.main import reset_rate_limit
 def _isolated(monkeypatch):
     monkeypatch.delenv("ORIANE_API_KEY", raising=False)
     monkeypatch.delenv("GMI_API_KEY", raising=False)
+    monkeypatch.delenv("GMI_MAAS_API_KEY", raising=False)
     monkeypatch.delenv("GMI_MODEL", raising=False)
     monkeypatch.setenv("RATE_LIMIT_PER_MINUTE", "0")
     clear_caches()
