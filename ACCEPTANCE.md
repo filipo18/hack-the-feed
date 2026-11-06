@@ -2,14 +2,14 @@
 
 Run `bash scripts/acceptance.sh`. It prints `PASS`, `FAIL`, or `BLOCKED` and does not print secret values.
 
-Live HTTPS and a real Oriane + GMI search stay `BLOCKED` until `ORIANE_API_KEY`, `GMI_API_KEY`, `GMI_MODEL`, `PUBLIC_HTTPS_URL`, and `GMI_CONSOLE_TOKEN` exist, and until a container budget is known. A localhost run is not that check.
+Live HTTPS and a real Oriane + GMI search stay `BLOCKED` on this VM. `ORIANE_API_KEY`, `GMI_API_KEY`, and `GMI_COMPUTE_API_KEY` may exist on the operator's machine. They are not copied here, and a local process with empty keys is not that check. `GMI_COMPUTE_API_KEY` is the console credential. `GMI_API_KEY` is inference only. A container is not ordered until `scripts/gmi-deploy.sh catalog` has shown a price and `GMI_ORDER_CONFIRM=yes` is set with that price.
 
 ## Checks
 
 1. Production build and the combined image boot together and serve the UI plus `GET /health`. Reloading `/brands/Ryanair` returns the app. Assets load from `/assets/`.
 2. Brand search posts `/api/search`. Ranked cards show why, evidence, and views. Held-out and unassessed rows stay out of the ranking. `/demo/brand-search` is the only mocked brand fixture, and it is labeled. A live provider call is blocked without keys.
 3. Missing Oriane config, HTTP failure, a malformed model body, a missing view count, and an empty sample each render an explicit state. The browser stays on one origin.
-4. HTTPS is Caddy on the same container when `TLS_DOMAIN` and `TLS_EMAIL` are set. Keys are runtime env only. This is not deploy-ready while the hostname, entitlement, and budget are unknown.
+4. HTTPS is Caddy on the same container when `TLS_DOMAIN` and `TLS_EMAIL` are set. Keys are runtime env only. `bash scripts/gmi-deploy.sh plan` prints the commands for the credentialed machine and does not print secret values. `bash scripts/test-gmi-deploy.sh` checks that refusal. It is not a live call.
 5. `/login` is demo access and checks no password. `/creators/:handle` says the creator report is not connected. `POST /api/creator-report` is not in this change.
 6. After a public URL exists: open `/` over HTTPS, reload `/brands/Ryanair`, run a real Ryanair search, and capture one controlled error. That pass is still blocked.
 

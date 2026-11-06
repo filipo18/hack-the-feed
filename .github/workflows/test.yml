@@ -17,6 +17,7 @@ jobs:
         working-directory: backend
       - run: python -m pytest
         working-directory: backend
+      - run: bash scripts/test-gmi-deploy.sh
 
   frontend:
     runs-on: ubuntu-latest

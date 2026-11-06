@@ -4,6 +4,7 @@ Brand search is the production path. The UI in [`frontend/`](frontend/) and the 
 
 ```bash
 bash scripts/acceptance.sh
+bash scripts/gmi-deploy.sh plan
 ```
 
 The creator report is not connected. `/creators/:handle` says so. A separate creator-discovery pilot is not an endpoint and is not part of this branch.

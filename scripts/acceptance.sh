@@ -14,6 +14,13 @@ if [[ ! -x "$python" ]]; then
   "$root/backend/.venv/bin/pip" install -q -r "$root/backend/requirements-dev.txt"
 fi
 
+if (cd "$root" && bash scripts/test-gmi-deploy.sh); then
+  note "PASS gmi-deploy-script"
+else
+  note "FAIL gmi-deploy-script"
+  fail=1
+fi
+
 if (cd "$root/backend" && "$python" -m pytest -q); then
   note "PASS backend-pytest"
 else
@@ -132,14 +139,14 @@ else
 fi
 
 missing=()
-for name in ORIANE_API_KEY GMI_API_KEY GMI_MODEL PUBLIC_HTTPS_URL GMI_CONSOLE_TOKEN; do
+for name in ORIANE_API_KEY GMI_API_KEY GMI_MODEL GMI_COMPUTE_API_KEY PUBLIC_HTTPS_URL GMI_PRODUCT GMI_IDC GMI_EXPECTED_PRICE; do
   if [[ -z "${!name:-}" ]]; then
     missing+=("$name")
   fi
 done
 if ((${#missing[@]})); then
   note "BLOCKED live-https-and-provider-search missing ${missing[*]}"
-  note "BLOCKED gmi-deploy no console token, hostname, or confirmed container budget"
+  note "BLOCKED gmi-deploy keys, hostname, or an accepted catalog price are not all present in this shell. Run scripts/gmi-deploy.sh on the credentialed machine. Do not copy secret values into this repo."
 else
   note "BLOCKED live-https-and-provider-search credentials are present in this shell but this script does not send a paid deploy or a live search automatically"
 fi
