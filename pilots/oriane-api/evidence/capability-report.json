@@ -1,0 +1,79 @@
+{
+  "who_owes_you_build": false,
+  "live_creator_results": false,
+  "auth_header_name_disclosed": false,
+  "gate": {
+    "live_content_proof": false,
+    "http_status": 401,
+    "operation": "AUTHENTICATION",
+    "code": "UNAUTHORIZED",
+    "message": "Authorization failed.",
+    "context_empty": true,
+    "www_authenticate": null,
+    "auth_header_name_disclosed": false,
+    "creator_results_present": false,
+    "query_shape_server_validated": false
+  },
+  "routes": [
+    {
+      "path": "/rest/contents/search",
+      "http_status": 401
+    },
+    {
+      "path": "/rest/profiles/search",
+      "http_status": 401
+    },
+    {
+      "path": "/rest/assets",
+      "http_status": 401
+    }
+  ],
+  "media_fields": {
+    "full_only": [
+      "frames",
+      "transcriptChunks",
+      "transcriptLanguage"
+    ],
+    "default_not_in_basic": [
+      "onScreenText",
+      "tags",
+      "transcript"
+    ],
+    "basic": [
+      "caption",
+      "duration",
+      "type"
+    ]
+  },
+  "absent_property_names_found": [],
+  "description_word_counts": {
+    "brand": 0,
+    "sponsor": 0,
+    "paid": 0,
+    "disclosure": 0,
+    "permalink": 0,
+    "postUrl": 0
+  },
+  "recommended": "beside-the-caption",
+  "alternatives": [
+    {
+      "rank": 1,
+      "slug": "beside-the-caption",
+      "title": "Beside the Caption"
+    },
+    {
+      "rank": 2,
+      "slug": "untagged-in-the-transcript",
+      "title": "Untagged in the Transcript"
+    },
+    {
+      "rank": 3,
+      "slug": "frame-echo",
+      "title": "Frame Echo"
+    }
+  ],
+  "rejected_standalone": [
+    "who-owes-you",
+    "did-they-actually-say-that"
+  ]
+}

@@ -1,0 +1,145 @@
+:root {
+  color: #1c1b19;
+  background: #f3f0e8;
+  font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  line-height: 1.45;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  margin-top: 0.25rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.kicker, .item-kicker, .meta, .footer, .caveat {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+.kicker { text-transform: uppercase; letter-spacing: 0.08em; }
+
+.lede, .section-lead, .note {
+  margin-top: 0.75rem;
+}
+
+.sheet, .item, .numbers, .split section {
+  margin-top: 1.75rem;
+}
+
+.sheet, .item, .numbers, .split section {
+  border-top: 1px solid #1c1b19;
+  padding-top: 0.9rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 1.5rem;
+  margin: 1rem 0 0;
+}
+
+.facts div { margin: 0; }
+
+dt {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+dd { margin: 0.15rem 0 0; }
+
+.queue { display: flex; flex-direction: column; }
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.status {
+  font-weight: 500;
+  color: #5c564c;
+}
+
+.reasons, .held, .lines, .split ul {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.reasons li + li, .lines li + li, .split li + li, .held li + li {
+  margin-top: 0.25rem;
+}
+
+.meta, .caveat, .footer { color: #5c564c; margin-top: 0.45rem; }
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+button {
+  font: 0.78rem "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: transparent;
+  color: #1c1b19;
+  border: 1px solid #1c1b19;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+}
+
+button[aria-pressed="true"] {
+  background: #1c1b19;
+  color: #f3f0e8;
+}
+
+.banner {
+  font-weight: 600;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.note {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+}
+.note ul { margin: 0.35rem 0 0; padding-left: 1.1rem; }
+
+@media (max-width: 720px) {
+  main { padding-top: 1.5rem; }
+  h1 { font-size: 2rem; }
+  .facts, .split, .item { grid-template-columns: 1fr; }
+  .actions { flex-direction: row; flex-wrap: wrap; }
+}

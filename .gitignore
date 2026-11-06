@@ -1,0 +1,12 @@
+# Local install, caches, and secrets. Pilot source and lockfiles stay tracked.
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vite/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.local

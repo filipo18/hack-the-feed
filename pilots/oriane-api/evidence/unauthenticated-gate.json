@@ -1,0 +1,67 @@
+{
+  "kind": "unauthenticated_gate",
+  "live_content_proof": false,
+  "authenticated": false,
+  "credits_spent_observed": false,
+  "observed_at": "2026-11-06T08:36:46Z",
+  "source": "single POST, no Authorization header, no API key, no retries",
+  "request": {
+    "method": "POST",
+    "url": "https://connect.oriane.xyz/rest/contents/search",
+    "query": {
+      "sort": "publishedAt:desc",
+      "offset": 0,
+      "limit": 1,
+      "projection": "basic"
+    },
+    "headers_sent": [
+      "Content-Type: application/json",
+      "Accept: application/json",
+      "User-Agent: oriane-capability-probe/0.1 (unauthenticated gate; synthetic handle)"
+    ],
+    "headers_not_sent": [
+      "Authorization",
+      "x-api-key",
+      "api-key"
+    ],
+    "body": {
+      "operator": "and",
+      "filters": {
+        "profileHandle": {
+          "exactMatch": {
+            "values": [
+              "__synthetic_probe_not_a_creator__"
+            ],
+            "operator": "or"
+          }
+        },
+        "platform": {
+          "includes": [
+            "tiktok"
+          ],
+          "operator": "and"
+        }
+      }
+    }
+  },
+  "response": {
+    "http_status": 401,
+    "content_type": "application/json; charset=utf-8",
+    "www_authenticate": null,
+    "body": {
+      "error": {
+        "id": "err_tzWGEIldOE5Wv6ocInSnBEwuhN1F",
+        "operation": "AUTHENTICATION",
+        "code": "UNAUTHORIZED",
+        "message": "Authorization failed.",
+        "context": {}
+      },
+      "metadata": {
+        "requestId": "req_Cu1NYXUs9GDkW4yNpW7mLxaapRJ4",
+        "executionTime": 1,
+        "timestamp": 1793954206378
+      }
+    }
+  },
+  "interpretation": "The documented content-search route exists and rejects a keyless call with operation AUTHENTICATION, code UNAUTHORIZED, message 'Authorization failed.', empty context. No WWW-Authenticate header. The header name and credential scheme are still undocumented. No content results were returned, and the server did not reach query validation (no 400), so this is not proof the body is accepted."
+}
