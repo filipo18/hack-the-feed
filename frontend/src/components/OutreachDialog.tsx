@@ -9,17 +9,25 @@ export function OutreachDialog({ draft, onClose }: { draft: OutreachDraft | null
   const dialog = useRef<HTMLDialogElement>(null);
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
   useEffect(() => {
     if (!draft) return;
     setMessage(draft.message);
     setCopied(false);
+    setCopyFailed(false);
     dialog.current?.showModal();
   }, [draft]);
 
   async function copy() {
-    await navigator.clipboard.writeText(message);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(message);
+      setCopied(true);
+      setCopyFailed(false);
+    } catch {
+      setCopied(false);
+      setCopyFailed(true);
+    }
   }
 
   return (
@@ -33,11 +41,12 @@ export function OutreachDialog({ draft, onClose }: { draft: OutreachDraft | null
         onChange={(event) => {
           setMessage(event.target.value);
           setCopied(false);
+          setCopyFailed(false);
         }}
       />
       <div className="outreach-actions">
         <button type="button" className="pill pill-primary" onClick={copy}>
-          {copied ? "Copied" : "Copy message"}
+          {copied ? "Copied" : copyFailed ? "Copy failed" : "Copy message"}
         </button>
         <button type="button" className="pill pill-quiet" onClick={() => dialog.current?.close()}>
           Close

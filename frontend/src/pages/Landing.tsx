@@ -74,7 +74,7 @@ export function Landing({ audience }: { audience: Audience }) {
             </div>
           ))}
         </div>
-        <p className="step-example">Example figures</p>
+        <p className="step-example">Example figures on this page, not a live search.</p>
       </section>
 
       <section className="compare" id="compare">

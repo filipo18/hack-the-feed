@@ -1,18 +1,20 @@
 # Frontend
 
-Two audiences, one app: `/for-brands` and `/for-creators`, each with a search that leads to results at `/brands/:brand` and `/creators/:handle`.
-
-After login, `/app` is the dashboard for each side: overview, a ranked list, and an outreach or pitch board. Log in at `/login`.
+Production UI for brand search. It runs from this folder without Lovable. The API is the Python service outside this folder. Do not put secrets, API keys, or auth headers here.
 
 ```bash
-npm install
-npm run dev     # http://localhost:5180
+npm ci
+npm test
 npm run build
+npm run dev    # http://127.0.0.1:5180
 ```
 
-- Runs on synthetic sample data until the backend answers: copy `.env.example` to `.env` and set `VITE_API_URL`. Live data then overrides it, one endpoint at a time. The contract is in [`API.md`](API.md).
-- Hosting: send every route to `index.html`, or links like `/for-creators` will 404 on refresh.
-- Copy for both pages: `src/content.ts`. The working name is `PRODUCT_NAME` there.
-- Pricing: `src/lib/value.ts`. The numbers are placeholders.
-- This repo is public, so keep real creator handles out of `src/lib/sample.ts`.
-- Backend code stays outside this folder. Do not put secrets, API keys, or auth headers here.
+Brand search posts `/api/search`. In dev, Vite proxies that path to the local API. The hosted image serves this build and the API on one origin, so the browser does not call a separate HTTP host.
+
+`/demo/brand-search` is a labeled fixture, not a live result.
+
+`/creators/:handle` says the creator report is not connected. That endpoint is a separate change. This folder does not invent creator rows.
+
+Demo access at `/login` stores a name in the browser and checks no password. The brand workspace then runs a real search. The creator workspace does not.
+
+Hosting has to send unknown paths to `index.html`. The combined image does that. Copy lives in `src/content.ts`. The working name is `PRODUCT_NAME`.

@@ -1,66 +1,28 @@
-# API the front end expects
+# Brand search contract
 
-Set `VITE_API_URL` to the backend's base URL. Types are in `src/lib/types.ts`.
-
-Live data overrides sample data one endpoint at a time. If there is no backend, or an endpoint is missing or returns another shape, that side stays on synthetic rows, shows a "Sample data" tag, and logs the reason to the browser console. So when the tag disappears, that side is live.
-
-## `GET /brands/:brand/creators`
-
-Creators who show this brand, with paid posts already removed.
+The live brand screen `POST`s same-origin `/api/search`. It does not call `GET /brands/...` and it does not substitute sample rows when the call fails.
 
 ```json
-{
-  "brand": "Owala",
-  "paidPostsRemoved": 14,
-  "creators": [
-    {
-      "handle": "sample.sofia",
-      "platform": "instagram",
-      "followers": 412000,
-      "market": "US",
-      "brandDeals": 2,
-      "mentions": [
-        {
-          "postUrl": "https://example.com/post",
-          "platform": "instagram",
-          "publishedAt": "2026-10-04",
-          "views": 3180000,
-          "brand": "Owala",
-          "channels": ["spoken", "caption"],
-          "snippet": "I take my Owala everywhere, honestly",
-          "timestamp": "0:14"
-        }
-      ]
-    }
-  ]
-}
+{ "brand": "Ryanair", "aliases": [], "platforms": ["instagram", "tiktok"] }
 ```
 
-## `GET /creators/:handle/mentions`
+The response is the backend contract: `assessment`, `assessmentReason`, `gmiModel`, `rankedCreators`, `heldOut`, `unassessedCreators`, `channels`, and `warnings`. Missing view counts stay null. Disclosure is `disclosed` or `unknown`, never unpaid.
 
-Brands found in this creator's videos. `handle` has no leading `@`.
+`/demo/brand-search` renders a checked-in fixture with a MOCKED FIXTURE banner. That page does not call the API.
 
-```json
-{
-  "creator": { "handle": "sample.sofia", "platform": "instagram", "followers": 412000, "market": "US", "brandDeals": 2 },
-  "paidPostsRemoved": 3,
-  "brands": [{ "brand": "Owala", "mentions": [] }]
-}
+## Creator report
+
+`POST /api/creator-report` is not implemented in this change. `frontend/src/creator/availability.ts` stays `CREATOR_REPORT_READY = false`. `/creators/:handle` and the creator demo workspace explain that the report is unavailable. They do not show sample creators.
+
+The old sample client remains in `src/lib/api.ts` for the unmounted PR5 creator components. Do not route those components until the creator endpoint is integrated.
+
+## Local dev
+
+```bash
+npm ci
+npm test
+npm run build
+npm run dev
 ```
 
-## Field rules
-
-- `channels`: any of `caption`, `hashtag`, `spoken`, `on_screen`
-- `views`: `null` when unknown, never `0`
-- `timestamp`: `null` when the mention has no time, such as a caption
-- `brandDeals`: posts on the account with an ad marker
-- `market`: `US`, `UK`, `CA`, `AU`, `DE`, `FR`, `ES` or `Other`
-- Dedupe by `postUrl`, and exclude brand accounts and collaborators
-- Send CORS headers for the front-end origin
-
-The front end works out the dollar values from these fields in `src/lib/value.ts`. The backend does not price anything.
-
-## Not needed for the demo
-
-- Login is a demo: it stores the brand or handle in the browser and checks nothing. Real auth replaces `src/lib/session.ts`.
-- The outreach and pitch stages are saved in the browser. To save them per account, the backend needs an endpoint for them.
+`npm run dev` serves http://127.0.0.1:5180 and proxies `/api` and `/health` to `VITE_DEV_API_PROXY` (default `http://127.0.0.1:8000`). Provider keys stay in the API process.

@@ -3,7 +3,7 @@ import type { Audience } from "../content";
 
 /**
  * Demo login. It stores the choice in this browser and checks nothing.
- * Swap this file for real auth when the backend has it.
+ * The creator workspace stays unavailable until POST /api/creator-report is integrated.
  */
 export interface Session {
   audience: Audience;
@@ -13,9 +13,18 @@ export interface Session {
 
 const SESSION_KEY = "unpaid.session";
 
+function readJson<T>(key: string): T | null {
+  const raw = localStorage.getItem(key);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return null;
+  }
+}
+
 export function readSession(): Session | null {
-  const raw = localStorage.getItem(SESSION_KEY);
-  return raw ? (JSON.parse(raw) as Session) : null;
+  return readJson<Session>(SESSION_KEY);
 }
 
 export function saveSession(session: Session) {
@@ -28,10 +37,7 @@ export function clearSession() {
 
 /** Per-account state kept in this browser until the backend stores it. */
 export function useStored<T>(key: string, initial: T) {
-  const [value, setValue] = useState<T>(() => {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : initial;
-  });
+  const [value, setValue] = useState<T>(() => readJson<T>(key) ?? initial);
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));

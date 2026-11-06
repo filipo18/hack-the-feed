@@ -6,9 +6,11 @@ import logging
 import os
 import re
 import time
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.http import post_json
@@ -118,7 +120,51 @@ def create_app() -> FastAPI:
         _rate_limit()
         return run_search(body.model_dump(), load_settings(), post_json)
 
+    @app.get("/{full_path:path}")
+    def frontend(full_path: str):
+        """Serve the production UI from STATIC_DIR when that directory exists.
+
+        API routes stay on this process, so a browser page and /api/search share
+        one origin. Unknown paths return index.html so a reload of /brands/Ryanair
+        still opens the app. Creator routes are not added here.
+        """
+        root = _static_root()
+        if root is None:
+            raise HTTPException(status_code=404, detail="Not found")
+        if full_path == "api" or full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail="Not found")
+        asset = _safe_static(root, full_path)
+        if asset is not None:
+            return FileResponse(asset)
+        index = root / "index.html"
+        if full_path and index.is_file():
+            return FileResponse(index)
+        if not full_path and index.is_file():
+            return FileResponse(index)
+        raise HTTPException(status_code=404, detail="Not found")
+
     return app
+
+
+def _static_root() -> Path | None:
+    raw = os.environ.get("STATIC_DIR", "").strip()
+    if not raw:
+        return None
+    root = Path(raw).resolve()
+    if not root.is_dir():
+        return None
+    return root
+
+
+def _safe_static(root: Path, full_path: str) -> Path | None:
+    if not full_path or full_path.endswith("/"):
+        return None
+    candidate = (root / full_path).resolve()
+    if candidate != root and root not in candidate.parents:
+        return None
+    if candidate.is_file():
+        return candidate
+    return None
 
 
 def _rate_limit() -> None:

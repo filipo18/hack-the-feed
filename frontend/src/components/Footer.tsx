@@ -5,7 +5,8 @@ export function Footer() {
     <footer className="footer">
       <p className="footer-mark">{PRODUCT_NAME}</p>
       <p>
-        Reach estimates show what the same views would cost to buy. They are not money owed.
+        Post views are not unique people. Disclosure is disclosed or unknown, and neither means a post was unpaid.
+        Illustrative prices on the marketing page are examples, not a bill.
       </p>
     </footer>
   );
