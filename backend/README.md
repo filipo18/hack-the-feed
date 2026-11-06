@@ -6,6 +6,8 @@ This directory does not include `Dockerfile`, `.dockerignore`, `DEPLOY.md`, or `
 
 The browser never receives `ORIANE_API_KEY` or `GMI_API_KEY`.
 
+The production UI is the self-hosted app in this repo's `frontend/` directory. This service does not assume that UI is hosted by Lovable. The browser calls this API. Provider keys stay in this process.
+
 ## Run
 
 From this directory, with Python 3.12:
