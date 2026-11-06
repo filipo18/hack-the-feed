@@ -27,17 +27,19 @@ describe("honest presentation", () => {
     expect(disclosureLabel("unknown").toLowerCase()).not.toContain("unpaid");
   });
 
-  it("marks the brand fixture and leaves the creator endpoint unready", () => {
+  it("marks the brand fixture and mounts the creator report instead of sample rows", () => {
     expect(DEMO_LABEL).toContain("MOCKED FIXTURE");
     expect(DEMO_SEARCH.rankedCreators.some((creator) => creator.sumViews == null)).toBe(true);
     expect(DEMO_SEARCH.heldOut.length).toBeGreaterThan(0);
     expect(DEMO_SEARCH.unassessedCreators.length).toBeGreaterThan(0);
-    expect(CREATOR_REPORT_READY).toBe(false);
+    expect(CREATOR_REPORT_READY).toBe(true);
     const unavailable = readFileSync(new URL("../creator/Unavailable.tsx", import.meta.url), "utf8");
     expect(unavailable).not.toContain("sample.sofia");
     const main = readFileSync(new URL("../main.tsx", import.meta.url), "utf8");
     expect(main).not.toContain("<CreatorResults");
+    expect(main).toContain("<CreatorHeld");
     const app = readFileSync(new URL("../pages/AppPages.tsx", import.meta.url), "utf8");
     expect(app).not.toContain("<CreatorWorkspace");
+    expect(app).toContain("<CreatorReportScreen");
   });
 });

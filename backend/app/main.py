@@ -13,6 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from app.creator_report import MAX_POSTS, run_creator_report
 from app.http import post_json
 from app.search import run_search
 from app.settings import load_settings
@@ -78,6 +79,33 @@ class SearchRequest(BaseModel):
         return url
 
 
+class CreatorReportRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    handle: str = Field(min_length=1, max_length=80)
+    platform: str
+    maxPosts: int = Field(default=5, ge=1, le=MAX_POSTS)
+    cpm: float | None = Field(default=None, ge=0, le=1000)
+
+    @field_validator("handle")
+    @classmethod
+    def clean_handle(cls, value: str) -> str:
+        cleaned = value.strip()
+        if cleaned.startswith("@"):
+            cleaned = cleaned[1:]
+        if not cleaned or any(character.isspace() for character in cleaned):
+            raise ValueError("handle must be one username")
+        return cleaned
+
+    @field_validator("platform")
+    @classmethod
+    def clean_platform(cls, value: str) -> str:
+        platform = value.strip().casefold()
+        if platform not in {"instagram", "tiktok", "youtube"}:
+            raise ValueError("platform must be instagram, tiktok, or youtube")
+        return platform
+
+
 class _RedactSecrets(logging.Filter):
     """Drop bearer tokens and configured provider keys from any log line."""
 
@@ -120,13 +148,18 @@ def create_app() -> FastAPI:
         _rate_limit()
         return run_search(body.model_dump(), load_settings(), post_json)
 
+    @app.post("/api/creator-report")
+    def creator_report(body: CreatorReportRequest) -> dict:
+        _rate_limit()
+        return run_creator_report(body.model_dump(), load_settings(), post_json)
+
     @app.get("/{full_path:path}")
     def frontend(full_path: str):
         """Serve the production UI from STATIC_DIR when that directory exists.
 
         API routes stay on this process, so a browser page and /api/search share
         one origin. Unknown paths return index.html so a reload of /brands/Ryanair
-        still opens the app. Creator routes are not added here.
+        or /creators/handle still opens the app. POST /api/creator-report is registered above.
         """
         root = _static_root()
         if root is None:

@@ -3,7 +3,7 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { BrandReport } from "../components/BrandReport";
 import { DEMO_LABEL, DEMO_SEARCH } from "../lib/demoFixture";
-import { CreatorUnavailable } from "../creator/Unavailable";
+import { CreatorReportScreen } from "../creator/CreatorReportScreen";
 
 /** Direct URL for the labeled fixture. Not linked from the live search. */
 export function DemoBrandSearch() {
@@ -21,8 +21,8 @@ export function DemoBrandSearch() {
   );
 }
 
-/** Mounted instead of the PR5 creator results screen, which still falls back to sample rows. */
+/** Live creator report. The old sample CreatorResults screen stays unmounted. */
 export function CreatorHeld() {
   const handle = decodeURIComponent(useParams().handle ?? "").replace(/^@/, "");
-  return <CreatorUnavailable handle={handle} />;
+  return <CreatorReportScreen handle={handle} layout="page" />;
 }

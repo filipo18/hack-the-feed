@@ -13,8 +13,8 @@ Brand search posts `/api/search`. In dev, Vite proxies that path to the local AP
 
 `/demo/brand-search` is a labeled fixture, not a live result.
 
-`/creators/:handle` says the creator report is not connected. That endpoint is a separate change. This folder does not invent creator rows.
+`/creators/:handle` posts `/api/creator-report`. If Oriane or GMI is unset, the screen says so. It does not invent creator rows. Live GMI vision is blocked unless the server process has `GMI_VISION=1` and a configured model. This workspace did not run that live call.
 
-Demo access at `/login` stores a name in the browser and checks no password. The brand workspace then runs a real search. The creator workspace does not.
+Demo access at `/login` stores a name in the browser and checks no password. The brand workspace runs a real search. The creator workspace requests the creator report.
 
 Hosting has to send unknown paths to `index.html`. The combined image does that. Copy lives in `src/content.ts`. The working name is `PRODUCT_NAME`.

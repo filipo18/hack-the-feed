@@ -5,7 +5,7 @@ import { BrandReport } from "../components/BrandReport";
 import { OutreachDialog, type OutreachDraft } from "../components/OutreachDialog";
 import { Pipeline } from "../components/Pipeline";
 import { Empty, Loading } from "../components/ResultState";
-import { CreatorUnavailable } from "../creator/Unavailable";
+import { CreatorReportScreen } from "../creator/CreatorReportScreen";
 import { useResult } from "../components/useResult";
 import { searchCreator } from "../lib/api";
 import { CHANNEL_LABEL, compact, money } from "../lib/format";
@@ -28,7 +28,7 @@ export function AppPage({ view }: { view: View }) {
         session.audience === "brands" ? (
           <BrandWorkspace session={session} view={view} />
         ) : (
-          <CreatorUnavailable layout="workspace" handle={session.name} />
+          <CreatorReportScreen layout="workspace" handle={session.name} />
         )
       }
     </AppShell>
