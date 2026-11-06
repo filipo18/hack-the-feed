@@ -1,0 +1,53 @@
+{
+  "ran": [
+    {
+      "id": "parse_and_baseline",
+      "handle": "cheapholidayexpert",
+      "platform": "tiktok",
+      "returned_posts": 5,
+      "creator_only_request": true,
+      "baseline_candidates": 9,
+      "model_experiment": "unrun"
+    },
+    {
+      "id": "parse_and_baseline",
+      "handle": "developeradam",
+      "platform": "instagram",
+      "returned_posts": 5,
+      "creator_only_request": true,
+      "baseline_candidates": 2,
+      "model_experiment": "unrun"
+    },
+    {
+      "id": "supplied_string_quote_check",
+      "role": "Checks caller-supplied strings for an exact substring. Does not propose names and does not score accuracy."
+    }
+  ],
+  "pending": [
+    {
+      "id": "gmi_inference",
+      "status": "unrun",
+      "reason": "GMI_API_KEY and GMI_MODEL were read from the environment passed to this process. A missing value leaves the model unrun. This pilot also refuses to send, so a present key would still not be a result. No accuracy is filled in."
+    },
+    {
+      "id": "vision_frame_model",
+      "status": "not_run",
+      "reason": "Frame URLs were not fetched. No vision model ran. visualSimilarity was not used."
+    },
+    {
+      "id": "exhaustive_human_gold",
+      "status": "not_available",
+      "reason": "Partial manual notes are not an exhaustive brand list. This report does not score the baseline against them."
+    },
+    {
+      "id": "remaining_indexed_pages",
+      "status": "not_run",
+      "reason": "Captures here are the first page only. Later offsets were not requested by this pilot."
+    },
+    {
+      "id": "production_creator_route",
+      "status": "not_added",
+      "reason": "No backend or frontend route was added. Integration is a later decision."
+    }
+  ]
+}
