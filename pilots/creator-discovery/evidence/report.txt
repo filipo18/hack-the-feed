@@ -1,0 +1,150 @@
+Creator discovery pilot
+This run reads captured content-search JSON. It does not call Oriane or GMI.
+Accuracy is not reported. There is no exhaustive ground truth.
+
+Creator cheapholidayexpert on tiktok
+  creator-only brand_filter=None http=206 returned=5 indexed_total=24 page_covers_indexed_total=False
+  posts with nonempty transcript=4 nonempty OCR=5 frames present on posts=5 frame_count=169
+  media transcript states {'empty': 1, 'present': 4}
+  media OCR states {'present': 5}
+  dropped rows 0
+  membership-card on-screen strings removed before this file was stored: 6
+  posts:
+    7700919307861200130 views=80000 transcript=present ocr=present frames=27 published=2026-10-26T10:20:06.000Z
+    7699815257883151638 views=8016 transcript=present ocr=present frames=11 published=2026-10-23T10:55:52.000Z
+    7699480431510523158 views=57900 transcript=present ocr=present frames=42 published=2026-10-22T13:16:32.000Z
+    7699054624178785558 views=9674 transcript=present ocr=present frames=71 published=2026-10-21T09:44:11.000Z
+    7698823548160199958 views=11300 transcript=empty ocr=present frames=18 published=2026-10-20T18:47:28.000Z
+  disclosure:
+    7700919307861200130 unknown signals=none
+    7699815257883151638 unknown signals=none
+    7699480431510523158 unknown signals=none
+    7699054624178785558 unknown signals=none
+    7698823548160199958 unknown signals=none
+  baseline candidates (unconfirmed unless a human file said so):
+    Cal Sleeper status=brand_candidate reasons=possible_person_or_alias posts=[7699054624178785558 views=9674]
+    James Robinson status=brand_candidate reasons=possible_person_or_alias posts=[7699054624178785558 views=9674]
+    caledonian status=brand_candidate reasons=unconfirmed_hashtag posts=[7699054624178785558 views=9674, 7699480431510523158 views=57900]
+    caledoniansleeper status=brand_candidate reasons=account_may_be_person,unconfirmed_hashtag posts=[7699054624178785558 views=9674, 7699480431510523158 views=57900]
+    sleepertrain status=brand_candidate reasons=unconfirmed_hashtag posts=[7699054624178785558 views=9674]
+    uksleepertrain status=brand_candidate reasons=unconfirmed_hashtag posts=[7699054624178785558 views=9674, 7699480431510523158 views=57900]
+    cumbrianjames status=brand_candidate reasons=account_may_be_person posts=[7699054624178785558 views=9674]
+    stanstedairport status=brand_candidate reasons=unconfirmed_hashtag posts=[7699815257883151638 views=8016, 7700919307861200130 views=80000]
+    stanstedairportlounge status=brand_candidate reasons=unconfirmed_hashtag posts=[7699815257883151638 views=8016]
+  baseline evidence:
+    7699054624178785558 caption '@Cal Sleeper' status=brand_candidate views=9674
+    7699054624178785558 caption '@James Robinson' status=brand_candidate views=9674
+    7699054624178785558 hashtags '#caledonian' status=brand_candidate views=9674
+    7699054624178785558 hashtags '#caledoniansleeper' status=brand_candidate views=9674
+    7699054624178785558 hashtags '#sleepertrain' status=brand_candidate views=9674
+    7699054624178785558 hashtags '#uksleepertrain' status=brand_candidate views=9674
+    7699054624178785558 mentions 'caledoniansleeper' status=brand_candidate views=9674
+    7699054624178785558 mentions 'cumbrianjames' status=brand_candidate views=9674
+    7699480431510523158 hashtags '#caledonian' status=brand_candidate views=57900
+    7699480431510523158 hashtags '#caledoniansleeper' status=brand_candidate views=57900
+    7699480431510523158 hashtags '#uksleepertrain' status=brand_candidate views=57900
+    7699815257883151638 hashtags '#stanstedairport' status=brand_candidate views=8016
+    7699815257883151638 hashtags '#stanstedairportlounge' status=brand_candidate views=8016
+    7700919307861200130 hashtags '#stanstedairport' status=brand_candidate views=80000
+  surfaces that are not brand candidates:
+    7698823548160199958 '#onthisday' reason=platform_tag
+  supplied strings (not discovered by the baseline, not a score):
+    Ryanair: grounded fields=['caption', 'frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...not available for passengers flying with Ryanair, AJet or easyJet because it’s in a differ...'
+    AJet: grounded fields=['caption', 'frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=caption t=None snippet='...lable for passengers flying with Ryanair, AJet or easyJet because it’s in a different pa...'
+    A-Jet: grounded fields=['transcript', 'transcript_chunk'] baseline_same_name=False example_field=transcript_chunk t=0 snippet='...but the problem is it is not for Ryanair, A-Jet or EasyJet flight, and there literally is...'
+    easyJet: grounded fields=['caption', 'frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...r passengers flying with Ryanair, AJet or easyJet because it’s in a different part of the a...'
+    Priority Pass: grounded fields=['caption', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...wever if you usually get free access with Priority Pass, there is another option… You can head t...'
+    Escape Lounge: grounded fields=['caption', 'frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...LOUNGE UPDATE 🚨 You may have spotted that Escape Lounge at Stansted Airport has closed 😭 So here’...'
+    The Camden: grounded fields=['caption', 'frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...pint with a view! 🍺 SO WHERE IS IT? 📍The Camden I’ve actually walked past this pub load...'
+    Spoons: grounded fields=['caption', 'frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...viewing area - and after seeing how busy Spoons was, I was hopeful that this was going to...'
+    Guinness: grounded fields=['caption', 'frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='GUINNESS'
+    Wetherspoons: grounded fields=['caption', 'frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='Is this better than Wetherspoons? bar restaurant the Windmill Wetherspoons...'
+    Caledonian Sleeper: grounded fields=['caption', 'frame_ocr', 'on_screen_text'] baseline_same_name=True example_field=caption t=None snippet='The MOST EXPENSIVE room on the Caledonian Sleeper 🛌🚆 Is this train double bed really worth...'
+    ARRAN: grounded fields=['frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='ARRAN'
+    Apple: no exact substring in this creator's returned posts
+    iPhone: no exact substring in this creator's returned posts
+    iMac: no exact substring in this creator's returned posts
+    OPPO: no exact substring in this creator's returned posts
+    Hasselblad: no exact substring in this creator's returned posts
+    Huawei: no exact substring in this creator's returned posts
+    Everyman: no exact substring in this creator's returned posts
+    KIA: no exact substring in this creator's returned posts
+    Porsche: no exact substring in this creator's returned posts
+    Lamborghini: no exact substring in this creator's returned posts
+    Ferrari: no exact substring in this creator's returned posts
+    TAG Heuer: no exact substring in this creator's returned posts
+    TAGHEUER: no exact substring in this creator's returned posts
+    Mobil: no exact substring in this creator's returned posts
+    ORACLE: no exact substring in this creator's returned posts
+    MW4: no exact substring in this creator's returned posts
+    GTA: no exact substring in this creator's returned posts
+    PS5: no exact substring in this creator's returned posts
+    Top Gear: no exact substring in this creator's returned posts
+  model experiment=unrun reason=missing GMI_API_KEY and GMI_MODEL accuracy=None
+  vision experiment=not_run
+  non-null view sum on returned posts=166890 null views=[]
+
+Creator developeradam on instagram
+  creator-only brand_filter=None http=206 returned=5 indexed_total=59 page_covers_indexed_total=False
+  posts with nonempty transcript=3 nonempty OCR=5 frames present on posts=5 frame_count=100
+  media transcript states {'empty': 6, 'null': 10, 'present': 3}
+  media OCR states {'empty': 4, 'present': 15}
+  dropped rows 0
+  posts:
+    De65olDMifM views=255144 transcript=present ocr=present frames=21 published=2026-10-25T14:18:26.000Z
+    De37AwzsDIC views=92454 transcript=empty ocr=present frames=17 published=2026-10-24T10:32:40.000Z
+    DezYvKqDPdv views=None transcript=no_nonempty ocr=present frames=19 published=2026-10-22T16:13:56.000Z
+    DewXQhhs5vX views=57739 transcript=present ocr=present frames=35 published=2026-10-21T12:10:05.000Z
+    DerVinws0-K views=405169 transcript=present ocr=present frames=8 published=2026-10-19T13:13:12.000Z
+  disclosure:
+    De65olDMifM unknown signals=none
+    De37AwzsDIC unknown signals=none
+    DezYvKqDPdv unknown signals=none
+    DewXQhhs5vX unknown signals=invitation_language
+    DerVinws0-K unknown signals=none
+  baseline candidates (unconfirmed unless a human file said so):
+    everymandriving status=brand_candidate reasons=account_may_be_person posts=[DewXQhhs5vX views=57739]
+    oppouk status=brand_candidate reasons=account_may_be_person posts=[DezYvKqDPdv views=None]
+  baseline evidence:
+    DewXQhhs5vX coAuthors 'everymandriving' status=brand_candidate views=57739
+    DezYvKqDPdv coAuthors 'oppouk' status=brand_candidate views=None
+    DezYvKqDPdv media.tags 'oppouk' status=brand_candidate views=None
+  surfaces that are not brand candidates:
+  supplied strings (not discovered by the baseline, not a score):
+    Ryanair: no exact substring in this creator's returned posts
+    AJet: no exact substring in this creator's returned posts
+    A-Jet: no exact substring in this creator's returned posts
+    easyJet: no exact substring in this creator's returned posts
+    Priority Pass: no exact substring in this creator's returned posts
+    Escape Lounge: no exact substring in this creator's returned posts
+    The Camden: no exact substring in this creator's returned posts
+    Spoons: no exact substring in this creator's returned posts
+    Guinness: no exact substring in this creator's returned posts
+    Wetherspoons: no exact substring in this creator's returned posts
+    Caledonian Sleeper: no exact substring in this creator's returned posts
+    ARRAN: no exact substring in this creator's returned posts
+    Apple: grounded fields=['caption'] baseline_same_name=False example_field=caption t=None snippet='Apple IPhone Duo 🤩🤩'
+    iPhone: grounded fields=['caption'] baseline_same_name=False example_field=caption t=None snippet='Apple IPhone Duo 🤩🤩'
+    iMac: grounded fields=['frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='iMac G3'
+    OPPO: grounded fields=['caption', 'frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=caption t=None snippet='Little dump from the OPPO Find X10 Series launch in Mallorca ☀️ 🇪🇸...'
+    Hasselblad: grounded fields=['frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='Hasselblad verter Case'
+    Huawei: no exact substring in this creator's returned posts
+    Everyman: grounded fields=['caption', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='Now this was a sick day!! Everyman driving experiences invited me out to the...'
+    KIA: grounded fields=['caption', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...passenger rides and then fully sending a KIA around the figure of 8 track for a timed...'
+    Porsche: grounded fields=['transcript', 'transcript_chunk'] baseline_same_name=False example_field=transcript_chunk t=13.36 snippet='some very sexy supercars, including a Porsche 911 GT3 RS, a Lamborghini Huracan and a F...'
+    Lamborghini: grounded fields=['frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=transcript_chunk t=13.36 snippet='...ercars, including a Porsche 911 GT3 RS, a Lamborghini Huracan and a Ferrari'
+    Ferrari: grounded fields=['frame_ocr', 'on_screen_text', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=transcript_chunk t=13.36 snippet='...e 911 GT3 RS, a Lamborghini Huracan and a Ferrari'
+    TAG Heuer: grounded fields=['frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='TAG HEUER Mobil 1 ORACLE CARLYLE'
+    TAGHEUER: no exact substring in this creator's returned posts
+    Mobil: grounded fields=['frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='TAG HEUER Mobil 1 ORACLE CARLYLE'
+    ORACLE: grounded fields=['frame_ocr', 'on_screen_text'] baseline_same_name=False example_field=on_screen_text t=None snippet='TAG HEUER Mobil 1 ORACLE CARLYLE'
+    MW4: grounded fields=['caption'] baseline_same_name=False example_field=caption t=None snippet='Sunday Funday 🤙🏼 Enjoying MW4 multiplayer right now however I’m far bet...'
+    GTA: grounded fields=['caption'] baseline_same_name=False example_field=caption t=None snippet='GTA 6 IS ONLY ONE MONTH AWAY AND I AM READY...'
+    PS5: grounded fields=['caption'] baseline_same_name=False example_field=caption t=None snippet='...😍😍😍😍 No PC at launch so I will be on the PS5 Pro 👀'
+    Top Gear: grounded fields=['caption', 'transcript', 'transcript_chunk'] baseline_same_name=False example_field=caption t=None snippet='...ing experiences invited me out to the old Top Gear test track for an action-packed day! Dr...'
+  model experiment=unrun reason=missing GMI_API_KEY and GMI_MODEL accuracy=None
+  vision experiment=not_run
+  non-null view sum on returned posts=810506 null views=['DezYvKqDPdv']
+
+Pending: GMI inference, vision, exhaustive annotation, later index pages, production integration.
+The earlier Ryanair cross-creator sample is not an input. It searched a known brand across many creators. It is not creator enumeration and not blind brand discovery.

@@ -1,0 +1,2162 @@
+{
+  "pilot": "creator-discovery",
+  "question": "From a creator's own indexed posts, which names can a deterministic surface extract, with an exact quote, without a brand filter.",
+  "live_call_made_by_this_pilot": false,
+  "accuracy": null,
+  "accuracy_note": "No exhaustive annotation and no unique-brand count. No precision or recall.",
+  "runs": [
+    {
+      "kind": "REAL_ORIANE_CAPTURE_NOT_SYNTHETIC",
+      "handle": "cheapholidayexpert",
+      "platform": "tiktok",
+      "creator_only_request": true,
+      "brand_filter": null,
+      "http_status": 206,
+      "pagination": {
+        "offset": 0,
+        "limit": 5,
+        "totalCount": 24
+      },
+      "returned_posts": 5,
+      "unique_platform_ids": 5,
+      "coverage": {
+        "indexed_total_count": 24,
+        "returned_posts": 5,
+        "page_covers_indexed_total": false,
+        "note": "totalCount is the count on this contents-search response. The public search help describes a recent index window, a follower floor, and indexing lag. Those rules are not restated here as measured facts. This page is not the creator's whole history, and the index is not an on-demand ingest of every post."
+      },
+      "dropped": [],
+      "posts": [
+        {
+          "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+          "platform": "tiktok",
+          "platform_id": "7700919307861200130",
+          "handle": "cheapholidayexpert",
+          "published_at": "2026-10-26T10:20:06.000Z",
+          "views": 80000,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 27,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+          "platform": "tiktok",
+          "platform_id": "7699815257883151638",
+          "handle": "cheapholidayexpert",
+          "published_at": "2026-10-23T10:55:52.000Z",
+          "views": 8016,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 11,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+          "platform": "tiktok",
+          "platform_id": "7699480431510523158",
+          "handle": "cheapholidayexpert",
+          "published_at": "2026-10-22T13:16:32.000Z",
+          "views": 57900,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 42,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+          "platform": "tiktok",
+          "platform_id": "7699054624178785558",
+          "handle": "cheapholidayexpert",
+          "published_at": "2026-10-21T09:44:11.000Z",
+          "views": 9674,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 71,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_19846e2590a509d5af7793b06e8b",
+          "platform": "tiktok",
+          "platform_id": "7698823548160199958",
+          "handle": "cheapholidayexpert",
+          "published_at": "2026-10-20T18:47:28.000Z",
+          "views": 11300,
+          "transcript": "empty",
+          "ocr": "present",
+          "frames": 18,
+          "media_transcript_states": [
+            "empty"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        }
+      ],
+      "media_transcript_states": {
+        "empty": 1,
+        "present": 4
+      },
+      "media_ocr_states": {
+        "present": 5
+      },
+      "frame_count": 169,
+      "redacted_frame_placeholders": 1,
+      "posts_with_frames": 5,
+      "posts_with_nonempty_transcript": 4,
+      "posts_with_nonempty_ocr": 5,
+      "views": {
+        "per_post": [
+          {
+            "platform_id": "7700919307861200130",
+            "views": 80000
+          },
+          {
+            "platform_id": "7699815257883151638",
+            "views": 8016
+          },
+          {
+            "platform_id": "7699480431510523158",
+            "views": 57900
+          },
+          {
+            "platform_id": "7699054624178785558",
+            "views": 9674
+          },
+          {
+            "platform_id": "7698823548160199958",
+            "views": 11300
+          }
+        ],
+        "posts_with_null_views": [],
+        "sum_of_non_null_views_on_returned_posts": 166890,
+        "sum_note": "Sum of viewsCount on returned posts that have a number. Not unique reach, not a lifetime total, and not a valuation."
+      },
+      "baseline": {
+        "evidence": [
+          {
+            "name": "onthisday",
+            "surface": "#onthisday",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#onthisday",
+            "post_id": "cnt_19846e2590a509d5af7793b06e8b",
+            "platform": "tiktok",
+            "platform_id": "7698823548160199958",
+            "published_at": "2026-10-20T18:47:28.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 11300,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "not_a_brand_candidate",
+            "needs_human_confirm": false,
+            "confirm_reason": "platform_tag"
+          },
+          {
+            "name": "Cal Sleeper",
+            "surface": "@Cal Sleeper",
+            "kind": "caption_at",
+            "field": "caption",
+            "snippet": "@Cal Sleeper",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "possible_person_or_alias"
+          },
+          {
+            "name": "James Robinson",
+            "surface": "@James Robinson",
+            "kind": "caption_at",
+            "field": "caption",
+            "snippet": "@James Robinson",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "possible_person_or_alias"
+          },
+          {
+            "name": "caledonian",
+            "surface": "#caledonian",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#caledonian",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "caledoniansleeper",
+            "surface": "#caledoniansleeper",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#caledoniansleeper",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "sleepertrain",
+            "surface": "#sleepertrain",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#sleepertrain",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "uksleepertrain",
+            "surface": "#uksleepertrain",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#uksleepertrain",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "caledoniansleeper",
+            "surface": "caledoniansleeper",
+            "kind": "mention",
+            "field": "mentions",
+            "snippet": "caledoniansleeper",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "account_may_be_person"
+          },
+          {
+            "name": "cumbrianjames",
+            "surface": "cumbrianjames",
+            "kind": "mention",
+            "field": "mentions",
+            "snippet": "cumbrianjames",
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform": "tiktok",
+            "platform_id": "7699054624178785558",
+            "published_at": "2026-10-21T09:44:11.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 9674,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "account_may_be_person"
+          },
+          {
+            "name": "caledonian",
+            "surface": "#caledonian",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#caledonian",
+            "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+            "platform": "tiktok",
+            "platform_id": "7699480431510523158",
+            "published_at": "2026-10-22T13:16:32.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 57900,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "caledoniansleeper",
+            "surface": "#caledoniansleeper",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#caledoniansleeper",
+            "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+            "platform": "tiktok",
+            "platform_id": "7699480431510523158",
+            "published_at": "2026-10-22T13:16:32.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 57900,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "uksleepertrain",
+            "surface": "#uksleepertrain",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#uksleepertrain",
+            "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+            "platform": "tiktok",
+            "platform_id": "7699480431510523158",
+            "published_at": "2026-10-22T13:16:32.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 57900,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "stanstedairport",
+            "surface": "#stanstedairport",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#stanstedairport",
+            "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+            "platform": "tiktok",
+            "platform_id": "7699815257883151638",
+            "published_at": "2026-10-23T10:55:52.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 8016,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "stanstedairportlounge",
+            "surface": "#stanstedairportlounge",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#stanstedairportlounge",
+            "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+            "platform": "tiktok",
+            "platform_id": "7699815257883151638",
+            "published_at": "2026-10-23T10:55:52.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 8016,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          },
+          {
+            "name": "stanstedairport",
+            "surface": "#stanstedairport",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#stanstedairport",
+            "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+            "platform": "tiktok",
+            "platform_id": "7700919307861200130",
+            "published_at": "2026-10-26T10:20:06.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 80000,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "unconfirmed_hashtag"
+          }
+        ],
+        "entities": [
+          {
+            "name": "Cal Sleeper",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "possible_person_or_alias"
+            ],
+            "evidence_count": 1,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "James Robinson",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "possible_person_or_alias"
+            ],
+            "evidence_count": 1,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "caledonian",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "unconfirmed_hashtag"
+            ],
+            "evidence_count": 2,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              },
+              {
+                "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+                "platform_id": "7699480431510523158",
+                "published_at": "2026-10-22T13:16:32.000Z",
+                "views": 57900
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "caledoniansleeper",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "account_may_be_person",
+              "unconfirmed_hashtag"
+            ],
+            "evidence_count": 3,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              },
+              {
+                "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+                "platform_id": "7699480431510523158",
+                "published_at": "2026-10-22T13:16:32.000Z",
+                "views": 57900
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "sleepertrain",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "unconfirmed_hashtag"
+            ],
+            "evidence_count": 1,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "uksleepertrain",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "unconfirmed_hashtag"
+            ],
+            "evidence_count": 2,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              },
+              {
+                "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+                "platform_id": "7699480431510523158",
+                "published_at": "2026-10-22T13:16:32.000Z",
+                "views": 57900
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "cumbrianjames",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "account_may_be_person"
+            ],
+            "evidence_count": 1,
+            "matching_posts": [
+              {
+                "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                "platform_id": "7699054624178785558",
+                "published_at": "2026-10-21T09:44:11.000Z",
+                "views": 9674
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "stanstedairport",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "unconfirmed_hashtag"
+            ],
+            "evidence_count": 2,
+            "matching_posts": [
+              {
+                "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                "platform_id": "7699815257883151638",
+                "published_at": "2026-10-23T10:55:52.000Z",
+                "views": 8016
+              },
+              {
+                "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+                "platform_id": "7700919307861200130",
+                "published_at": "2026-10-26T10:20:06.000Z",
+                "views": 80000
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "stanstedairportlounge",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "unconfirmed_hashtag"
+            ],
+            "evidence_count": 1,
+            "matching_posts": [
+              {
+                "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                "platform_id": "7699815257883151638",
+                "published_at": "2026-10-23T10:55:52.000Z",
+                "views": 8016
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          }
+        ],
+        "not_brand_surfaces": [
+          {
+            "name": "onthisday",
+            "surface": "#onthisday",
+            "kind": "hashtag",
+            "field": "hashtags",
+            "snippet": "#onthisday",
+            "post_id": "cnt_19846e2590a509d5af7793b06e8b",
+            "platform": "tiktok",
+            "platform_id": "7698823548160199958",
+            "published_at": "2026-10-20T18:47:28.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 11300,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "not_a_brand_candidate",
+            "needs_human_confirm": false,
+            "confirm_reason": "platform_tag"
+          }
+        ],
+        "disclosures": [
+          {
+            "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+            "platform_id": "7700919307861200130",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+            "platform_id": "7699815257883151638",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+            "platform_id": "7699480431510523158",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+            "platform_id": "7699054624178785558",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_19846e2590a509d5af7793b06e8b",
+            "platform_id": "7698823548160199958",
+            "state": "unknown",
+            "signals": []
+          }
+        ],
+        "confirmations_ignored": [],
+        "limits": [
+          "Baseline reads mentions, hashtags, co-authors, media account tags, and caption @-names.",
+          "It does not scan a brand dictionary across caption prose, transcripts, or OCR.",
+          "A string that is only in speech or on-screen text is not a baseline candidate.",
+          "No candidate is confirmed unless a human confirmation names a candidate that was already extracted.",
+          "Disclosure is disclosed or unknown. A missing ad label is not a payment verdict."
+        ]
+      },
+      "supplied_string_check": {
+        "role": "Strings supplied by the caller. Not a discovery pass, not a gazetteer, and not ground truth.",
+        "names": [
+          {
+            "name": "Ryanair",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Ryanair",
+                  "snippet": "...not available for passengers flying with Ryanair, AJet or easyJet because it’s in a differ..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "AJet",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "AJet",
+                  "snippet": "...lable for passengers flying with Ryanair, AJet or easyJet because it’s in a different pa..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "A-Jet",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "transcript_chunk",
+                  "media_index": 0,
+                  "timestamp_seconds": 0,
+                  "exact_quote": "A-Jet",
+                  "snippet": "...but the problem is it is not for Ryanair, A-Jet or EasyJet flight, and there literally is..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "easyJet",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "easyJet",
+                  "snippet": "...r passengers flying with Ryanair, AJet or easyJet because it’s in a different part of the a..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Priority Pass",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Priority Pass",
+                  "snippet": "...wever if you usually get free access with Priority Pass, there is another option… You can head t..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Escape Lounge",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Escape Lounge",
+                  "snippet": "...LOUNGE UPDATE 🚨 You may have spotted that Escape Lounge at Stansted Airport has closed 😭 So here’..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "The Camden",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7700919307861200130",
+                "views": 80000,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+                  "platform_id": "7700919307861200130",
+                  "published_at": "2026-10-26T10:20:06.000Z",
+                  "views": 80000,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "The Camden",
+                  "snippet": "...pint with a view! 🍺 SO WHERE IS IT? 📍The Camden I’ve actually walked past this pub load..."
+                }
+              },
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "The Camden",
+                  "snippet": "...re is another option… You can head to: 📍 The Camden Where you’ll get £18 to spend on food and..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Spoons",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7700919307861200130",
+                "views": 80000,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+                  "platform_id": "7700919307861200130",
+                  "published_at": "2026-10-26T10:20:06.000Z",
+                  "views": 80000,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Spoons",
+                  "snippet": "...viewing area - and after seeing how busy Spoons was, I was hopeful that this was going to..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Guinness",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7700919307861200130",
+                "views": 80000,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+                  "platform_id": "7700919307861200130",
+                  "published_at": "2026-10-26T10:20:06.000Z",
+                  "views": 80000,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "GUINNESS",
+                  "snippet": "GUINNESS"
+                }
+              },
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Guinness",
+                  "snippet": "...hing but the downside is that my meal and Guinness cost over £18, meaning I had to pay out o..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Wetherspoons",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7700919307861200130",
+                "views": 80000,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_ba770ed32809d99e476c7171d38e",
+                  "platform_id": "7700919307861200130",
+                  "published_at": "2026-10-26T10:20:06.000Z",
+                  "views": 80000,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Wetherspoons",
+                  "snippet": "Is this better than Wetherspoons? bar restaurant the Windmill Wetherspoons..."
+                }
+              },
+              {
+                "platform_id": "7699815257883151638",
+                "views": 8016,
+                "fields": [
+                  "caption"
+                ],
+                "example": {
+                  "post_id": "cnt_2ef7b84cafc76f237cfcdd0a0feb",
+                  "platform_id": "7699815257883151638",
+                  "published_at": "2026-10-23T10:55:52.000Z",
+                  "views": 8016,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Wetherspoons",
+                  "snippet": "...neral area of the airport. Did anyone day Wetherspoons?? 💳 However if you usually get free acces..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Caledonian Sleeper",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": true,
+            "occurrences": [
+              {
+                "platform_id": "7699480431510523158",
+                "views": 57900,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+                  "platform_id": "7699480431510523158",
+                  "published_at": "2026-10-22T13:16:32.000Z",
+                  "views": 57900,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Caledonian Sleeper",
+                  "snippet": "The MOST EXPENSIVE room on the Caledonian Sleeper 🛌🚆 Is this train double bed really worth..."
+                }
+              },
+              {
+                "platform_id": "7699054624178785558",
+                "views": 9674,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_7c8ec2b15e221efc083ffa5341dd",
+                  "platform_id": "7699054624178785558",
+                  "published_at": "2026-10-21T09:44:11.000Z",
+                  "views": 9674,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Caledonian Sleeper",
+                  "snippet": "...he Classic Room? 🤔 Yep, we’re back on the Caledonian Sleeper checking out the Club En-suite! 🛌 💾 SAVE..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "ARRAN",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "7699480431510523158",
+                "views": 57900,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_82d2e0452217b009cfb5dacf3895",
+                  "platform_id": "7699480431510523158",
+                  "published_at": "2026-10-22T13:16:32.000Z",
+                  "views": 57900,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "ARRAN",
+                  "snippet": "ARRAN"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Apple",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "iPhone",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "iMac",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "OPPO",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Hasselblad",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Huawei",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Everyman",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "KIA",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Porsche",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Lamborghini",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Ferrari",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "TAG Heuer",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "TAGHEUER",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Mobil",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "ORACLE",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "MW4",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "GTA",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "PS5",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Top Gear",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          }
+        ]
+      },
+      "model": {
+        "experiment": "unrun",
+        "network_call": false,
+        "accuracy": null,
+        "candidates": null,
+        "docs": "https://docs.gmicloud.ai/inference-engine/api-reference/llm-api-reference",
+        "reason": "missing GMI_API_KEY and GMI_MODEL"
+      },
+      "vision": {
+        "experiment": "not_run",
+        "frame_count": 169,
+        "design": "A later pass can sample frames, propose a name, and keep it unconfirmed until the same name is an exact quote in text or a person confirms that frame. visualSimilarity searches a known asset. It is not an unknown-logo detector. This run did not fetch frames or call a vision model."
+      },
+      "ocr_strings_redacted_while_parsing": 0,
+      "stored_sanitization": {
+        "on_screen_text_strings_removed": 6,
+        "frame_region_strings_removed": 0,
+        "reason": "Card-pattern on-screen strings were removed before this fixture was stored."
+      },
+      "card_ocr_strings_removed_before_storage": 6
+    },
+    {
+      "kind": "REAL_ORIANE_CAPTURE_NOT_SYNTHETIC",
+      "handle": "developeradam",
+      "platform": "instagram",
+      "creator_only_request": true,
+      "brand_filter": null,
+      "http_status": 206,
+      "pagination": {
+        "offset": 0,
+        "limit": 5,
+        "totalCount": 59
+      },
+      "returned_posts": 5,
+      "unique_platform_ids": 5,
+      "coverage": {
+        "indexed_total_count": 59,
+        "returned_posts": 5,
+        "page_covers_indexed_total": false,
+        "note": "totalCount is the count on this contents-search response. The public search help describes a recent index window, a follower floor, and indexing lag. Those rules are not restated here as measured facts. This page is not the creator's whole history, and the index is not an on-demand ingest of every post."
+      },
+      "dropped": [],
+      "posts": [
+        {
+          "post_id": "cnt_1c8b2361499cdcac290c412e6aea",
+          "platform": "instagram",
+          "platform_id": "De65olDMifM",
+          "handle": "developeradam",
+          "published_at": "2026-10-25T14:18:26.000Z",
+          "views": 255144,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 21,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_d25fc173b00a37ea3692dc63a35c",
+          "platform": "instagram",
+          "platform_id": "De37AwzsDIC",
+          "handle": "developeradam",
+          "published_at": "2026-10-24T10:32:40.000Z",
+          "views": 92454,
+          "transcript": "empty",
+          "ocr": "present",
+          "frames": 17,
+          "media_transcript_states": [
+            "empty"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_44690bbe095281a21b6c036a993d",
+          "platform": "instagram",
+          "platform_id": "DezYvKqDPdv",
+          "handle": "developeradam",
+          "published_at": "2026-10-22T16:13:56.000Z",
+          "views": null,
+          "transcript": "no_nonempty",
+          "ocr": "present",
+          "frames": 19,
+          "media_transcript_states": [
+            "empty",
+            "null",
+            "empty",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "empty",
+            "empty",
+            "null",
+            "empty",
+            "null",
+            "null"
+          ],
+          "media_ocr_states": [
+            "present",
+            "present",
+            "present",
+            "empty",
+            "empty",
+            "present",
+            "empty",
+            "present",
+            "present",
+            "present",
+            "present",
+            "present",
+            "present",
+            "present",
+            "empty"
+          ]
+        },
+        {
+          "post_id": "cnt_b8596977e187485564d524a11427",
+          "platform": "instagram",
+          "platform_id": "DewXQhhs5vX",
+          "handle": "developeradam",
+          "published_at": "2026-10-21T12:10:05.000Z",
+          "views": 57739,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 35,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        },
+        {
+          "post_id": "cnt_ec614a09ecd01922508310a1871a",
+          "platform": "instagram",
+          "platform_id": "DerVinws0-K",
+          "handle": "developeradam",
+          "published_at": "2026-10-19T13:13:12.000Z",
+          "views": 405169,
+          "transcript": "present",
+          "ocr": "present",
+          "frames": 8,
+          "media_transcript_states": [
+            "present"
+          ],
+          "media_ocr_states": [
+            "present"
+          ]
+        }
+      ],
+      "media_transcript_states": {
+        "empty": 6,
+        "null": 10,
+        "present": 3
+      },
+      "media_ocr_states": {
+        "empty": 4,
+        "present": 15
+      },
+      "frame_count": 100,
+      "redacted_frame_placeholders": 0,
+      "posts_with_frames": 5,
+      "posts_with_nonempty_transcript": 3,
+      "posts_with_nonempty_ocr": 5,
+      "views": {
+        "per_post": [
+          {
+            "platform_id": "De65olDMifM",
+            "views": 255144
+          },
+          {
+            "platform_id": "De37AwzsDIC",
+            "views": 92454
+          },
+          {
+            "platform_id": "DezYvKqDPdv",
+            "views": null
+          },
+          {
+            "platform_id": "DewXQhhs5vX",
+            "views": 57739
+          },
+          {
+            "platform_id": "DerVinws0-K",
+            "views": 405169
+          }
+        ],
+        "posts_with_null_views": [
+          "DezYvKqDPdv"
+        ],
+        "sum_of_non_null_views_on_returned_posts": 810506,
+        "sum_note": "Sum of viewsCount on returned posts that have a number. Not unique reach, not a lifetime total, and not a valuation."
+      },
+      "baseline": {
+        "evidence": [
+          {
+            "name": "everymandriving",
+            "surface": "everymandriving",
+            "kind": "coauthor",
+            "field": "coAuthors",
+            "snippet": "everymandriving",
+            "post_id": "cnt_b8596977e187485564d524a11427",
+            "platform": "instagram",
+            "platform_id": "DewXQhhs5vX",
+            "published_at": "2026-10-21T12:10:05.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": 57739,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "account_may_be_person"
+          },
+          {
+            "name": "oppouk",
+            "surface": "oppouk",
+            "kind": "coauthor",
+            "field": "coAuthors",
+            "snippet": "oppouk",
+            "post_id": "cnt_44690bbe095281a21b6c036a993d",
+            "platform": "instagram",
+            "platform_id": "DezYvKqDPdv",
+            "published_at": "2026-10-22T16:13:56.000Z",
+            "media_index": null,
+            "timestamp_seconds": null,
+            "views": null,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "account_may_be_person"
+          },
+          {
+            "name": "oppouk",
+            "surface": "oppouk",
+            "kind": "media_tag",
+            "field": "media.tags",
+            "snippet": "oppouk",
+            "post_id": "cnt_44690bbe095281a21b6c036a993d",
+            "platform": "instagram",
+            "platform_id": "DezYvKqDPdv",
+            "published_at": "2026-10-22T16:13:56.000Z",
+            "media_index": 1,
+            "timestamp_seconds": null,
+            "views": null,
+            "extractor": "baseline-structured-surfaces-v1",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reason": "account_may_be_person"
+          }
+        ],
+        "entities": [
+          {
+            "name": "everymandriving",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "account_may_be_person"
+            ],
+            "evidence_count": 1,
+            "matching_posts": [
+              {
+                "post_id": "cnt_b8596977e187485564d524a11427",
+                "platform_id": "DewXQhhs5vX",
+                "published_at": "2026-10-21T12:10:05.000Z",
+                "views": 57739
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          },
+          {
+            "name": "oppouk",
+            "status": "brand_candidate",
+            "needs_human_confirm": true,
+            "confirm_reasons": [
+              "account_may_be_person"
+            ],
+            "evidence_count": 2,
+            "matching_posts": [
+              {
+                "post_id": "cnt_44690bbe095281a21b6c036a993d",
+                "platform_id": "DezYvKqDPdv",
+                "published_at": "2026-10-22T16:13:56.000Z",
+                "views": null
+              }
+            ],
+            "views_note": "Each number is that post's viewsCount. Do not add numbers across entities, and do not treat them as unique reach."
+          }
+        ],
+        "not_brand_surfaces": [],
+        "disclosures": [
+          {
+            "post_id": "cnt_1c8b2361499cdcac290c412e6aea",
+            "platform_id": "De65olDMifM",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_d25fc173b00a37ea3692dc63a35c",
+            "platform_id": "De37AwzsDIC",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_44690bbe095281a21b6c036a993d",
+            "platform_id": "DezYvKqDPdv",
+            "state": "unknown",
+            "signals": []
+          },
+          {
+            "post_id": "cnt_b8596977e187485564d524a11427",
+            "platform_id": "DewXQhhs5vX",
+            "state": "unknown",
+            "signals": [
+              {
+                "code": "invitation_language",
+                "snippet": "invited me"
+              }
+            ]
+          },
+          {
+            "post_id": "cnt_ec614a09ecd01922508310a1871a",
+            "platform_id": "DerVinws0-K",
+            "state": "unknown",
+            "signals": []
+          }
+        ],
+        "confirmations_ignored": [],
+        "limits": [
+          "Baseline reads mentions, hashtags, co-authors, media account tags, and caption @-names.",
+          "It does not scan a brand dictionary across caption prose, transcripts, or OCR.",
+          "A string that is only in speech or on-screen text is not a baseline candidate.",
+          "No candidate is confirmed unless a human confirmation names a candidate that was already extracted.",
+          "Disclosure is disclosed or unknown. A missing ad label is not a payment verdict."
+        ]
+      },
+      "supplied_string_check": {
+        "role": "Strings supplied by the caller. Not a discovery pass, not a gazetteer, and not ground truth.",
+        "names": [
+          {
+            "name": "Ryanair",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "AJet",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "A-Jet",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "easyJet",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Priority Pass",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Escape Lounge",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "The Camden",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Spoons",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Guinness",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Wetherspoons",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Caledonian Sleeper",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "ARRAN",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Apple",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "De37AwzsDIC",
+                "views": 92454,
+                "fields": [
+                  "caption"
+                ],
+                "example": {
+                  "post_id": "cnt_d25fc173b00a37ea3692dc63a35c",
+                  "platform_id": "De37AwzsDIC",
+                  "published_at": "2026-10-24T10:32:40.000Z",
+                  "views": 92454,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Apple",
+                  "snippet": "Apple IPhone Duo 🤩🤩"
+                }
+              }
+            ]
+          },
+          {
+            "name": "iPhone",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "De37AwzsDIC",
+                "views": 92454,
+                "fields": [
+                  "caption"
+                ],
+                "example": {
+                  "post_id": "cnt_d25fc173b00a37ea3692dc63a35c",
+                  "platform_id": "De37AwzsDIC",
+                  "published_at": "2026-10-24T10:32:40.000Z",
+                  "views": 92454,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "IPhone",
+                  "snippet": "Apple IPhone Duo 🤩🤩"
+                }
+              }
+            ]
+          },
+          {
+            "name": "iMac",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "De37AwzsDIC",
+                "views": 92454,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_d25fc173b00a37ea3692dc63a35c",
+                  "platform_id": "De37AwzsDIC",
+                  "published_at": "2026-10-24T10:32:40.000Z",
+                  "views": 92454,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "iMac",
+                  "snippet": "iMac G3"
+                }
+              }
+            ]
+          },
+          {
+            "name": "OPPO",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DezYvKqDPdv",
+                "views": null,
+                "fields": [
+                  "caption",
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_44690bbe095281a21b6c036a993d",
+                  "platform_id": "DezYvKqDPdv",
+                  "published_at": "2026-10-22T16:13:56.000Z",
+                  "views": null,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "OPPO",
+                  "snippet": "Little dump from the OPPO Find X10 Series launch in Mallorca ☀️ 🇪🇸..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Hasselblad",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DezYvKqDPdv",
+                "views": null,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_44690bbe095281a21b6c036a993d",
+                  "platform_id": "DezYvKqDPdv",
+                  "published_at": "2026-10-22T16:13:56.000Z",
+                  "views": null,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Hasselblad",
+                  "snippet": "Hasselblad verter Case"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Huawei",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Everyman",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "caption",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Everyman",
+                  "snippet": "Now this was a sick day!! Everyman driving experiences invited me out to the..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "KIA",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "caption",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "KIA",
+                  "snippet": "...passenger rides and then fully sending a KIA around the figure of 8 track for a timed..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Porsche",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "transcript_chunk",
+                  "media_index": 0,
+                  "timestamp_seconds": 13.36,
+                  "exact_quote": "Porsche",
+                  "snippet": "some very sexy supercars, including a Porsche 911 GT3 RS, a Lamborghini Huracan and a F..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "Lamborghini",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "transcript_chunk",
+                  "media_index": 0,
+                  "timestamp_seconds": 13.36,
+                  "exact_quote": "Lamborghini",
+                  "snippet": "...ercars, including a Porsche 911 GT3 RS, a Lamborghini Huracan and a Ferrari"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Ferrari",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "transcript_chunk",
+                  "media_index": 0,
+                  "timestamp_seconds": 13.36,
+                  "exact_quote": "Ferrari",
+                  "snippet": "...e 911 GT3 RS, a Lamborghini Huracan and a Ferrari"
+                }
+              }
+            ]
+          },
+          {
+            "name": "TAG Heuer",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "TAG HEUER",
+                  "snippet": "TAG HEUER Mobil 1 ORACLE CARLYLE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "TAGHEUER",
+            "exact_substring_found": false,
+            "baseline_emitted_same_name": false,
+            "occurrences": []
+          },
+          {
+            "name": "Mobil",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Mobil",
+                  "snippet": "TAG HEUER Mobil 1 ORACLE CARLYLE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "ORACLE",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "frame_ocr",
+                  "on_screen_text"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "on_screen_text",
+                  "media_index": 0,
+                  "timestamp_seconds": null,
+                  "exact_quote": "ORACLE",
+                  "snippet": "TAG HEUER Mobil 1 ORACLE CARLYLE"
+                }
+              }
+            ]
+          },
+          {
+            "name": "MW4",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "De65olDMifM",
+                "views": 255144,
+                "fields": [
+                  "caption"
+                ],
+                "example": {
+                  "post_id": "cnt_1c8b2361499cdcac290c412e6aea",
+                  "platform_id": "De65olDMifM",
+                  "published_at": "2026-10-25T14:18:26.000Z",
+                  "views": 255144,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "MW4",
+                  "snippet": "Sunday Funday 🤙🏼 Enjoying MW4 multiplayer right now however I’m far bet..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "GTA",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DerVinws0-K",
+                "views": 405169,
+                "fields": [
+                  "caption"
+                ],
+                "example": {
+                  "post_id": "cnt_ec614a09ecd01922508310a1871a",
+                  "platform_id": "DerVinws0-K",
+                  "published_at": "2026-10-19T13:13:12.000Z",
+                  "views": 405169,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "GTA",
+                  "snippet": "GTA 6 IS ONLY ONE MONTH AWAY AND I AM READY..."
+                }
+              }
+            ]
+          },
+          {
+            "name": "PS5",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DerVinws0-K",
+                "views": 405169,
+                "fields": [
+                  "caption"
+                ],
+                "example": {
+                  "post_id": "cnt_ec614a09ecd01922508310a1871a",
+                  "platform_id": "DerVinws0-K",
+                  "published_at": "2026-10-19T13:13:12.000Z",
+                  "views": 405169,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "PS5",
+                  "snippet": "...😍😍😍😍 No PC at launch so I will be on the PS5 Pro 👀"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Top Gear",
+            "exact_substring_found": true,
+            "baseline_emitted_same_name": false,
+            "occurrences": [
+              {
+                "platform_id": "DewXQhhs5vX",
+                "views": 57739,
+                "fields": [
+                  "caption",
+                  "transcript",
+                  "transcript_chunk"
+                ],
+                "example": {
+                  "post_id": "cnt_b8596977e187485564d524a11427",
+                  "platform_id": "DewXQhhs5vX",
+                  "published_at": "2026-10-21T12:10:05.000Z",
+                  "views": 57739,
+                  "field": "caption",
+                  "media_index": null,
+                  "timestamp_seconds": null,
+                  "exact_quote": "Top Gear",
+                  "snippet": "...ing experiences invited me out to the old Top Gear test track for an action-packed day! Dr..."
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "model": {
+        "experiment": "unrun",
+        "network_call": false,
+        "accuracy": null,
+        "candidates": null,
+        "docs": "https://docs.gmicloud.ai/inference-engine/api-reference/llm-api-reference",
+        "reason": "missing GMI_API_KEY and GMI_MODEL"
+      },
+      "vision": {
+        "experiment": "not_run",
+        "frame_count": 100,
+        "design": "A later pass can sample frames, propose a name, and keep it unconfirmed until the same name is an exact quote in text or a person confirms that frame. visualSimilarity searches a known asset. It is not an unknown-logo detector. This run did not fetch frames or call a vision model."
+      },
+      "ocr_strings_redacted_while_parsing": 0,
+      "stored_sanitization": {
+        "on_screen_text_strings_removed": 0,
+        "frame_region_strings_removed": 0,
+        "reason": "Card-pattern on-screen strings were removed before this fixture was stored."
+      },
+      "card_ocr_strings_removed_before_storage": 0
+    }
+  ],
+  "experiments": {
+    "ran": [
+      {
+        "id": "parse_and_baseline",
+        "handle": "cheapholidayexpert",
+        "platform": "tiktok",
+        "returned_posts": 5,
+        "creator_only_request": true,
+        "baseline_candidates": 9,
+        "model_experiment": "unrun"
+      },
+      {
+        "id": "parse_and_baseline",
+        "handle": "developeradam",
+        "platform": "instagram",
+        "returned_posts": 5,
+        "creator_only_request": true,
+        "baseline_candidates": 2,
+        "model_experiment": "unrun"
+      },
+      {
+        "id": "supplied_string_quote_check",
+        "role": "Checks caller-supplied strings for an exact substring. Does not propose names and does not score accuracy."
+      }
+    ],
+    "pending": [
+      {
+        "id": "gmi_inference",
+        "status": "unrun",
+        "reason": "GMI_API_KEY and GMI_MODEL were read from the environment passed to this process. A missing value leaves the model unrun. This pilot also refuses to send, so a present key would still not be a result. No accuracy is filled in."
+      },
+      {
+        "id": "vision_frame_model",
+        "status": "not_run",
+        "reason": "Frame URLs were not fetched. No vision model ran. visualSimilarity was not used."
+      },
+      {
+        "id": "exhaustive_human_gold",
+        "status": "not_available",
+        "reason": "Partial manual notes are not an exhaustive brand list. This report does not score the baseline against them."
+      },
+      {
+        "id": "remaining_indexed_pages",
+        "status": "not_run",
+        "reason": "Captures here are the first page only. Later offsets were not requested by this pilot."
+      },
+      {
+        "id": "production_creator_route",
+        "status": "not_added",
+        "reason": "No backend or frontend route was added. Integration is a later decision."
+      }
+    ]
+  },
+  "not_used": [
+    "The earlier Ryanair cross-creator sample is not an input. It searched a known brand across many creators. It is not creator enumeration and not blind brand discovery."
+  ]
+}
