@@ -1,0 +1,11 @@
+{
+  "source_url": "https://connect.oriane.xyz/rest/docs",
+  "linked_from": "https://www.oriane.xyz/api",
+  "link_mechanism": "public Webflow page iframe src, not an authenticated app session",
+  "fetched_at": "2026-11-06T08:33:00Z",
+  "extraction": "Scalar createApiReference content object embedded in the public docs HTML",
+  "openapi": "3.0.0",
+  "info_version": "0.0.1",
+  "sha256": "f16ca3ee555864db540b5063ffc7b23641b717ec70385d28e52b6aaad64176d9",
+  "live_authenticated_calls": false
+}

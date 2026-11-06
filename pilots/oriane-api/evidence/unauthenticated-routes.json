@@ -1,0 +1,79 @@
+{
+  "kind": "unauthenticated_gate_all_documented_routes",
+  "live_content_proof": false,
+  "authenticated": false,
+  "credits_spent_observed": false,
+  "note": "One keyless POST per documented path. No auth header, no retries, synthetic bodies. Same failure on every route: HTTP 401, operation AUTHENTICATION, code UNAUTHORIZED, message 'Authorization failed.', empty context, no WWW-Authenticate. Header name and scheme remain undocumented. None of these calls returned a data payload, so query shapes are not server-validated.",
+  "routes": [
+    {
+      "path": "/rest/contents/search",
+      "observed_at": "2026-11-06T08:36:46Z",
+      "http_status": 401,
+      "www_authenticate": null,
+      "detail_file": "evidence/unauthenticated-gate.json",
+      "error": {
+        "operation": "AUTHENTICATION",
+        "code": "UNAUTHORIZED",
+        "message": "Authorization failed.",
+        "context": {}
+      }
+    },
+    {
+      "path": "/rest/profiles/search",
+      "observed_at": "2026-11-06T08:40:03Z",
+      "http_status": 401,
+      "www_authenticate": null,
+      "request_query": {
+        "sort": "createdAt:desc",
+        "offset": 0,
+        "limit": 1,
+        "projection": "basic"
+      },
+      "request_body": {
+        "operator": "and",
+        "filters": {
+          "handle": {
+            "exactMatch": {
+              "values": ["__synthetic_probe_not_a_creator__"],
+              "operator": "or"
+            }
+          }
+        }
+      },
+      "error": {
+        "id": "err_MGf19nfEdZiEc5Xa8ylrRLwrDReD",
+        "operation": "AUTHENTICATION",
+        "code": "UNAUTHORIZED",
+        "message": "Authorization failed.",
+        "context": {}
+      },
+      "metadata": {
+        "requestId": "req_o83LsUjRkbobAJgIbtALyFAEqVq5",
+        "executionTime": 0,
+        "timestamp": 1793954403452
+      }
+    },
+    {
+      "path": "/rest/assets",
+      "observed_at": "2026-11-06T08:40:03Z",
+      "http_status": 401,
+      "www_authenticate": null,
+      "request_body": {
+        "type": "text",
+        "text": "synthetic probe not a search"
+      },
+      "error": {
+        "id": "err_FUB7NbP8jPPTcmKHCxz5beliHhaZ",
+        "operation": "AUTHENTICATION",
+        "code": "UNAUTHORIZED",
+        "message": "Authorization failed.",
+        "context": {}
+      },
+      "metadata": {
+        "requestId": "req_i9bYW0lAfCwWlWGBomxicN7IuK7M",
+        "executionTime": 2,
+        "timestamp": 1793954403682
+      }
+    }
+  ]
+}

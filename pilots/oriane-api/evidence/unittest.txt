@@ -1,0 +1,18 @@
+test_recorded_keyless_calls_are_not_content_proof (test_probe.GateTests.test_recorded_keyless_calls_are_not_content_proof) ... ok
+test_missing_transcript_is_not_a_negative_proof (test_probe.InterpretTests.test_missing_transcript_is_not_a_negative_proof) ... ok
+test_page_plan_does_not_invent_a_price (test_probe.InterpretTests.test_page_plan_does_not_invent_a_price) ... ok
+test_synthetic_fixture_is_labeled_and_finds_the_caption_gap (test_probe.InterpretTests.test_synthetic_fixture_is_labeled_and_finds_the_caption_gap) ... ok
+test_asset_and_visual_search_need_an_id_before_similarity (test_probe.QueryTests.test_asset_and_visual_search_need_an_id_before_similarity) ... ok
+test_content_by_id_and_profile_and_untagged (test_probe.QueryTests.test_content_by_id_and_profile_and_untagged) ... ok
+test_creator_enumeration_request (test_probe.QueryTests.test_creator_enumeration_request) ... ok
+test_demo_page_is_small_and_default_projection (test_probe.QueryTests.test_demo_page_is_small_and_default_projection) ... ok
+test_execute_never_sends (test_probe.QueryTests.test_execute_never_sends) ... ok
+test_rejects_undocumented_paging_and_platform (test_probe.QueryTests.test_rejects_undocumented_paging_and_platform) ... ok
+test_document_shape (test_probe.SnapshotTests.test_document_shape) ... ok
+test_idea_citations_resolve (test_probe.SnapshotTests.test_idea_citations_resolve) ... ok
+test_provenance_hash_matches_snapshot (test_probe.SnapshotTests.test_provenance_hash_matches_snapshot) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.028s
+
+OK

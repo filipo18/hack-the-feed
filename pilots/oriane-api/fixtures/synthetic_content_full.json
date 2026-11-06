@@ -1,0 +1,77 @@
+{
+  "_fixture": "SYNTHETIC — not a live Oriane response. For client plumbing tests only.",
+  "id": "cnt_SYNTHETICPLUMBINGONLY0000001",
+  "matchedQueries": ["synthetic"],
+  "platform": "tiktok",
+  "profileHandle": "synthetic.probe",
+  "profileDisplayName": "Synthetic Probe",
+  "format": "video",
+  "platformType": "video",
+  "title": null,
+  "caption": "Morning routine. Link below.",
+  "thumbnailMediaId": "med_SYNTHETICPLUMBINGONLY0000001",
+  "publishedAt": "2026-11-01T12:00:00.000Z",
+  "profileId": "prf_SYNTHETICPLUMBINGONLY0000001",
+  "thumbnailMediaUrl": "https://example.invalid/synthetic/thumbnail.webp",
+  "viewsCount": 12000,
+  "likesCount": 100,
+  "sharesCount": 10,
+  "commentsCount": 5,
+  "interactionsCount": 115,
+  "profileFollowersCount": 20000,
+  "mediaCount": 1,
+  "hashtags": ["#morning"],
+  "mentions": [],
+  "platformId": "synthetic-platform-id",
+  "profilePlatformId": "synthetic-profile-id",
+  "profilePictureUrl": "https://example.invalid/synthetic/pfp.webp",
+  "media": [
+    {
+      "type": "video",
+      "duration": 8.0,
+      "caption": "Morning routine. Link below.",
+      "onScreenText": ["SILVERPOOL", "morning", "DAWNLABEL"],
+      "transcript": "this is just my morning routine I have used the silverpool bottle every day",
+      "tags": [],
+      "transcriptLanguage": "en",
+      "transcriptChunks": [
+        {
+          "startSeconds": 0.4,
+          "endSeconds": 1.8,
+          "text": "this is just my morning routine"
+        },
+        {
+          "startSeconds": 4.2,
+          "endSeconds": 6.0,
+          "text": "I have used the silverpool bottle every day"
+        }
+      ],
+      "frames": [
+        {
+          "id": "med_SYNTHETICFRAME00000000000001",
+          "position": 1,
+          "timestampSeconds": 0.5,
+          "onScreenTextRegions": [],
+          "url": "https://example.invalid/synthetic/frame-0.5.webp"
+        },
+        {
+          "id": "med_SYNTHETICFRAME00000000000002",
+          "position": 2,
+          "timestampSeconds": 4.8,
+          "onScreenTextRegions": [
+            {
+              "text": "SILVERPOOL",
+              "polygon": [
+                {"x": 0.1, "y": 0.2},
+                {"x": 0.4, "y": 0.2},
+                {"x": 0.4, "y": 0.3},
+                {"x": 0.1, "y": 0.3}
+              ]
+            }
+          ],
+          "url": "https://example.invalid/synthetic/frame-4.8.webp"
+        }
+      ]
+    }
+  ]
+}
