@@ -47,7 +47,7 @@ export const COPY: Record<Audience, Copy> = {
         text: "Type your brand. We read captions, speech and on-screen text in short videos.",
         panel: [
           { label: "Videos read", value: "883", note: "Instagram and TikTok" },
-          { label: "Ad posts removed", value: "14", note: "Marked #ad or paid partnership" },
+          { label: "Ad posts removed", value: "41", note: "Marked #ad or paid partnership" },
         ],
       },
       {
@@ -55,7 +55,7 @@ export const COPY: Record<Audience, Copy> = {
         text: "See every creator with no ad marker on the post, sorted by impressions.",
         panel: [
           { label: "Top creator", value: "4.1M", note: "Impressions across 2 videos" },
-          { label: "All creators", value: "9.9M", note: "Impressions you didn’t know about" },
+          { label: "All creators", value: "30.1M", note: "Impressions you didn’t know about" },
         ],
       },
       {

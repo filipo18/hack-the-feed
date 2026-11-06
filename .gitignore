@@ -10,3 +10,6 @@ coverage/
 .env.*
 !.env.example
 *.local
+
+# Vercel link for the demo deploy
+.vercel/
