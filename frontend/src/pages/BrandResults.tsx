@@ -44,7 +44,7 @@ export function BrandResults() {
               title={brand}
               active={showing}
               amount={creators.reduce((sum, creator) => sum + creator.views, 0)}
-              line={(shown) => `${compact(shown)} impressions you missed.`}
+              line={(shown) => `${compact(shown)} impressions to build on.`}
               note="Video views on posts with no ad marker. Only part of each profile is indexed, so the real number is higher."
               stats={[
                 { label: "Creators with no ad marker", value: creators.length, prefix: "At least " },

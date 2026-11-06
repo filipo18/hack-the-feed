@@ -4,7 +4,7 @@ import type { RankedBrand, RankedCreator } from "./rank";
 export function brandOutreach(brand: string, creator: RankedCreator) {
   return {
     title: `Reach out to @${creator.handle}`,
-    message: `Hi ${creator.handle},\n\nWe saw your video with ${brand}: ${creator.top.postUrl}\n\nIt has ${compact(creator.top.views ?? 0)} views, and we loved it. We'd like to work with you on a regular basis.\n\nAre you open to a short call this week?`,
+    message: `Hi ${creator.handle},\n\nWe saw your video with ${brand}: ${creator.top.postUrl}\n\nIt has ${compact(creator.top.views ?? 0)} views, and we loved it. Since you're already showing ${brand}, would you like to do a paid collaboration?\n\nAre you open to a short call this week?`,
   };
 }
 
