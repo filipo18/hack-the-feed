@@ -13,7 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build the Agentbox image
-        run: docker build -t hack-the-feed:ci .
+        run: |
+          docker build \
+            --label org.opencontainers.image.source="https://github.com/${GITHUB_REPOSITORY}" \
+            --label org.opencontainers.image.revision="${GITHUB_SHA}" \
+            -t hack-the-feed:ci .
 
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -24,7 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build
-        run: docker build -t hack-the-feed:ci .
+        run: |
+          docker build \
+            --label org.opencontainers.image.source="https://github.com/${GITHUB_REPOSITORY}" \
+            --label org.opencontainers.image.revision="${GITHUB_SHA}" \
+            -t hack-the-feed:ci .
       - name: Push one immutable tag
         env:
           OWNER: ${{ github.repository_owner }}
