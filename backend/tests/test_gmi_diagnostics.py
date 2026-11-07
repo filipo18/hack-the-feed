@@ -63,3 +63,32 @@ def test_model_keeps_existing_timeout_when_override_is_unset(monkeypatch):
     assess(failed_request, _settings(monkeypatch), "Nike", ["nike"], [])
 
     assert observed == [37.0]
+
+
+def test_batch_failure_keeps_success_and_safe_diagnostic(monkeypatch):
+    import json
+    monkeypatch.setenv("GMI_HTTP_TIMEOUT_SECONDS", "120")
+    posts = [{"postKey": f"instagram:{i}", "platform": "instagram", "handle": "runner", "viewsCount": 10, "disclosure": "unknown", "evidenceLabels": [], "retrievedBy": []} for i in range(11)]
+    def request(url, body, headers, timeout):
+        assert timeout == 120
+        batch = json.loads(body["messages"][1]["content"])["posts"]
+        if len(batch) == 1:
+            return 403, {"error": {"code": 1010, "message": "diagnostic-secret"}}
+        return 200, {"choices": [{"message": {"content": json.dumps({"posts": [
+            {"postKey": p["postKey"], "verdict": "relevant", "holdout": None, "why": "Names brand"}
+            for p in batch]})}}]}
+    notes = []
+    judgments, reason = assess(request, _settings(monkeypatch), "Nike", ["nike"], posts, notes)
+    assert len(judgments) == 10
+    assert reason == "gmi_error"
+    assert notes == ["GMI chat returned HTTP 403. Provider code 1010."]
+
+
+def test_timeout_diagnostic_uses_model_timeout(monkeypatch):
+    monkeypatch.setenv("HTTP_TIMEOUT_SECONDS", "20")
+    monkeypatch.setenv("GMI_HTTP_TIMEOUT_SECONDS", "120")
+    def request(*args):
+        raise ProviderCallError("provider timed out")
+    notes = []
+    assert assess(request, _settings(monkeypatch), "Nike", ["nike"], [], notes) == (None, "gmi_error")
+    assert notes == ["GMI chat provider timed out. Configured timeout 120s."]

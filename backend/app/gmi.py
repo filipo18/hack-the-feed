@@ -14,7 +14,7 @@ import logging
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-from app.http import ProviderCallError
+from app.http import ProviderCallError, provider_http_note
 
 VERDICTS = {"relevant", "irrelevant", "uncertain"}
 HOLDOUTS = {"owned_account", "complaint", "repost", "asr_false_positive", "incidental"}
@@ -115,7 +115,7 @@ def parse_judgments(content: str) -> dict[str, dict] | None:
     return parsed
 
 
-def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict]) -> tuple[dict[str, dict] | None, str | None]:
+def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict], diagnostics: list[str] | None = None) -> tuple[dict[str, dict] | None, str | None]:
     """Returns (judgments, error_reason). judgments is None when nothing usable came back."""
     if not settings.gmi_configured:
         return None, "gmi_not_configured"
@@ -123,12 +123,15 @@ def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict])
         combined = {}
         errors = []
         with ThreadPoolExecutor(max_workers=4) as pool:
-            futures = [pool.submit(assess, post_json, settings, brand, terms, posts[i:i + 10]) for i in range(0, len(posts), 10)]
+            batch_details = [[] for _ in range(0, len(posts), 10)]
+            futures = [pool.submit(assess, post_json, settings, brand, terms, posts[i:i + 10], detail) for i, detail in zip(range(0, len(posts), 10), batch_details)]
             for future in futures:
                 result, reason = future.result()
                 combined.update(result or {})
                 if reason:
                     errors.append(reason)
+        if diagnostics is not None:
+            diagnostics.extend(dict.fromkeys(note for detail in batch_details for note in detail))
         return combined or None, errors[0] if errors else None
     body = build_request(settings.gmi_model or "", brand, terms, posts)
     url = f"{settings.gmi_base_url}/chat/completions"
@@ -141,9 +144,13 @@ def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict])
         status, payload = post_json(url, body, headers, settings.gmi_timeout_seconds)
     except ProviderCallError as exc:
         _LOG.warning("GMI request failed: %s", exc)
+        if diagnostics is not None:
+            diagnostics.append(f"GMI chat {exc}. Configured timeout {settings.gmi_timeout_seconds:g}s.")
         return None, "gmi_error"
     if status != 200:
         _LOG.warning("GMI request rejected: HTTP %s", status)
+        if diagnostics is not None:
+            diagnostics.append(provider_http_note("GMI chat", status, payload))
         return None, "gmi_error"
     content = message_content(payload)
     if content is None:

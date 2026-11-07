@@ -137,7 +137,9 @@ def run_search(request: dict, settings, post_json) -> dict:
             response_cache.set(cache_key, response, settings.response_ttl_seconds)
         return response
 
-    judgments, reason = assess(post_json, settings, request["brand"].strip(), terms, deduped)
+    diagnostics: list[str] = []
+    judgments, reason = assess(post_json, settings, request["brand"].strip(), terms, deduped, diagnostics)
+    response["warnings"].extend(diagnostics)
     if judgments is not None and not any(post["postKey"] in judgments for post in deduped):
         judgments = None
         reason = "malformed_model_response"
