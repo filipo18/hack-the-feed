@@ -10,6 +10,11 @@ export interface SearchPost {
   countsTowardReach?: boolean;
   verdict?: string | null;
   holdout?: string | null;
+  assessment?: string;
+  context?: string;
+  why?: string | null;
+  caption?: string | null;
+  viewsConflict?: boolean;
   media?: {
     transcript?: string | null;
     onScreenText?: string[] | null;
@@ -29,6 +34,8 @@ export interface SearchCreator {
   why?: string | null;
   judgmentSource?: string;
   posts?: SearchPost[];
+  depthStatus?: "checking" | "complete" | "partial" | "failed";
+  depthHasMore?: boolean;
 }
 
 export interface SearchChannel {
@@ -49,6 +56,7 @@ export interface SearchResponse {
   rankedCreators: SearchCreator[];
   heldOut: SearchCreator[];
   unassessedCreators: SearchCreator[];
+  depth?: { status: "complete" | "partial" | "failed"; handle: string; platform: string; hasMore: boolean };
 }
 
 export interface SearchBody {

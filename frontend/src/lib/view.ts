@@ -21,6 +21,9 @@ export interface CardItem {
   thumbnail?: string | null;
   /** The term to highlight inside the quote. */
   highlight: string;
+  signals?: string[];
+  depthLabel?: string;
+  matches?: { id: string; thumbnail: string | null; context: string; why: string; views: number | null }[];
 }
 
 export function whereOf(mention: Mention): string {

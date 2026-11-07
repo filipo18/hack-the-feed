@@ -13,15 +13,22 @@ import { compact } from "../../lib/format";
 import { liveCreators, liveItem, liveOutreach, liveViews } from "../../lib/live";
 import { HONESTY_NOTE, assessmentCopy, disclosureLabel, holdoutLabel, modelLabel } from "../../lib/present";
 import { useBrandSearch } from "../../lib/useBrandSearch";
+import { bestFitCreators } from "../../lib/brandDepth";
 
 export function LiveBrandResults() {
   const brand = decodeURIComponent(useParams().brand ?? "");
   const state = useBrandSearch(brand);
   const { scanning, finish } = useScan(`live:brand:${brand}`, false);
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
+  const [sort, setSort] = useState<"fit" | "views">("fit");
   const ready = state.status !== "loading";
   const data = state.status === "ready" ? state.data : null;
-  const creators = useMemo(() => (data ? liveCreators(data) : []), [data]);
+  const creators = useMemo(() => {
+    if (!data) return [];
+    const valid = renderableCreators(data.rankedCreators).creators;
+    const rows = sort === "fit" ? bestFitCreators(valid) : valid.sort((a, b) => (b.sumViews ?? -1) - (a.sumViews ?? -1) || a.creatorKey.localeCompare(b.creatorKey));
+    return liveCreators({ ...data, rankedCreators: rows });
+  }, [data, sort]);
   const items = creators.map((creator) => liveItem(brand, creator));
   const showing = ready && !scanning;
   const copy = data ? assessmentCopy(data.assessmentReason) : null;
@@ -80,7 +87,8 @@ export function LiveBrandResults() {
             <div className="results-body">
               <details className="search-method" data-testid="search-meta">
                 <summary>About these results</summary>
-                <p className="live-meta">Instagram, one page of 10 on each channel. {modelLabel(data)} {HONESTY_NOTE}</p>
+                <p className="live-meta">Instagram discovery searches fetch up to 10 posts per channel. The first 10 eligible creators get a deeper search of up to 20 brand-matching posts each. Other creators show initial search evidence only. {modelLabel(data)} {HONESTY_NOTE}</p>
+                <p className="live-meta">Best fit puts evidence of product use, reviews, or recommendations first, then repeated matching posts, direct evidence count, and explicit mentions. Views break remaining ties. This compares the evidence found; it does not predict campaign performance or verify audience demographics.</p>
               </details>
               {copy && (
                 <div className="live-note" data-testid="assessment" role="status">
@@ -98,8 +106,22 @@ export function LiveBrandResults() {
               {creators.length > 0 && (
                 <section className="live-section">
                   <div className="results-head">
-                    <h2>Reach out to these first</h2>
+                    <h2>Your creator shortlist</h2>
+                    <label className="match-sort">Sort by
+                      <select value={sort} onChange={event => setSort(event.target.value as "fit" | "views")}>
+                        <option value="fit">Best fit</option>
+                        <option value="views">Most relevant views</option>
+                      </select>
+                    </label>
                   </div>
+                  {state.status === "ready" && state.deeper.total > 0 && (
+                    <p className="depth-progress" role="status" aria-live="polite">
+                      {state.deeper.finished < state.deeper.total
+                        ? `Checking more brand mentions · ${state.deeper.finished} of ${state.deeper.total} creators checked. Results update as evidence arrives.`
+                        : `Deeper search finished for ${state.deeper.total} creators.`}
+                      {state.deeper.failed > 0 && ` ${state.deeper.failed} checks were incomplete or unavailable; earlier verified matches are retained.`}
+                    </p>
+                  )}
                   <Cards
                     testId="ranked-creators"
                     items={items}

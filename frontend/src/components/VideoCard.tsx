@@ -42,10 +42,33 @@ export function VideoCard({ index, item, action, onAction }: { index: number; it
           {item.amountNote && <small>{item.amountNote}</small>}
         </p>
       </div>
+      {item.signals && item.signals.length > 0 && (
+        <ul className="match-signals" aria-label="Brand match evidence">
+          {item.signals.map(signal => <li key={signal}>{signal}</li>)}
+        </ul>
+      )}
+      {item.depthLabel && <p className="match-depth">{item.depthLabel}</p>}
       {item.reason && (
         <details className="card-evidence">
           <summary>Why this creator</summary>
           <p>{item.reason}</p>
+        </details>
+      )}
+      {item.matches && item.matches.length > 0 && (
+        <details className="card-matches">
+          <summary>View {item.matches.length === 1 ? "matching post" : `all ${item.matches.length} matching posts`}</summary>
+          <div className="match-gallery">
+            {item.matches.map((match, number) => (
+              <div className="match-post" key={match.id}>
+                {match.thumbnail && <img src={match.thumbnail} alt={`Matching post ${number + 1} from ${item.title}`} loading="lazy" referrerPolicy="no-referrer" onError={event => { event.currentTarget.hidden = true; }} />}
+                <div>
+                  <strong>{match.context}</strong>
+                  <span>{match.views === null ? "Views unknown" : `${compact(match.views)} views`}</span>
+                  <p>{match.why}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </details>
       )}
       <button type="button" className="pill pill-primary" aria-label={`${action}: ${item.title}`} onClick={onAction}>

@@ -3,6 +3,7 @@ import { renderableCreators, type SearchCreator, type SearchResponse } from "./c
 import { compact } from "./format";
 import { evidenceExcerpt, evidenceLabels } from "./present";
 import type { CardItem } from "./view";
+import { CONTEXT_LABELS, fitLabels, matchingPosts } from "./brandDepth";
 
 /** A ranked creator from POST /api/search, shaped for the cards and the desk. */
 export interface LiveCreator {
@@ -47,7 +48,7 @@ export function liveItem(brand: string, creator: LiveCreator): CardItem {
   return {
     id: creator.key,
     title: `@${creator.handle}`,
-    subtitle: `${creator.platform}, ${creator.posts} relevant ${creator.posts === 1 ? "post" : "posts"}`,
+    subtitle: `${creator.platform} · ${creator.posts} matching ${creator.posts === 1 ? "post" : "posts"} found`,
     reason: creator.excerpt ? (creator.why ?? undefined) : undefined,
     amount: creator.views === null ? "Views unknown" : compact(creator.views),
     amountNote: creator.views === null ? undefined : creator.viewsIncomplete ? "some views missing" : "views",
@@ -58,6 +59,19 @@ export function liveItem(brand: string, creator: LiveCreator): CardItem {
     postUrl: creator.postUrl,
     thumbnail: creator.thumbnail,
     highlight: brand,
+    signals: fitLabels(creator.raw),
+    depthLabel: creator.raw.depthStatus === "checking" ? "Checking more posts…"
+      : creator.raw.depthStatus === "failed" ? "Deeper check unavailable · initial matches shown"
+      : creator.raw.depthStatus === "partial" ? "Deeper check incomplete · verified matches shown"
+      : creator.raw.depthStatus === "complete" ? creator.raw.depthHasMore ? "20-post search limit reached · more may exist" : "Deeper check complete · indexed matches only"
+      : "Initial search only",
+    matches: matchingPosts(creator.raw).map((post, index) => ({
+      id: post.postKey ?? String(index),
+      thumbnail: post.media?.flatMap(media => media.frames ?? []).map(frame => safeImageUrl(frame.url)).find(Boolean) ?? null,
+      context: CONTEXT_LABELS[post.context ?? "unknown"] ?? CONTEXT_LABELS.unknown,
+      why: post.why ?? post.caption ?? "No explanation returned for this post.",
+      views: post.viewsConflict ? null : post.viewsCount ?? null,
+    })),
   };
 }
 

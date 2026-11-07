@@ -18,6 +18,12 @@ function response(frames: { url: string | null }[]): SearchResponse {
 }
 
 describe("live post previews", () => {
+  it("uses excerpts only from matching posts, including captions", () => {
+    const data = response([]);
+    data.rankedCreators[0].posts![0].media = [{ transcript: "Unrelated high-view post" }];
+    data.rankedCreators[0].posts![1].caption = "I run in Nike shoes.";
+    expect(liveCreators(data)[0].excerpt).toBe("I run in Nike shoes.");
+  });
   it("uses an Oriane frame from the relevant post on the creator card", () => {
     const creator = liveCreators(response([{ url: "https://images.example/relevant.jpg" }]))[0];
     expect(liveItem("Nike", creator).thumbnail).toBe("https://images.example/relevant.jpg");

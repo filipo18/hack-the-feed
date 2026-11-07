@@ -238,6 +238,8 @@ def apply_judgments(
             reach = verdict == "relevant" and holdout is None
             post_out = _annotate(post, verdict=verdict, holdout=holdout, reach=reach, assessment="complete")
             post_out["judgmentSource"] = "model"
+            post_out["context"] = judgment.get("context", "unknown")
+            post_out["why"] = judgment["why"]
             assessed_posts.append(post_out)
             whys.append((_views_sort(post), judgment["why"]))
         built = _creator_shell(creator, assessed_posts, whys)
@@ -289,6 +291,7 @@ def _annotate(post: dict, *, verdict: str | None, holdout: str | None, reach: bo
     annotated["holdout"] = holdout
     annotated["countsTowardReach"] = reach
     annotated["assessment"] = assessment
+    annotated["context"] = "unknown"
     return annotated
 
 
@@ -306,6 +309,9 @@ def _creator_shell(creator: dict, posts: list[dict], whys: list[tuple[float, str
         sum_views = None
         incomplete = bool(reach_posts)
     why = max(whys, key=lambda item: item[0])[1] if whys else None
+    relevant_whys = [(_views_sort(post), post["why"]) for post in reach_posts if post.get("why")]
+    if relevant_whys:
+        why = max(relevant_whys, key=lambda item: item[0])[1]
     disclosure = "disclosed" if any(post["disclosure"] == "disclosed" for post in posts) else "unknown"
     return {
         "creatorKey": creator["creatorKey"],
