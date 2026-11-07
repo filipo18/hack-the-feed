@@ -9,17 +9,22 @@ export function OutreachDialog({
   draft,
   onClose,
   onSent,
+  onSaveDraft,
 }: {
   draft: OutreachDraft | null;
   onClose: () => void;
-  onSent?: () => void;
+  onSent?: (message: string) => void;
+  onSaveDraft?: (message: string) => void;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (!draft) return;
+    if (!draft) {
+      dialog.current?.close();
+      return;
+    }
     setMessage(draft.message);
     setCopied(false);
     dialog.current?.showModal();
@@ -44,6 +49,10 @@ export function OutreachDialog({
         }}
       />
       <div className="outreach-actions">
+        {onSaveDraft && <button type="button" className="pill pill-primary" onClick={() => {
+          onSaveDraft(message);
+          dialog.current?.close();
+        }}>Save draft</button>}
         <button type="button" className="pill pill-primary" onClick={copy}>
           {copied ? "Copied" : "Copy message"}
         </button>
@@ -52,7 +61,7 @@ export function OutreachDialog({
             type="button"
             className="pill pill-quiet"
             onClick={() => {
-              onSent();
+              onSent(message);
               dialog.current?.close();
             }}
           >
