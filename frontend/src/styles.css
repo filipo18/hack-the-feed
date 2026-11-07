@@ -363,14 +363,13 @@ button, input, textarea { font: inherit; }
 }
 
 /* Close */
-.close { padding: clamp(80px, 11vw, 150px) 0 56px; background: linear-gradient(180deg, var(--navy), var(--royal)); }
-.close .display { padding: 0 var(--gutter); }
+.close { padding: 32px 0 56px; background: linear-gradient(180deg, var(--navy), var(--royal)); }
 .cross {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  margin: clamp(56px, 8vw, 96px) var(--gutter) 0;
+  margin: 0 var(--gutter);
   padding-top: 24px;
   border-top: 1px solid rgb(255 255 255 / 0.3);
 }
@@ -1056,6 +1055,9 @@ button, input, textarea { font: inherit; }
 .creator-other .creator-video-evidence { padding: 0; background: none; }
 
 /* Progressive brand matching and evidence. */
+.results-head:has(.match-controls) { flex-wrap: wrap; }
+.match-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.match-filter-count { color: #bdccec; font-size: 14px; margin-bottom: 20px; }
 .match-sort { display: flex; align-items: center; gap: 12px; color: #bdccec; font-size: 14px; }
 .match-sort select { border: 1px solid #5972a8; border-radius: 10px; padding: 10px 34px 10px 12px; background: #112b61; color: white; font: inherit; }
 .match-sort select:focus-visible, .card-matches summary:focus-visible { outline: 2px solid #b9d4ff; outline-offset: 4px; }
@@ -1073,9 +1075,13 @@ button, input, textarea { font: inherit; }
 .match-post strong, .match-post span { display: block; }
 .match-post span { color: #b8c9eb; font-size: 12px; margin-top: 3px; }
 .match-post p { margin: 6px 0 0; color: #cfdbf4; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+.match-video-link { display: inline-block; margin-top: 8px; padding: 4px 0; color: #d6e6ff; text-underline-offset: 3px; }
+.match-video-link:focus-visible { outline: 2px solid #b9d4ff; outline-offset: 4px; }
 .card-body > div { min-width: 0; }
 .card-body h3 { overflow-wrap: anywhere; }
 @media (max-width: 600px) {
   .results-head:has(.match-sort) { align-items: flex-start; flex-direction: column; gap: 14px; }
   .match-sort { width: 100%; justify-content: space-between; }
+  .match-controls { width: 100%; }
+  .match-sort select { min-width: 0; max-width: 65%; }
 }

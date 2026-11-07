@@ -38,7 +38,7 @@ export function liveCreators(data: SearchResponse): LiveCreator[] {
       excerpt: evidenceExcerpt(creator),
       postUrl: post?.canonicalPostUrl ?? null,
       thumbnail: post?.media?.flatMap((media) => media.frames ?? [])
-        .map((frame) => safeImageUrl(frame.url)).find((url) => url !== null) ?? null,
+        .map((frame) => safeHttpsUrl(frame.url)).find((url) => url !== null) ?? null,
       raw: creator,
     };
   });
@@ -67,7 +67,8 @@ export function liveItem(brand: string, creator: LiveCreator): CardItem {
       : "Initial search only",
     matches: matchingPosts(creator.raw).map((post, index) => ({
       id: post.postKey ?? String(index),
-      thumbnail: post.media?.flatMap(media => media.frames ?? []).map(frame => safeImageUrl(frame.url)).find(Boolean) ?? null,
+      postUrl: safeHttpsUrl(post.canonicalPostUrl),
+      thumbnail: post.media?.flatMap(media => media.frames ?? []).map(frame => safeHttpsUrl(frame.url)).find(Boolean) ?? null,
       context: CONTEXT_LABELS[post.context ?? "unknown"] ?? CONTEXT_LABELS.unknown,
       why: post.why ?? post.caption ?? "No explanation returned for this post.",
       views: post.viewsConflict ? null : post.viewsCount ?? null,
@@ -75,7 +76,7 @@ export function liveItem(brand: string, creator: LiveCreator): CardItem {
   };
 }
 
-function safeImageUrl(value: string | null | undefined): string | null {
+function safeHttpsUrl(value: string | null | undefined): string | null {
   if (!value) return null;
   try {
     const url = new URL(value);

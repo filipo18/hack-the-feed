@@ -22,7 +22,6 @@ export interface Copy {
   compareTitle: [string, string];
   compareOld: string;
   compareRows: { label: string; old: string; next: string }[];
-  closeTitle: [string, string];
   crossTitle: string;
   crossText: string;
   crossAction: string;
@@ -83,7 +82,6 @@ export const COPY: Record<Audience, Copy> = {
       { label: "First message", old: "Would you try us?", next: "We saw your video" },
       { label: "Price talk", old: "Their rate card", next: "Real impressions on your brand" },
     ],
-    closeTitle: ["Turn one-off posts", "into partnerships."],
     crossTitle: "Creator?",
     crossText: "Find the brands in your videos and see what those mentions are worth.",
     crossAction: "See your mentions",
@@ -149,7 +147,6 @@ export const COPY: Record<Audience, Copy> = {
       { label: "Your price", old: "A guess", next: "What that reach costs to buy" },
       { label: "Their first thought", old: "Who is this?", next: "They already use us" },
     ],
-    closeTitle: ["Your next deal", "is already posted."],
     crossTitle: "Brand?",
     crossText: "Find the creators already showing your product and work with the best ones.",
     crossAction: "Find your creators",

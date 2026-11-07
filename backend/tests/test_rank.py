@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from app.gmi import parse_judgments
 from app.oriane import text_channel_body, visual_body, written_body
 from app.rank import disclosure_for, project_post
@@ -42,9 +44,22 @@ def test_captured_sanitized_row_keeps_caption_and_hashtag_evidence():
     post = project_post(payload["row"], "written", ["ryanair"])
     assert post is not None
     assert post["evidenceLabels"] == ["caption", "hashtag"]
-    assert post["canonicalPostUrl"] is None
+    assert post["canonicalPostUrl"] == "https://www.instagram.com/p/DfHWl8YTWWx/"
     assert post["paidPartnership"] == "not_in_oriane_schema"
     assert post["viewsCount"] == 13226443
+
+
+@pytest.mark.parametrize("platform,platform_id", [
+    ("instagram", "18000000000000000"),
+    ("instagram", "../not-a-post"),
+    ("instagram", "DfHWl8YTWWx?next=evil"),
+    ("instagram", "https://example.com/video"),
+    ("tiktok", "7700919307861200130"),
+])
+def test_post_links_do_not_treat_arbitrary_ids_as_instagram_shortcodes(platform, platform_id):
+    post = project_post({"platform": platform, "platformId": platform_id}, "written", [])
+    assert post is not None
+    assert post["canonicalPostUrl"] is None
 
 
 def test_malformed_model_text_is_not_a_judgment():

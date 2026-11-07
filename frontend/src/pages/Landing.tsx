@@ -105,12 +105,6 @@ export function Landing({ audience }: { audience: Audience }) {
       </section>
 
       <section className="close">
-        <h2 className="display">
-          {copy.closeTitle[0]}
-          <br />
-          {copy.closeTitle[1]}
-        </h2>
-        <SearchBox copy={copy} id="close-search" />
         <div className="cross">
           <h3>{copy.crossTitle}</h3>
           <p>{copy.crossText}</p>
