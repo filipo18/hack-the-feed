@@ -58,6 +58,9 @@ test("matching videos have individual links and tag filtering works with sorting
   await expect(cards.first()).toContainText("@viral");
   await expect(page.getByText("About these results", { exact: true })).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
+  const controls = await page.locator(".match-controls").boundingBox();
+  const progress = await page.locator(".depth-progress").boundingBox();
+  expect(progress!.y).toBeGreaterThanOrEqual(controls!.y + controls!.height);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 

@@ -1061,7 +1061,7 @@ button, input, textarea { font: inherit; }
 .match-sort { display: flex; align-items: center; gap: 12px; color: #bdccec; font-size: 14px; }
 .match-sort select { border: 1px solid #5972a8; border-radius: 10px; padding: 10px 34px 10px 12px; background: #112b61; color: white; font: inherit; }
 .match-sort select:focus-visible, .card-matches summary:focus-visible { outline: 2px solid #b9d4ff; outline-offset: 4px; }
-.depth-progress { margin: -8px 0 24px; max-width: 800px; color: #bfceee; font-size: 14px; line-height: 1.6; }
+.depth-progress { margin: 16px 0 24px; max-width: 800px; color: #bfceee; font-size: 14px; line-height: 1.6; }
 .match-signals { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 12px 0 0; }
 .match-signals li { border: 1px solid #435e94; border-radius: 6px; background: #16346a; color: #d8e8ff; padding: 4px 8px; font-size: 12px; }
 .match-depth { color: #afc1e5; font-size: 12px; line-height: 1.5; margin: 8px 0; }
