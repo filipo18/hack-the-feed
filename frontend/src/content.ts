@@ -26,7 +26,7 @@ export interface Copy {
   crossTitle: string;
   crossText: string;
   crossAction: string;
-  frame: { caption: string; toastTitle: string; toastText: string; valueLabel: string; value: string };
+  frame: { caption: string; toastTitle: string; toastText: string; valueLabel: string; value: string; image: string };
 }
 
 export const COPY: Record<Audience, Copy> = {
@@ -39,7 +39,7 @@ export const COPY: Record<Audience, Copy> = {
     placeholder: "Your brand, like Birkenstock",
     inputLabel: "Your brand",
     action: "Find creators",
-    examples: ["Birkenstock", "Owala", "Ryanair"],
+    examples: ["Birkenstock", "Starbucks", "Ryanair"],
     stepsTitle: ["Stop looking", "for strangers."],
     steps: [
       {
@@ -88,9 +88,10 @@ export const COPY: Record<Audience, Copy> = {
     crossText: "Find the brands in your videos and see what those mentions are worth.",
     crossAction: "See your mentions",
     frame: {
-      caption: "“I take my Owala everywhere, honestly”",
+      image: "/ugc/starbucks/1.jpg",
+      caption: "“my Starbucks order, every single morning”",
       toastTitle: "Spoken at 0:14",
-      toastText: "Owala found. No ad marker on this post.",
+      toastText: "Starbucks found. No ad marker on this post.",
       valueLabel: "Impressions on this video",
       value: "3.2M",
     },
@@ -153,6 +154,7 @@ export const COPY: Record<Audience, Copy> = {
     crossText: "Find the creators already showing your product and work with the best ones.",
     crossAction: "Find your creators",
     frame: {
+      image: "/ugc/birkenstock/3.jpg",
       caption: "“Packing list: Birkenstock, passport, nothing else”",
       toastTitle: "On screen at 0:22",
       toastText: "Birkenstock found. You never tagged it.",
