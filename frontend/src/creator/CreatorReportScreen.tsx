@@ -8,6 +8,7 @@ import { useScan } from "../components/motion";
 import { useResult } from "../components/useResult";
 import { SCAN_STAGES } from "../content";
 import { CREATOR_REPORT_PATH } from "./availability";
+import { videoPreviewUrl } from "../lib/creatorReport";
 import type { CreatorReport } from "../lib/types";
 
 export async function loadCreatorReport(handle: string): Promise<CreatorReport> {
@@ -43,7 +44,7 @@ export function CreatorReportScreen({
     ? loaded.report.entities.flatMap((entity) => entity.evidence.slice(0, 1).map((evidence) => ({
         text: evidence.snippet ?? entity.name,
         term: entity.name,
-        thumbnail: evidence.frameUrl,
+        thumbnail: videoPreviewUrl([evidence], loaded.report.posts.find((post) => post.platformId === evidence.platformId)?.thumbnailUrl),
       }))).slice(0, 6)
     : [];
 

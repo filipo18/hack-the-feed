@@ -1041,3 +1041,16 @@ button, input, textarea { font: inherit; }
   .creator-report .brand-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
   .creator-report .brand-actions .pill { height: 100%; }
 }
+
+/* One preview per source video, alongside its grounded evidence. */
+.creator-report .creator-video-evidence { display: grid; grid-template-columns: 88px minmax(0, 1fr); align-items: start; gap: 12px; }
+.creator-video-copy { display: grid; gap: 8px; min-width: 0; }
+.creator-video-quote { display: grid; gap: 3px; }
+.creator-video-preview { position: relative; display: block; width: 88px; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 10px; background: var(--ice); text-decoration: none; }
+.creator-video-preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.creator-video-preview > span { position: absolute; inset: auto 0 0; padding: 5px 3px; background: rgb(5 21 66 / 0.8); color: var(--white); text-align: center; font-size: 11px; line-height: 1.3; }
+.creator-preview-missing { display: grid; place-items: center; border: 1px solid rgb(6 16 44 / 0.12); }
+.creator-preview-missing > span { position: static; padding: 8px; background: none; color: var(--muted-on-light); }
+.creator-video-preview:focus-visible { outline: 3px solid var(--royal); outline-offset: 3px; }
+.creator-other .creator-video-list { margin-top: 10px; }
+.creator-other .creator-video-evidence { padding: 0; background: none; }

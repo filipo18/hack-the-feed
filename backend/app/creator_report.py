@@ -202,6 +202,7 @@ def _public_post(post: dict) -> dict:
         "transcriptState": transcript,
         "ocrLineCount": len(ocr_lines),
         "frameCount": len(frames),
+        "thumbnailUrl": frames[0]["url"] if frames else None,
         "disclosure": _disclosure(post),
     }
 

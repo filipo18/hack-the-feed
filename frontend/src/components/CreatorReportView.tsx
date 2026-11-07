@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CreatorEvidence } from "./CreatorEvidence";
 import { OutreachDialog, type OutreachDraft } from "./OutreachDialog";
 import { postViews } from "../lib/creatorReport";
 import { compact, money } from "../lib/format";
@@ -73,19 +74,7 @@ export function CreatorReportView({
                     {entity.matchingPostCount} {entity.matchingPostCount === 1 ? "post" : "posts"}
                   </p>
                 </div>
-                <ul className="mention-list">
-                  {entity.evidence.map((item, index) => (
-                    <li key={`${item.platformId}-${item.field}-${index}`}>
-                      <span>{item.snippet ? `“${item.snippet}”` : "No text quote. The frame itself is the evidence."}</span>
-                      <span className="sub">
-                        {item.field.replaceAll("_", " ")}
-                        {item.timestampSeconds != null && ` at ${item.timestampSeconds}s`} · {item.platformId} ·{" "}
-                        {item.views == null ? "views unknown" : `${compact(item.views)} views`} · {review.confirmed ? "appearance confirmed" : "needs review"}
-                        {item.source === "vision" && " · a logo is not a contract"}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <CreatorEvidence evidence={entity.evidence} posts={report.posts} confirmed={review.confirmed} />
                 <div className="brand-actions">
                   <button
                     type="button"
@@ -135,7 +124,7 @@ export function CreatorReportView({
               <li key={entity.id}>
                 <h3>{entity.name}</h3>
                 <p className="sub">{labelType(entity.entityType)} · {entity.matchingPostCount} {entity.matchingPostCount === 1 ? "post" : "posts"}</p>
-                {entity.evidence.map((item, index) => <p className="sub" key={index}>{item.snippet ?? "Frame evidence"} · {item.field.replaceAll("_", " ")} · {item.platformId}</p>)}
+                <CreatorEvidence evidence={entity.evidence} posts={report.posts} />
               </li>
             ))}
           </ul>

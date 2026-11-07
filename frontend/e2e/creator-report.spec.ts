@@ -63,6 +63,43 @@ test("creator cards fit a narrow screen", async ({ page }) => {
   await expect(page.getByLabel("Disclosure for 77x.world")).toBeVisible();
 });
 
+test("video previews stay tied to their post and repeated mentions share a thumbnail", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const data = report();
+  data.posts[0].thumbnailUrl = "https://images.example/first.svg";
+  data.posts.push({ ...data.posts[0], id: "two", platformId: "post-two", thumbnailUrl: "https://images.example/second.svg" });
+  const brand = data.entities[0];
+  brand.evidence.push({ ...brand.evidence[0], field: "caption" });
+  brand.evidence.push({ ...brand.evidence[0], postId: "two", platformId: "post-two", snippet: "Second video" });
+  brand.matchingPosts.push({ platformId: "post-two", publishedAt: null, views: 1000 });
+  brand.matchingPostCount = 2;
+  await page.route("https://images.example/**", (route) => route.fulfill({
+    contentType: "image/svg+xml", body: '<svg xmlns="http://www.w3.org/2000/svg" width="90" height="120"><rect width="90" height="120" fill="blue"/></svg>',
+  }));
+  await page.route("**/api/creator-report", (route) => route.fulfill({ json: data }));
+  await page.goto("/creators/test.creator");
+  const card = page.locator("article").filter({ has: page.getByRole("heading", { name: "77x.world" }) });
+  await expect(card.getByRole("img")).toHaveCount(2);
+  await expect(card.getByRole("img", { name: "Video preview for Instagram post post-one" })).toHaveAttribute("src", "https://images.example/first.svg");
+  await expect(card.getByRole("link", { name: "Open preview for Instagram post post-two" })).toHaveAttribute("href", "https://images.example/second.svg");
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});
+
+test("a missing or broken video image keeps its evidence readable", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const data = report();
+  data.posts[0].thumbnailUrl = "https://images.example/missing.jpg";
+  await page.route("https://images.example/**", (route) => route.fulfill({ status: 404, body: "" }));
+  await page.route("**/api/creator-report", (route) => route.fulfill({ json: data }));
+  await page.goto("/creators/test.creator");
+  const card = page.locator("article").filter({ has: page.getByRole("heading", { name: "77x.world" }) });
+  await expect(card.getByText("Preview unavailable", { exact: true })).toBeVisible();
+  await expect(card).toContainText("post-one");
+  await expect(card.getByRole("img")).toHaveCount(0);
+  await expect(card.getByRole("button", { name: "Confirm appearance" })).toBeVisible();
+});
+
 test("creator search uses the scan animation until the report is ready", async ({ page }) => {
   await page.clock.install();
   let release!: () => void;

@@ -98,6 +98,7 @@ export interface CreatorReport {
     transcriptState: string;
     ocrLineCount: number;
     frameCount: number;
+    thumbnailUrl?: string | null;
     disclosure: "unknown" | "disclosed";
   }[];
   entities: CreatorEntity[];

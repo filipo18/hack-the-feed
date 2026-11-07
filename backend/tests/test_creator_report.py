@@ -296,3 +296,20 @@ def test_text_failure_does_not_hide_vision_blocker(monkeypatch):
     assessment = response.json()["assessment"]
     assert assessment["textReason"] == "gmi_error"
     assert assessment["visionReason"] == "model_vision_not_confirmed"
+
+
+def test_creator_previews_are_available_without_running_vision(monkeypatch):
+    response, _ = _post(monkeypatch, FIXTURE["posts"], 3, _model([]), gmi=False)
+    posts = response.json()["posts"]
+    assert posts[0]["thumbnailUrl"] == "https://example.invalid/luka/swoosh.webp"
+    assert posts[1]["thumbnailUrl"] is None
+    assert response.json()["assessment"]["vision"] == "blocked"
+
+
+def test_creator_preview_skips_sensitive_frames(monkeypatch):
+    row = dict(FIXTURE["posts"][0], media=[{"frames": [{
+        "id": "sensitive", "url": "https://example.invalid/private.webp",
+        "onScreenTextRegions": [{"text": "passport card number"}],
+    }]}])
+    response, _ = _post(monkeypatch, [row], 1, _model([]), gmi=False)
+    assert response.json()["posts"][0]["thumbnailUrl"] is None
