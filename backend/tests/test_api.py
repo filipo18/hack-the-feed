@@ -240,6 +240,30 @@ def test_gmi_not_configured_leaves_posts_pending(monkeypatch):
     assert not any("/chat/completions" in call["url"] for call in http.calls)
 
 
+def test_gmi_http_failure_names_the_status_and_drops_the_body(monkeypatch):
+    row = _row("instagram", "ig", "ufc", 10, "ufc-id", caption="Ryanair once")
+    pages = {"written": _page([row]), "transcript": _page([]), "ocr": _page([]), "visual": _page([])}
+    secret = "Bearer live-key-must-not-appear"
+    body, _ = _search(monkeypatch, pages, (403, {"error": {"code": 1010, "message": secret}}))
+    assert body["assessment"] == "unassessed"
+    assert body["assessmentReason"] == "gmi_error"
+    assert body["rankedCreators"] == []
+    warning = " ".join(body["warnings"])
+    assert "HTTP 403" in warning
+    assert "1010" in warning
+    assert "live-key" not in warning
+    assert secret not in warning
+
+
+def test_gmi_timeout_names_the_limit(monkeypatch):
+    row = _row("instagram", "ig", "ufc", 10, "ufc-id", caption="Ryanair once")
+    pages = {"written": _page([row]), "transcript": _page([]), "ocr": _page([]), "visual": _page([])}
+    body, _ = _search(monkeypatch, pages, ProviderCallError("provider timed out"))
+    assert body["assessmentReason"] == "gmi_error"
+    assert body["rankedCreators"] == []
+    assert any("timed out" in item and "20" in item for item in body["warnings"])
+
+
 def test_visual_asset_is_reused_and_queries_stay_on_one_page(monkeypatch):
     pages = {"written": _page([]), "transcript": _page([]), "ocr": _page([]), "visual": _page([])}
     body, http = _search(

@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import re
 
-from app.http import ProviderCallError
+from app.http import ProviderCallError, provider_http_note
 
 VERDICTS = {"relevant", "irrelevant", "uncertain"}
 HOLDOUTS = {"owned_account", "complaint", "repost", "asr_false_positive", "incidental"}
@@ -105,10 +105,10 @@ def parse_judgments(content: str) -> dict[str, dict] | None:
     return parsed
 
 
-def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict]) -> tuple[dict[str, dict] | None, str | None]:
-    """Returns (judgments, error_reason). judgments is None when nothing usable came back."""
+def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict]) -> tuple[dict[str, dict] | None, str | None, str | None]:
+    """Returns (judgments, error_reason, safe_detail). judgments is None when nothing usable came back."""
     if not settings.gmi_configured:
-        return None, "gmi_not_configured"
+        return None, "gmi_not_configured", None
     body = build_request(settings.gmi_model or "", brand, terms, posts)
     url = f"{settings.gmi_base_url}/chat/completions"
     headers = {
@@ -118,17 +118,20 @@ def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict])
     }
     try:
         status, payload = post_json(url, body, headers, settings.timeout_seconds)
-    except ProviderCallError:
-        return None, "gmi_error"
+    except ProviderCallError as exc:
+        return None, "gmi_error", (
+            f"GMI chat {exc}. Limit {settings.timeout_seconds:g}s. "
+            "A full page of posts can exceed a short limit. Nothing was ranked."
+        )
     if status != 200:
-        return None, "gmi_error"
+        return None, "gmi_error", provider_http_note("GMI chat", status, payload)
     content = message_content(payload)
     if content is None:
-        return None, "malformed_model_response"
+        return None, "malformed_model_response", None
     judgments = parse_judgments(content)
     if judgments is None:
-        return None, "malformed_model_response"
-    return judgments, None
+        return None, "malformed_model_response", None
+    return judgments, None, None
 
 
 def _one_judgment(item: object) -> dict | None:

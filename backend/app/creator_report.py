@@ -14,7 +14,7 @@ import os
 import re
 
 from app.gmi import message_content
-from app.http import ProviderCallError
+from app.http import ProviderCallError, provider_http_note
 
 MAX_POSTS = 20
 ENTITY_TYPES = {"brand", "team", "product", "person", "platform_distribution"}
@@ -377,10 +377,12 @@ def _send(post_json, settings, body: dict) -> tuple[str, object, str | None]:
     }
     try:
         status, payload = post_json(url, body, headers, settings.timeout_seconds)
-    except ProviderCallError:
-        return "failed", None, "gmi_error"
+    except ProviderCallError as exc:
+        return "failed", None, (
+            f"gmi_error: GMI chat {exc}. Limit {settings.timeout_seconds:g}s. Nothing was ranked."
+        )
     if status != 200:
-        return "failed", None, "gmi_error"
+        return "failed", None, "gmi_error: " + provider_http_note("GMI chat", status, payload)
     return "complete", payload, None
 
 

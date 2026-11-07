@@ -137,7 +137,7 @@ def run_search(request: dict, settings, post_json) -> dict:
             response_cache.set(cache_key, response, settings.response_ttl_seconds)
         return response
 
-    judgments, reason = assess(post_json, settings, request["brand"].strip(), terms, deduped)
+    judgments, reason, detail = assess(post_json, settings, request["brand"].strip(), terms, deduped)
     if judgments is not None and not any(post["postKey"] in judgments for post in deduped):
         judgments = None
         reason = "malformed_model_response"
@@ -146,6 +146,8 @@ def run_search(request: dict, settings, post_json) -> dict:
     if judgments is None:
         response["assessment"] = "unassessed"
         response["assessmentReason"] = reason
+        if detail:
+            response["warnings"].append(detail)
         return response
     response["assessment"] = "complete"
     response["assessmentReason"] = None

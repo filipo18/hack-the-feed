@@ -2,7 +2,13 @@
 
 The image to register is the repo-root Dockerfile. It serves the compiled frontend and the API in one process. Agentbox terminates HTTPS and forwards to the internal port. This image binds `0.0.0.0:${PORT:-8080}`.
 
-Agentbox injects `GMI_MAAS_API_KEY` at runtime. The process uses that value for inference when it is set, and otherwise uses `GMI_API_KEY`. `GMI_MODEL` is still required and is not chosen by the image. Neither key is logged. Whether an older inference key is accepted by `https://api.gmi-serving.com/v1` is unverified.
+Agentbox injects `GMI_MAAS_API_KEY` at runtime. The process uses that value for inference when it is set, and otherwise uses `GMI_API_KEY`. `GMI_MODEL` is still required and is not chosen by the image. Neither key is logged. Whether an older inference key is accepted by `https://api.gmi-serving.com/v1` is unverified. The app calls that host with `httpx` (User-Agent `python-httpx/<version>`), `Authorization`, `Content-Type`, and `Accept`. It does not set a browser user agent. A separate `urllib` request is not this client.
+
+If brand search returns `assessmentReason: gmi_error`, read `warnings`. `HTTP 403` plus a provider code is the model host refusing that request. `timed out` means the call exceeded `HTTP_TIMEOUT_SECONDS` (default 20). A creator text call can succeed in that same process while the larger brand prompt does not. Do not treat those as the same failure.
+
+## Durable start
+
+The image `ENTRYPOINT` is `/entrypoint.sh`. It binds `${PORT:-8080}`. Agentbox `agents.create` and `agents.update` take `start_cmd`. That is the command a sandbox runs when it starts. `sandbox.execute` is a one-off command and is not the service. If an imported template does not run the image entrypoint, set `start_cmd` to `/entrypoint.sh` on the existing agent. Do not put keys on that command line. This repo does not call that update.
 
 Registration, launching a sandbox, and marketplace publication are separate. This repo does not register a template or start a sandbox. A launch is paid. Do not publish the image as a public package from here.
 
