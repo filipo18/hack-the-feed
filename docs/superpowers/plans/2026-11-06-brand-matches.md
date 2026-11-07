@@ -17,7 +17,7 @@
 ## Tasks
 - [x] Backend: regression tests for context validation, exact scope, pagination, deduplication, missing model judgments, provider failures, and cache isolation; implement the bounded endpoint and context annotations.
 - [x] Frontend: tests for preserving initial evidence on failures, deduplication, safe view totals, best-fit ordering, and bounded progressive work; implement requests, merge, cancellation, labels, sort, and evidence gallery.
-- [ ] Verify backend/frontend suites, build, browser progressive success/failure, mobile layout; review changes; publish through existing main/Vercel integration and verify live search.
+- [x] Verify backend/frontend suites, build, browser progressive success/failure, mobile layout; review changes; publish through existing main/Vercel integration and verify live search.
 
 ## Review focus
 Unknown context must not become a recommendation. Cross-platform or wrong-author responses must be discarded. Partial model responses must remain marked partial. Duplicate/conflicting view counts cannot inflate totals. Navigating to another brand must stop queued requests and prevent stale UI updates.
@@ -25,3 +25,5 @@ Unknown context must not become a recommendation. Cross-platform or wrong-author
 ## Verification so far
 
 50 backend tests, 22 frontend tests, and production build passed. Seven browser integration checks passed; the added malformed-row regression failed before the fix and passed afterward. Independent review found that regression and it was fixed. Current official Oriane schema at https://connect.oriane.xyz/rest/docs verifies all five text filters, exact profileHandle, platform, and offset pagination.
+
+Production commit `63558d9` deployed through Git-triggered Vercel production deployment `dpl_3eHc44MxKhjz4XMwXr6Hcz4jubNy`. Live Birkenstock discovery returned 12 ranked creators and 13 matching posts in 19 seconds. All ten deeper checks completed by 46 seconds, increasing the shortlist to 18 matching posts; `jwstudios` increased from one to three. Chromium verified counts, galleries, zero page errors, and no horizontal overflow at 390px. Screenshots and response captures are in ignored `dist/brand-fit-*` and `dist/live-brand-*` files.
