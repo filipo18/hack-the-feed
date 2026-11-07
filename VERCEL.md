@@ -10,10 +10,10 @@ deployment configuration. The existing `frontend/vercel.json` remains in place.
 
 ## Deploy on pushes to main
 
-The Vercel project is `filip-7433s-projects/hack-the-feed`. Connect it to
-`filipo18/hack-the-feed` in the project's Git settings and keep `main` as the
-Production Branch. The Vercel GitHub app must have access to this repository.
-Once connected, pushes and merges to `main` build both services and update
+The Vercel project `filip-7433s-projects/hack-the-feed` is connected to
+`filipo18/hack-the-feed`, with `main` as the Production Branch. Keep the
+Vercel GitHub app's access to this repository enabled.
+Pushes and merges to `main` build both services and update
 <https://hack-the-feed-beta.vercel.app> after a successful build. A failed build
 leaves the previous production deployment serving traffic.
 
