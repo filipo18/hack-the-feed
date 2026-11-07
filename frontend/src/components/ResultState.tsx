@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
 
 export function Loading({ term }: { term: string }) {
-  return <p className="result-note">Reading videos for {term}.</p>;
+  return (
+    <div className="report-loading" aria-busy="true">
+      <div className="report-loading-copy" role="status">
+        <span className="report-spinner" aria-hidden="true" />
+        <div>
+          <h2>Reading videos for {term}</h2>
+          <p>Finding recent posts and checking their captions, transcripts and on-screen text. This can take about a minute.</p>
+        </div>
+      </div>
+      <div className="report-skeletons" aria-hidden="true">
+        {[0, 1, 2].map((item) => <div key={item}><div /><span /><span /></div>)}
+      </div>
+    </div>
+  );
 }
 
 export function Empty({ term, back }: { term: string; back: string }) {

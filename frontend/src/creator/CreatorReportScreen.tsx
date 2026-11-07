@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { CreatorReportView } from "../components/CreatorReportView";
@@ -69,8 +69,16 @@ export function CreatorReportScreen({
     <div className="page">
       <section className="results">
         <Nav audience="creators" />
-        <div className="results-body">
-          <h1 className="display live-title display-handle">@{handle}</h1>
+        <div className="results-body creator-results">
+          <header className="creator-report-head">
+            <div>
+              <Link className="creator-back" to="/for-creators">← Search another creator</Link>
+              <p className="creator-eyebrow">Creator report</p>
+              <h1>@{handle}</h1>
+              <p className="creator-description">Recent video evidence and brand appearances.</p>
+            </div>
+            <span className="creator-platform">{platform}</span>
+          </header>
           <div className="live-panel">{body}</div>
         </div>
       </section>

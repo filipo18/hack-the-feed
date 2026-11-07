@@ -42,6 +42,12 @@ Project Settings. Do not prefix keys with `VITE_` or put them in `frontend/`.
 Use `GMI_API_KEY` on Vercel; Agentbox's automatically injected credential is
 not available there. Keep `VITE_SAMPLE` unset for the live UI.
 
+Set `HTTP_TIMEOUT_SECONDS=60` and `GMI_HTTP_TIMEOUT_SECONDS=120` in Production.
+The previous 20-second limit interrupted both Oriane retrieval and model
+inference during live Nike searches. These Vercel environment overrides leave
+other hosting environments unchanged. The backend function allows up to 300
+seconds, covering the visual asset and search calls followed by inference.
+
 The app can start without provider credentials, but searches then report an
 unconfigured provider and cannot return live rankings. After setting or
 changing environment variables, deploy again.

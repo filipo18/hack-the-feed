@@ -63,8 +63,8 @@ export function LiveBrandResults() {
                 line={(shown) => (views.known ? `${compact(shown)} views to build on.` : "Views unknown so far.")}
                 note={
                   views.missing
-                    ? "Some relevant posts are missing a view count, so the real number is higher. One page of 10 per channel."
-                    : "Post views on the relevant posts we found. One page of 10 per channel, so the real number is higher."
+                    ? "Views on relevant posts in this sample. Some view counts are missing."
+                    : "Views on distinct relevant posts in this sample. Views are not unique people."
                 }
                 stats={[
                   { label: "Ranked creators", value: creators.length },
@@ -78,9 +78,10 @@ export function LiveBrandResults() {
               </div>
             )}
             <div className="results-body">
-              <p className="live-meta" data-testid="search-meta">
-                Instagram and TikTok, one page of 10 on each channel. {modelLabel(data)} {HONESTY_NOTE}
-              </p>
+              <details className="search-method" data-testid="search-meta">
+                <summary>About these results</summary>
+                <p className="live-meta">Instagram and TikTok, one page of 10 on each channel. {modelLabel(data)} {HONESTY_NOTE}</p>
+              </details>
               {copy && (
                 <div className="live-note" data-testid="assessment" role="status">
                   <strong>{copy.title}</strong>

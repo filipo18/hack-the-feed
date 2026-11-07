@@ -10,6 +10,7 @@ failed assessment, not a judgment.
 from __future__ import annotations
 
 import json
+import logging
 import re
 
 from app.http import ProviderCallError
@@ -20,6 +21,7 @@ FORBIDDEN_WHY = ("unpaid", "invoice", "cpm")
 WHY_LIMIT = 400
 
 _FENCE = re.compile(r"^```(?:json)?\s*|\s*```$", re.IGNORECASE)
+_LOG = logging.getLogger(__name__)
 
 
 def build_request(model: str, brand: str, terms: list[str], posts: list[dict]) -> dict:
@@ -117,10 +119,12 @@ def assess(post_json, settings, brand: str, terms: list[str], posts: list[dict])
         "Accept": "application/json",
     }
     try:
-        status, payload = post_json(url, body, headers, settings.timeout_seconds)
-    except ProviderCallError:
+        status, payload = post_json(url, body, headers, settings.gmi_timeout_seconds)
+    except ProviderCallError as exc:
+        _LOG.warning("GMI request failed: %s", exc)
         return None, "gmi_error"
     if status != 200:
+        _LOG.warning("GMI request rejected: HTTP %s", status)
         return None, "gmi_error"
     content = message_content(payload)
     if content is None:

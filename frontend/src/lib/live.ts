@@ -16,6 +16,7 @@ export interface LiveCreator {
   labels: string[];
   excerpt: string | null;
   postUrl: string | null;
+  thumbnail: string | null;
   raw: SearchCreator;
 }
 
@@ -35,6 +36,8 @@ export function liveCreators(data: SearchResponse): LiveCreator[] {
       labels: evidenceLabels(creator),
       excerpt: evidenceExcerpt(creator),
       postUrl: post?.canonicalPostUrl ?? null,
+      thumbnail: post?.media?.flatMap((media) => media.frames ?? [])
+        .map((frame) => safeImageUrl(frame.url)).find((url) => url !== null) ?? null,
       raw: creator,
     };
   });
@@ -53,8 +56,19 @@ export function liveItem(brand: string, creator: LiveCreator): CardItem {
     views: creator.views,
     unit: "views",
     postUrl: creator.postUrl,
+    thumbnail: creator.thumbnail,
     highlight: brand,
   };
+}
+
+function safeImageUrl(value: string | null | undefined): string | null {
+  if (!value) return null;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : null;
+  } catch {
+    return null;
+  }
 }
 
 /** Sum of the known view counts. `known` is false when no creator had a number. */

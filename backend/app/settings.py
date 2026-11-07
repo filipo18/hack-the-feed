@@ -15,6 +15,7 @@ class Settings:
     gmi_base_url: str
     cors_origins: list[str]
     timeout_seconds: float
+    gmi_timeout_seconds: float
     response_ttl_seconds: float
     asset_ttl_seconds: float
     rate_limit_per_minute: int
@@ -71,6 +72,7 @@ def load_settings() -> Settings:
         gmi_base_url=os.environ.get("GMI_BASE_URL", "https://api.gmi-serving.com/v1").rstrip("/"),
         cors_origins=origins,
         timeout_seconds=_float("HTTP_TIMEOUT_SECONDS", 20.0),
+        gmi_timeout_seconds=_float("GMI_HTTP_TIMEOUT_SECONDS", _float("HTTP_TIMEOUT_SECONDS", 20.0)),
         response_ttl_seconds=_float("SEARCH_CACHE_TTL_SECONDS", 600.0),
         asset_ttl_seconds=_float("ASSET_CACHE_TTL_SECONDS", 3600.0),
         rate_limit_per_minute=_int("RATE_LIMIT_PER_MINUTE", 30),

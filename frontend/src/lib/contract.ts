@@ -10,7 +10,11 @@ export interface SearchPost {
   countsTowardReach?: boolean;
   verdict?: string | null;
   holdout?: string | null;
-  media?: { transcript?: string | null; onScreenText?: string[] | null }[];
+  media?: {
+    transcript?: string | null;
+    onScreenText?: string[] | null;
+    frames?: { url?: string | null; timestampSeconds?: number | null }[];
+  }[];
 }
 
 export interface SearchCreator {
