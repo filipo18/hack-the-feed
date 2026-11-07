@@ -11,7 +11,7 @@ export function searchRequest(brand: string): SearchBody {
   return {
     brand: brand.trim(),
     aliases: [],
-    platforms: ["instagram", "tiktok"],
+    platforms: ["instagram"],
   };
 }
 

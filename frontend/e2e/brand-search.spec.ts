@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   });
   page.on("request", (request) => {
     const url = new URL(request.url());
-    expect(url.origin, request.url()).toBe("http://127.0.0.1:8765");
+    expect(url.origin, request.url()).toBe(new URL(test.info().project.use.baseURL!).origin);
   });
 });
 
@@ -71,7 +71,7 @@ test("the brand form posts /api/search and does not invent creators", async ({ p
   expect(request.postDataJSON()).toEqual({
     brand: "Ryanair",
     aliases: [],
-    platforms: ["instagram", "tiktok"],
+    platforms: ["instagram"],
   });
   await expect(page.getByTestId("assessment")).toContainText("ORIANE_API_KEY");
   await expect(page.getByTestId("ranked-creators")).toHaveCount(0);
@@ -150,7 +150,7 @@ test("the mocked brand fixture is labeled and the creator route does not use sam
 
   await page.goto("/creators/sample.sofia");
   await expect(page.getByTestId("creator-report")).toContainText("Oriane is not configured");
-  await expect(page.getByTestId("creator-report")).toContainText("Live vision validation is blocked");
+  await expect(page.getByTestId("creator-report")).toContainText("Instagram search is unavailable");
   await expect(page.getByText("sample.kenji")).toHaveCount(0);
   await expect(page.getByText("Sample data")).toHaveCount(0);
   await expect(page.getByText("Joke invoice")).toHaveCount(0);

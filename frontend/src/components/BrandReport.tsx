@@ -41,7 +41,7 @@ export function BrandReport({
         </p>
       )}
       <p className="results-meta" data-testid="search-meta">
-        Instagram and TikTok, one page of 10 on each channel. {modelLabel(data)} {HONESTY_NOTE}
+        One page of 10 per search channel. {modelLabel(data)} {HONESTY_NOTE}
       </p>
       {copy && (
         <div className="result-note" data-testid="assessment" role="status">

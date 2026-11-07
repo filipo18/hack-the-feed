@@ -4,7 +4,7 @@ The image to register is the repo-root Dockerfile. It serves the compiled fronte
 
 Agentbox injects `GMI_MAAS_API_KEY` at runtime. The process uses that value for inference when it is set, and otherwise uses `GMI_API_KEY`. `GMI_MODEL` is still required and is not chosen by the image. Neither key is logged. Whether an older inference key is accepted by `https://api.gmi-serving.com/v1` is unverified. The app calls that host with `httpx` (User-Agent `python-httpx/<version>`), `Authorization`, `Content-Type`, and `Accept`. It does not set a browser user agent. A separate `urllib` request is not this client.
 
-If brand search returns `assessmentReason: gmi_error`, read `warnings`. `HTTP 403` plus a provider code is the model host refusing that request. `timed out` means the call exceeded `HTTP_TIMEOUT_SECONDS` (default 20). A creator text call can succeed in that same process while the larger brand prompt does not. Do not treat those as the same failure.
+If brand search returns `assessmentReason: gmi_error`, read `warnings`. `HTTP 403` plus a provider code is the model host refusing that request. `timed out` means a transport timeout occurred. Brand assessment uses `GMI_HTTP_TIMEOUT_SECONDS`, falling back to `HTTP_TIMEOUT_SECONDS` (default 20); the warning reports the configured timeout. A creator text call can succeed in that same process while the larger brand prompt does not. Do not treat those as the same failure.
 
 ## Durable start
 

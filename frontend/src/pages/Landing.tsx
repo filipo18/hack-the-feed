@@ -24,6 +24,7 @@ export function Landing({ audience }: { audience: Audience }) {
           <p className="hero-lede">{copy.lede}</p>
           <div className="frame" aria-hidden="true">
             <div className="frame-video">
+              <img className="frame-still" src={copy.frame.image} alt="" onError={(event) => event.currentTarget.remove()} />
               <p className="frame-caption">{copy.frame.caption}</p>
             </div>
             <div className="toast toast-found">
@@ -74,7 +75,7 @@ export function Landing({ audience }: { audience: Audience }) {
             </div>
           ))}
         </div>
-        <p className="step-example">Example figures on this page, not a live search.</p>
+        <p className="step-example">Example figures</p>
       </section>
 
       <section className="compare" id="compare">

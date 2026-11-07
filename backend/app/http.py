@@ -39,7 +39,6 @@ def provider_http_note(who: str, status: int, payload: object | None) -> str:
         note += f" Provider code {code}."
     if payload is None:
         note += " Body was not JSON."
-    note += " Nothing was ranked from that response."
     return note
 
 

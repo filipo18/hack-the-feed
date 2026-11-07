@@ -14,6 +14,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.creator_report import MAX_POSTS, run_creator_report
+from app.brand_depth import run_creator_search
 from app.http import post_json
 from app.search import run_search
 from app.settings import load_settings
@@ -106,6 +107,19 @@ class CreatorReportRequest(BaseModel):
         return platform
 
 
+class CreatorBrandRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    brand: str = Field(min_length=1, max_length=80)
+    aliases: list[str] = Field(default_factory=list, max_length=8)
+    handle: str = Field(min_length=1, max_length=80)
+    platform: str
+
+    _brand = field_validator("brand")(SearchRequest.clean_brand.__func__)
+    _aliases = field_validator("aliases")(SearchRequest.clean_aliases.__func__)
+    _handle = field_validator("handle")(CreatorReportRequest.clean_handle.__func__)
+    _platform = field_validator("platform")(CreatorReportRequest.clean_platform.__func__)
+
+
 class _RedactSecrets(logging.Filter):
     """Drop bearer tokens and configured provider keys from any log line."""
 
@@ -171,6 +185,11 @@ def create_app() -> FastAPI:
     def creator_report(body: CreatorReportRequest) -> dict:
         _rate_limit()
         return run_creator_report(body.model_dump(), load_settings(), post_json)
+
+    @app.post("/api/search/creator")
+    def creator_search(body: CreatorBrandRequest) -> dict:
+        _rate_limit()
+        return run_creator_search(body.model_dump(), load_settings(), post_json)
 
     @app.get("/{full_path:path}")
     def frontend(full_path: str):

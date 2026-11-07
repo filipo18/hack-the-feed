@@ -52,7 +52,8 @@ export function evidenceLabels(creator: SearchCreator): string[] {
 }
 
 export function evidenceExcerpt(creator: SearchCreator): string | null {
-  for (const post of creator.posts ?? []) {
+  for (const post of (creator.posts ?? []).filter(item => item.countsTowardReach)) {
+    if (post.caption?.trim()) return post.caption.trim();
     for (const media of post.media ?? []) {
       const transcript = media.transcript?.trim();
       if (transcript) return transcript;

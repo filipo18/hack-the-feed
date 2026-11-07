@@ -1,4 +1,4 @@
-"""Run the four Oriane channels, then ask GMI once. Channels fail independently."""
+"""Run four Oriane channels, then assess bounded batches. Channels fail independently."""
 
 from __future__ import annotations
 
@@ -137,7 +137,9 @@ def run_search(request: dict, settings, post_json) -> dict:
             response_cache.set(cache_key, response, settings.response_ttl_seconds)
         return response
 
-    judgments, reason, detail = assess(post_json, settings, request["brand"].strip(), terms, deduped)
+    diagnostics: list[str] = []
+    judgments, reason = assess(post_json, settings, request["brand"].strip(), terms, deduped, diagnostics)
+    response["warnings"].extend(diagnostics)
     if judgments is not None and not any(post["postKey"] in judgments for post in deduped):
         judgments = None
         reason = "malformed_model_response"
@@ -146,13 +148,15 @@ def run_search(request: dict, settings, post_json) -> dict:
     if judgments is None:
         response["assessment"] = "unassessed"
         response["assessmentReason"] = reason
-        if detail:
-            response["warnings"].append(detail)
         return response
-    response["assessment"] = "complete"
-    response["assessmentReason"] = None
+    complete = all(post["postKey"] in judgments for post in deduped)
+    response["assessment"] = "complete" if complete else "partial"
+    response["assessmentReason"] = None if complete else "partial_model_response"
+    if not complete:
+        response["warnings"].append("Some retrieved posts could not be assessed. Only assessed relevant posts contribute to the ranking.")
     response["cache"] = "miss"
-    response_cache.set(cache_key, response, settings.response_ttl_seconds)
+    if complete and all(channel["status"] == "ok" for channel in channels):
+        response_cache.set(cache_key, response, settings.response_ttl_seconds)
     return response
 
 

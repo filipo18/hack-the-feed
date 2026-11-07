@@ -10,6 +10,8 @@ export interface Mention {
   channels: Channel[];
   snippet: string;
   timestamp: string | null;
+  /** Optional frame from the video. Without one, the card shows a painted tile. */
+  thumbnail?: string | null;
 }
 
 export interface Creator {
@@ -35,7 +37,7 @@ export interface CreatorResult {
 
 export type ReportPlatform = "instagram" | "tiktok" | "youtube";
 export type EntityType = "brand" | "team" | "product" | "person" | "platform_distribution";
-export type ReviewDisclosure = "unknown" | "disclosed" | "paid";
+export type ReviewDisclosure = "unknown" | "disclosed";
 
 export interface CreatorEntity {
   id: string;
@@ -96,8 +98,9 @@ export interface CreatorReport {
     transcriptState: string;
     ocrLineCount: number;
     frameCount: number;
+    thumbnailUrl?: string | null;
     disclosure: "unknown" | "disclosed";
   }[];
   entities: CreatorEntity[];
-  assessment: { text: string; vision: string; reason: string | null };
+  assessment: { text: string; vision: string; reason: string | null; textReason?: string | null; visionReason?: string | null };
 }

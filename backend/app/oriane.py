@@ -98,10 +98,10 @@ def default_visual_text(brand: str) -> str:
     return text[:300]
 
 
-def search_url(base: str, sort: str) -> str:
+def search_url(base: str, sort: str, offset: int = 0) -> str:
     # sort is one of the two fixed values this service sends. Keep the colon literal,
     # matching the live query string rather than percent-encoding it.
-    return f"{base}{SEARCH_PATH}?limit={PAGE_LIMIT}&offset=0&projection=full&sort={sort}"
+    return f"{base}{SEARCH_PATH}?limit={PAGE_LIMIT}&offset={offset}&projection=full&sort={sort}"
 
 
 def bearer_headers(api_key: str) -> dict[str, str]:
@@ -178,9 +178,9 @@ def parse_asset_id(status: int, payload: object) -> str | None:
     return None
 
 
-def call_search(post_json, base: str, api_key: str, body: dict, sort: str, timeout: float) -> dict:
+def call_search(post_json, base: str, api_key: str, body: dict, sort: str, timeout: float, offset: int = 0) -> dict:
     try:
-        status, payload = post_json(search_url(base, sort), body, bearer_headers(api_key), timeout)
+        status, payload = post_json(search_url(base, sort, offset), body, bearer_headers(api_key), timeout)
     except ProviderCallError as exc:
         return {
             "status": "failed",

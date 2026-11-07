@@ -233,3 +233,13 @@ Held-out `holdoutReason` is one of `owned_account`, `asr_false_positive`, `compl
 The live Ryanair check on 6 Nov 2026 saw index counts of 896 written, 527 transcript, 1789 OCR, and 42 visual candidates, and 35 distinct posts in the top 10 of each channel. This service asks for that same page size and does not walk the rest of the index. Oriane's own how-to-search also describes about three months, accounts under 5,000 followers, and up to a week of lag. A ranked list is a sample, not every mention.
 
 No canonical post URL and no paid-partnership field are invented. Hosting access to GMI is not verified here. Keys are not in this repo.
+
+## Creator report visual analysis
+
+The production frontend requests Instagram only for brand searches and creator reports. The API still accepts explicit platform requests from other clients.
+
+Set `GMI_VISION_MODEL` on the server to an image-capable model available to your GMI account. This enables creator frame analysis independently of the text model in `GMI_MODEL`. Alternatively, `GMI_VISION=1` enables frame analysis with `GMI_MODEL` when that model supports image input. Both paths require the GMI key and text model configuration. Redeploy after changing hosted environment variables. No live vision validation is implied by mocked tests.
+
+Reports distinguish disabled vision, unavailable frames, and failed analysis. `assessment.textReason` and `assessment.visionReason` keep separate model-call failures; `assessment.reason` remains for existing clients.
+
+Creator cards show distinct post views. An optional `CREATOR_ILLUSTRATIVE_CPM` supplies an illustrative estimate after confirmation; no default price is assumed. People, teams, and distribution platforms remain in the response as contextual evidence and are collapsed in the frontend.

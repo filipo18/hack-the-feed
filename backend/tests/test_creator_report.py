@@ -272,3 +272,44 @@ def test_creator_route_does_not_change_brand_search_health():
     missing = client.post("/api/search", json={"brand": "Ryanair"})
     assert missing.status_code == 200
     assert missing.json()["assessment"] == "unassessed"
+
+
+def test_no_frames_reports_missing_evidence_instead_of_disabled_vision(monkeypatch):
+    rows = [dict(FIXTURE["posts"][0], media=[])]
+    response, http = _post(monkeypatch, rows, 1, _model([]))
+    assert response.json()["assessment"]["visionReason"] == "no_frames"
+    assert response.json()["assessment"]["vision"] == "blocked"
+    assert len(http.calls) == 2
+
+
+def test_dedicated_vision_model_runs_without_changing_the_text_model(monkeypatch):
+    monkeypatch.setenv("GMI_VISION_MODEL", "configured-vision-model")
+    response, http = _post(monkeypatch, FIXTURE["posts"], 3, _model([]), _model([], "observations"))
+    assert response.json()["assessment"]["vision"] == "complete"
+    assert response.json()["visionFramesSent"] == 1
+    model_calls = [call["body"] for call in http.calls if "/chat/completions" in call["url"]]
+    assert {call["model"] for call in model_calls} == {"configured-by-env", "configured-vision-model"}
+
+
+def test_text_failure_does_not_hide_vision_blocker(monkeypatch):
+    response, _ = _post(monkeypatch, FIXTURE["posts"], 3, (500, {}))
+    assessment = response.json()["assessment"]
+    assert assessment["textReason"] == "gmi_error"
+    assert assessment["visionReason"] == "model_vision_not_confirmed"
+
+
+def test_creator_previews_are_available_without_running_vision(monkeypatch):
+    response, _ = _post(monkeypatch, FIXTURE["posts"], 3, _model([]), gmi=False)
+    posts = response.json()["posts"]
+    assert posts[0]["thumbnailUrl"] == "https://example.invalid/luka/swoosh.webp"
+    assert posts[1]["thumbnailUrl"] is None
+    assert response.json()["assessment"]["vision"] == "blocked"
+
+
+def test_creator_preview_skips_sensitive_frames(monkeypatch):
+    row = dict(FIXTURE["posts"][0], media=[{"frames": [{
+        "id": "sensitive", "url": "https://example.invalid/private.webp",
+        "onScreenTextRegions": [{"text": "passport card number"}],
+    }]}])
+    response, _ = _post(monkeypatch, [row], 1, _model([]), gmi=False)
+    assert response.json()["posts"][0]["thumbnailUrl"] is None

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { COPY, PRODUCT_NAME, type Audience } from "../content";
+import { SAMPLE_MODE } from "../lib/mode";
 import { saveSession } from "../lib/session";
 
 export function Login() {
@@ -24,12 +25,12 @@ export function Login() {
         {PRODUCT_NAME}
       </Link>
       <form className="login-card" onSubmit={submit}>
-        <h1 className="display">{isBrand ? "Demo access" : "Creator report"}</h1>
+        <h1 className="display">
+          {SAMPLE_MODE ? (isBrand ? "See who posts you." : "See who you post.") : isBrand ? "Demo access" : "Creator report"}
+        </h1>
         <p className="login-note">
           This stores a name in this browser and does not check a password.
-          {isBrand
-            ? " The brand workspace runs a real search."
-            : " The creator workspace requests indexed posts for that handle. It does not send a pitch."}
+          {isBrand ? " The brand workspace runs a real search." : " The creator workspace requests indexed posts for that handle."}
         </p>
         <div className="switch switch-light" role="group" aria-label="Choose your side">
           <button type="button" className={isBrand ? "active" : undefined} onClick={() => setAudience("brands")}>
@@ -49,7 +50,7 @@ export function Login() {
           required
         />
         <button type="submit" className="pill pill-primary">
-          {isBrand ? "Open demo workspace" : "Open creator workspace"}
+          Open my dashboard
         </button>
       </form>
     </main>

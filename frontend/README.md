@@ -13,7 +13,7 @@ Brand search posts `/api/search`. In dev, Vite proxies that path to the local AP
 
 `/demo/brand-search` is a labeled fixture, not a live result.
 
-`/creators/:handle` posts `/api/creator-report`. If Oriane or GMI is unset, the screen says so. It does not invent creator rows. Live GMI vision is blocked unless the server process has `GMI_VISION=1` and a configured model. This workspace did not run that live call.
+`/creators/:handle` posts `/api/creator-report`. If Oriane or GMI is unset, the screen says so. It does not invent creator rows. The live app requests Instagram only. Creator reports have no platform switcher. Set server-only `GMI_VISION_MODEL` to an available image-capable model to enable visual analysis, or use `GMI_VISION=1` when `GMI_MODEL` itself supports images. Missing frames are reported separately from disabled analysis. This workspace did not run that live call.
 
 Demo access at `/login` stores a name in the browser and checks no password. The brand workspace runs a real search. The creator workspace requests the creator report.
 
