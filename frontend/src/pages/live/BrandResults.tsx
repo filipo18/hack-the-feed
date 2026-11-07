@@ -11,7 +11,7 @@ import { SCAN_STAGES } from "../../content";
 import { renderableCreators } from "../../lib/contract";
 import { compact } from "../../lib/format";
 import { liveCreators, liveItem, liveOutreach, liveViews } from "../../lib/live";
-import { HONESTY_NOTE, assessmentCopy, disclosureLabel, holdoutLabel, modelLabel } from "../../lib/present";
+import { assessmentCopy, disclosureLabel, holdoutLabel } from "../../lib/present";
 import { useBrandSearch } from "../../lib/useBrandSearch";
 import { bestFitCreators } from "../../lib/brandDepth";
 
@@ -21,6 +21,8 @@ export function LiveBrandResults() {
   const { scanning, finish } = useScan(`live:brand:${brand}`, false);
   const [draft, setDraft] = useState<OutreachDraft | null>(null);
   const [sort, setSort] = useState<"fit" | "views">("fit");
+  const [tagFilter, setTagFilter] = useState({ brand, tag: "" });
+  const tag = tagFilter.brand === brand ? tagFilter.tag : "";
   const ready = state.status !== "loading";
   const data = state.status === "ready" ? state.data : null;
   const creators = useMemo(() => {
@@ -30,6 +32,8 @@ export function LiveBrandResults() {
     return liveCreators({ ...data, rankedCreators: rows });
   }, [data, sort]);
   const items = creators.map((creator) => liveItem(brand, creator));
+  const tags = [...new Set(items.flatMap(item => item.signals ?? []))].sort();
+  const filteredItems = tag ? items.filter(item => item.signals?.includes(tag)) : items;
   const showing = ready && !scanning;
   const copy = data ? assessmentCopy(data.assessmentReason) : null;
   const held = data ? renderableCreators(data.heldOut).creators : [];
@@ -85,11 +89,6 @@ export function LiveBrandResults() {
               </div>
             )}
             <div className="results-body">
-              <details className="search-method" data-testid="search-meta">
-                <summary>About these results</summary>
-                <p className="live-meta">Instagram discovery searches fetch up to 10 posts per channel. The first 10 eligible creators get a deeper search of up to 20 brand-matching posts each. Other creators show initial search evidence only. {modelLabel(data)} {HONESTY_NOTE}</p>
-                <p className="live-meta">Best fit puts evidence of product use, reviews, or recommendations first, then repeated matching posts, direct evidence count, and explicit mentions. Views break remaining ties. This compares the evidence found; it does not predict campaign performance or verify audience demographics.</p>
-              </details>
               {copy && (
                 <div className="live-note" data-testid="assessment" role="status">
                   <strong>{copy.title}</strong>
@@ -107,12 +106,21 @@ export function LiveBrandResults() {
                 <section className="live-section">
                   <div className="results-head">
                     <h2>Your creator shortlist</h2>
-                    <label className="match-sort">Sort by
-                      <select value={sort} onChange={event => setSort(event.target.value as "fit" | "views")}>
-                        <option value="fit">Best fit</option>
-                        <option value="views">Most relevant views</option>
-                      </select>
-                    </label>
+                    <div className="match-controls">
+                      <label className="match-sort">Filter by tag
+                        <select value={tag} onChange={event => setTagFilter({ brand, tag: event.target.value })}>
+                          <option value="">All tags</option>
+                          {tag && !tags.includes(tag) && <option value={tag}>{tag}</option>}
+                          {tags.map(label => <option key={label} value={label}>{label}</option>)}
+                        </select>
+                      </label>
+                      <label className="match-sort">Sort by
+                        <select value={sort} onChange={event => setSort(event.target.value as "fit" | "views")}>
+                          <option value="fit">Best fit</option>
+                          <option value="views">Most relevant views</option>
+                        </select>
+                      </label>
+                    </div>
                   </div>
                   {state.status === "ready" && state.deeper.total > 0 && (
                     <p className="depth-progress" role="status" aria-live="polite">
@@ -122,9 +130,11 @@ export function LiveBrandResults() {
                       {state.deeper.failed > 0 && ` ${state.deeper.failed} checks were incomplete or unavailable; earlier verified matches are retained.`}
                     </p>
                   )}
+                  {tag && <p className="match-filter-count" role="status">Showing {filteredItems.length} of {items.length} creators · {tag}</p>}
+                  {filteredItems.length === 0 && <p className="live-note">No creators match this tag. Choose All tags to see every creator.</p>}
                   <Cards
                     testId="ranked-creators"
-                    items={items}
+                    items={filteredItems}
                     action="Reach out"
                     onAction={(id) => {
                       const creator = creators.find((item) => item.key === id);

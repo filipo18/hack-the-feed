@@ -119,7 +119,15 @@ def project_post(row: dict, channel: str, terms: list[str]) -> dict | None:
         "viewsCount": views_count,
         "viewsConflict": False,
         "publishedAt": row.get("publishedAt") if isinstance(row.get("publishedAt"), str) else None,
-        "canonicalPostUrl": None,
+        # Captured Instagram rows carry the public shortcode as platformId.
+        # Numeric IDs and other platforms need their own verified mapping.
+        "canonicalPostUrl": (
+            f"https://www.instagram.com/p/{platform_id}/"
+            if platform == "instagram"
+            and re.fullmatch(r"[A-Za-z0-9_-]{11}", platform_id)
+            and not platform_id.isdecimal()
+            else None
+        ),
         "paidPartnership": "not_in_oriane_schema",
         "retrievedBy": [channel],
         "evidenceLabels": evidence_labels(row, terms, channel),

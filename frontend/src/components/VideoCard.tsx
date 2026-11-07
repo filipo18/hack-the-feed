@@ -65,6 +65,12 @@ export function VideoCard({ index, item, action, onAction }: { index: number; it
                   <strong>{match.context}</strong>
                   <span>{match.views === null ? "Views unknown" : `${compact(match.views)} views`}</span>
                   <p>{match.why}</p>
+                  {match.postUrl && (
+                    <a className="match-video-link" href={match.postUrl} target="_blank" rel="noreferrer"
+                      aria-label={`Open video ${number + 1} from ${item.title}`}>
+                      Open video ↗
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

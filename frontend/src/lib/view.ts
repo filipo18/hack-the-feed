@@ -23,7 +23,7 @@ export interface CardItem {
   highlight: string;
   signals?: string[];
   depthLabel?: string;
-  matches?: { id: string; thumbnail: string | null; context: string; why: string; views: number | null }[];
+  matches?: { id: string; postUrl: string | null; thumbnail: string | null; context: string; why: string; views: number | null }[];
 }
 
 export function whereOf(mention: Mention): string {
