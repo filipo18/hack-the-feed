@@ -287,8 +287,8 @@ def test_dedicated_vision_model_runs_without_changing_the_text_model(monkeypatch
     response, http = _post(monkeypatch, FIXTURE["posts"], 3, _model([]), _model([], "observations"))
     assert response.json()["assessment"]["vision"] == "complete"
     assert response.json()["visionFramesSent"] == 1
-    assert http.calls[1]["body"]["model"] == "configured-by-env"
-    assert http.calls[2]["body"]["model"] == "configured-vision-model"
+    model_calls = [call["body"] for call in http.calls if "/chat/completions" in call["url"]]
+    assert {call["model"] for call in model_calls} == {"configured-by-env", "configured-vision-model"}
 
 
 def test_text_failure_does_not_hide_vision_blocker(monkeypatch):

@@ -48,6 +48,16 @@ inference during live Nike searches. These Vercel environment overrides leave
 other hosting environments unchanged. The backend function allows up to 300
 seconds, covering the visual asset and search calls followed by inference.
 
+Production also sets `GMI_VISION=1`. The configured `openai/gpt-6.1-sol`
+model accepted an Oriane frame in a staged creator-report request before
+enabling this flag. Creator reports analyze at most ten frames, up to two
+per post, with text and image requests running concurrently. Image requests
+use `GMI_HTTP_TIMEOUT_SECONDS`, and visual evidence can cite only a frame
+actually sent to the model. This checks selected frames, not every moment
+of a video. Leave `GMI_VISION_MODEL` unset to use the configured text model;
+verify image support again before changing models. Other environments keep
+visual analysis opt-in.
+
 The app can start without provider credentials, but searches then report an
 unconfigured provider and cannot return live rankings. After setting or
 changing environment variables, deploy again.
