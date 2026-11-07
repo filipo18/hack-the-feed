@@ -63,6 +63,45 @@ test("creator cards fit a narrow screen", async ({ page }) => {
   await expect(page.getByLabel("Disclosure for 77x.world")).toBeVisible();
 });
 
+test("creator search uses the scan animation until the report is ready", async ({ page }) => {
+  await page.clock.install();
+  let release!: () => void;
+  const ready = new Promise<void>((resolve) => { release = resolve; });
+  await page.route("**/api/creator-report", async (route) => {
+    await ready;
+    await route.fulfill({ json: report() });
+  });
+  await page.goto("/creators/test.creator");
+  await expect(page.locator(".scan")).toBeVisible();
+  await expect(page.locator(".scan-title")).toHaveCSS("color", "rgb(255, 255, 255)");
+  await expect(page.locator(".scan-stage")).toHaveCSS("color", "rgb(255, 255, 255)");
+  await page.clock.runFor(5000);
+  await expect(page.locator(".scan")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Skip" })).toHaveCount(0);
+  await expect(page.getByTestId("creator-report")).toHaveCount(0);
+  release();
+  await expect(page.getByRole("button", { name: "Skip" })).toBeVisible();
+  await page.getByRole("button", { name: "Skip" }).click();
+  await expect(page.locator(".scan")).toHaveCount(0);
+  await expect(page.getByTestId("creator-report")).toBeVisible();
+});
+
+test("a failed creator search exits the animation and shows the error", async ({ page }) => {
+  await page.route("**/api/creator-report", (route) => route.fulfill({ status: 502, json: { detail: "unavailable" } }));
+  await page.goto("/creators/test.creator");
+  await expect(page.locator(".scan")).toBeVisible();
+  await page.getByRole("button", { name: "Skip" }).click();
+  await expect(page.getByTestId("creator-report-error")).toBeVisible();
+  await expect(page.locator(".scan")).toHaveCount(0);
+});
+
+test("creator search respects reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/creators/test.creator");
+  await expect(page.getByTestId("creator-report")).toBeVisible();
+  await expect(page.locator(".scan")).toHaveCount(0);
+});
+
 for (const platform of ["tiktok", "youtube"]) {
   test(`old ${platform} links still load Instagram`, async ({ page }) => {
     const request = page.waitForRequest("**/api/creator-report");

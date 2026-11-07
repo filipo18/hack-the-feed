@@ -400,6 +400,7 @@ button, input, textarea { font: inherit; }
 
 /* Scan */
 .scan {
+  color: var(--white);
   position: fixed;
   inset: 0;
   z-index: 40;

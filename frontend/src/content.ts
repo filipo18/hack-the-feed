@@ -4,7 +4,7 @@ export type Audience = "brands" | "creators";
 
 export const SCAN_STAGES: Record<Audience, string[]> = {
   brands: ["Reading captions", "Listening to speech", "Reading on-screen text", "Checking the visuals", "Ranking creators by impressions"],
-  creators: ["Reading your captions", "Listening to your videos", "Reading on-screen text", "Matching brands", "Working out what they’re worth"],
+  creators: ["Finding Instagram posts", "Reading captions and transcripts", "Reading on-screen text", "Matching brands", "Preparing your report"],
 };
 
 export interface Copy {

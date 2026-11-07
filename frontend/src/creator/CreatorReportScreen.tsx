@@ -3,7 +3,10 @@ import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { CreatorReportView } from "../components/CreatorReportView";
 import { Loading } from "../components/ResultState";
+import { Scan } from "../components/Scan";
+import { useScan } from "../components/motion";
 import { useResult } from "../components/useResult";
+import { SCAN_STAGES } from "../content";
 import { CREATOR_REPORT_PATH } from "./availability";
 import type { CreatorReport } from "../lib/types";
 
@@ -35,8 +38,25 @@ export function CreatorReportScreen({
     ),
     handle,
   );
+  const { scanning, finish } = useScan(`live:creator:${handle}`, layout === "workspace");
+  const items = loaded?.ok
+    ? loaded.report.entities.flatMap((entity) => entity.evidence.slice(0, 1).map((evidence) => ({
+        text: evidence.snippet ?? entity.name,
+        term: entity.name,
+        thumbnail: evidence.frameUrl,
+      }))).slice(0, 6)
+    : [];
 
-  const body = !loaded ? (
+  const body = scanning ? (
+    <Scan
+      key={handle}
+      title={`@${handle}`}
+      stages={SCAN_STAGES.creators}
+      items={items}
+      ready={loaded !== null}
+      onDone={finish}
+    />
+  ) : !loaded ? (
     <Loading term={`@${handle}`} />
   ) : loaded.ok === false ? (
     <p className="result-note" data-testid="creator-report-error">
