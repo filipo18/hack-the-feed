@@ -1006,3 +1006,37 @@ button, input, textarea { font: inherit; }
   .card, .scan, .scan-stage { animation: none; }
   .scan-track { animation: none; }
 }
+
+/* Creator evidence report */
+.creator-report { display: grid; gap: 20px; }
+.creator-summary { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; font-size: 15px; }
+.creator-coverage { max-width: 64ch; font-size: 14px; }
+.creator-coverage summary, .creator-other summary { cursor: pointer; width: fit-content; }
+.creator-coverage p { margin-top: 8px; }
+.creator-assessment { padding: 12px 16px; border-left: 3px solid var(--royal); border-radius: 4px 12px 12px 4px; background: rgb(255 255 255 / 0.55); color: var(--muted-on-light); font-size: 14px; line-height: 1.5; }
+.creator-section-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 4px; }
+.creator-section-head h2 { font-size: 20px; font-weight: 700; }
+.creator-report .brand-list { margin-top: 14px; }
+.creator-report .brand-row { grid-template-columns: minmax(140px, 0.8fr) minmax(0, 1.6fr) minmax(160px, 0.7fr); align-items: start; gap: 20px; padding: 20px; border-radius: 16px; }
+.creator-report .brand-main { display: grid; gap: 4px; min-width: 0; }
+.creator-report .brand-row h2 { overflow-wrap: anywhere; }
+.creator-report .brand-value { margin-top: 8px; font-size: 34px; }
+.creator-views-unknown { margin-top: 8px; font-size: 18px; font-weight: 600; }
+.creator-estimate { margin-top: 4px; font-size: 13px; color: var(--muted-on-light); }
+.creator-report .mention-list { min-width: 0; font-size: 16px; overflow-wrap: anywhere; }
+.creator-report .mention-list li { display: grid; gap: 6px; padding: 4px 0; }
+.creator-report .brand-actions { justify-items: stretch; gap: 12px; }
+.creator-report .brand-actions .pill { padding: 10px 14px; min-height: 42px; font-size: 14px; white-space: normal; }
+.creator-report .brand-actions label { display: grid; gap: 4px; }
+.creator-report .brand-actions select { width: 100%; margin: 0; padding: 8px 10px; border: 1px solid rgb(6 16 44 / 0.2); border-radius: 8px; background: var(--white); color: var(--ink); }
+.creator-other { border-top: 1px solid rgb(6 16 44 / 0.12); padding-top: 16px; }
+.creator-other summary { font-size: 15px; font-weight: 600; }
+.creator-other > p { margin-top: 8px; }
+.creator-other ul { display: grid; gap: 12px; margin-top: 12px; }
+.creator-other li { padding: 12px 16px; border-radius: 12px; background: rgb(255 255 255 / 0.6); overflow-wrap: anywhere; }
+.creator-other h3 { font-size: 15px; font-weight: 600; }
+@media (max-width: 860px) {
+  .creator-report .brand-row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .creator-report .brand-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
+  .creator-report .brand-actions .pill { height: 100%; }
+}

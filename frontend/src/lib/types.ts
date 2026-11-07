@@ -37,7 +37,7 @@ export interface CreatorResult {
 
 export type ReportPlatform = "instagram" | "tiktok" | "youtube";
 export type EntityType = "brand" | "team" | "product" | "person" | "platform_distribution";
-export type ReviewDisclosure = "unknown" | "disclosed" | "paid";
+export type ReviewDisclosure = "unknown" | "disclosed";
 
 export interface CreatorEntity {
   id: string;
@@ -101,5 +101,5 @@ export interface CreatorReport {
     disclosure: "unknown" | "disclosed";
   }[];
   entities: CreatorEntity[];
-  assessment: { text: string; vision: string; reason: string | null };
+  assessment: { text: string; vision: string; reason: string | null; textReason?: string | null; visionReason?: string | null };
 }

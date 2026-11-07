@@ -88,6 +88,8 @@ def run_creator_report(request: dict, settings, post_json) -> dict:
     base["assessment"]["text"] = text_status
     base["assessment"]["vision"] = vision_status
     base["assessment"]["reason"] = text_reason or vision_reason
+    base["assessment"]["textReason"] = text_reason
+    base["assessment"]["visionReason"] = vision_reason
     base["visionFramesSent"] = len(frames) if vision_status == "complete" else 0
     return base
 
@@ -317,10 +319,11 @@ def _text(post_json, settings, texts: list[dict]) -> tuple[str, list, str | None
 
 
 def _vision(post_json, settings, frames: list[dict]) -> tuple[str, list, str | None]:
-    if os.environ.get("GMI_VISION", "").strip() != "1":
-        return "blocked", [], "model_vision_not_confirmed"
     if not frames:
-        return "complete", [], None
+        return "blocked", [], "no_frames"
+    vision_model = os.environ.get("GMI_VISION_MODEL", "").strip()
+    if not vision_model and os.environ.get("GMI_VISION", "").strip() != "1":
+        return "blocked", [], "model_vision_not_confirmed"
     instructions = (
         "Name what you can see in these frames. Return one JSON object:\n"
         '{"observations":[{"frameId":"","name":"","entityType":"brand|team|product|person|platform_distribution","alias":null}]}\n'
@@ -335,7 +338,7 @@ def _vision(post_json, settings, frames: list[dict]) -> tuple[str, list, str | N
     for frame in frames:
         content.append({"type": "image_url", "image_url": {"url": frame["url"]}})
     body = {
-        "model": settings.gmi_model,
+        "model": vision_model or settings.gmi_model,
         "temperature": 0,
         "max_tokens": 2000,
         "response_format": {"type": "json_object"},

@@ -46,7 +46,7 @@ export const COPY: Record<Audience, Copy> = {
         name: "Search",
         text: "Type your brand. We read captions, speech and on-screen text in short videos.",
         panel: [
-          { label: "Videos read", value: "883", note: "Instagram and TikTok" },
+          { label: "Videos read", value: "883", note: "Illustrative sample" },
           { label: "Ad posts removed", value: "41", note: "Marked #ad or paid partnership" },
         ],
       },

@@ -1,24 +1,20 @@
 import { useState } from "react";
 import { OutreachDialog, type OutreachDraft } from "./OutreachDialog";
+import { postViews } from "../lib/creatorReport";
 import { compact, money } from "../lib/format";
-import type { CreatorEntity, CreatorReport, ReportPlatform, ReviewDisclosure } from "../lib/types";
+import type { CreatorEntity, CreatorReport, ReviewDisclosure } from "../lib/types";
 
-const PLATFORMS: ReportPlatform[] = ["instagram", "tiktok", "youtube"];
-const BILLABLE = new Set<CreatorEntity["entityType"]>(["brand", "team", "product"]);
+const BILLABLE = new Set<CreatorEntity["entityType"]>(["brand", "product"]);
 
 type Review = { confirmed: boolean; disclosure: ReviewDisclosure };
 
 export function CreatorReportView({
   report,
   sample,
-  platform,
-  onPlatform,
   showPipeline,
 }: {
   report: CreatorReport;
   sample: boolean;
-  platform: ReportPlatform;
-  onPlatform: (platform: ReportPlatform) => void;
   showPipeline?: boolean;
 }) {
   const [reviews, setReviews] = useState<Record<string, Review>>({});
@@ -28,47 +24,49 @@ export function CreatorReportView({
 
   const confirmed = report.entities.filter((entity) => reviewOf(entity).confirmed && BILLABLE.has(entity.entityType));
   const cpm = report.illustrativeCpm;
+  const brands = report.entities.filter((entity) => BILLABLE.has(entity.entityType));
+  const otherMentions = report.entities.filter((entity) => !BILLABLE.has(entity.entityType));
 
   return (
-    <div data-testid="creator-report">
-      <div className="filter" role="group" aria-label="Platform">
-        {PLATFORMS.map((item) => (
-          <button key={item} type="button" className={item === platform ? "active" : undefined} onClick={() => onPlatform(item)}>
-            {item}
-          </button>
-        ))}
-      </div>
-      <p className="results-meta">
-        Indexed {report.retrieval.indexedTotalCount ?? "unknown"} · returned {report.retrieval.returnedCount} of cap{" "}
-        {report.retrieval.cap}
-        {report.retrieval.earliestPublishedAt &&
-          ` · ${report.retrieval.earliestPublishedAt.slice(0, 10)} to ${report.retrieval.latestPublishedAt?.slice(0, 10)}`}
-        .{" "}
-        {report.retrieval.paginationComplete == null
-          ? "Page coverage is unknown"
-          : report.retrieval.paginationComplete
-            ? "This page covers the indexed count"
-            : "This page does not cover the indexed count"}
-        . This is not a complete account history.
+    <div className="creator-report" data-testid="creator-report">
+      <div className="creator-summary">
+        <p><strong>{report.retrieval.returnedCount} Instagram {report.retrieval.returnedCount === 1 ? "post" : "posts"}</strong> in this sample</p>
         {sample && <span className="sample-tag">Sample data</span>}
-      </p>
+        <details className="creator-coverage">
+          <summary>Sample coverage</summary>
+          <p className="sub">
+            Indexed {report.retrieval.indexedTotalCount ?? "unknown"} · returned {report.retrieval.returnedCount} of cap {report.retrieval.cap}.
+            {report.retrieval.earliestPublishedAt && ` ${report.retrieval.earliestPublishedAt.slice(0, 10)} to ${report.retrieval.latestPublishedAt?.slice(0, 10)}.`}
+            {report.retrieval.paginationComplete == null
+              ? " Index coverage is unknown."
+              : report.retrieval.paginationComplete
+                ? " All currently indexed posts returned."
+                : " More indexed posts may be available."}
+            {" This is not a complete account history. Views are not unique reach."}
+          </p>
+        </details>
+      </div>
       <Assessment report={report} />
       {report.retrieval.message === "no indexed content found" && (
-        <p className="result-note">No indexed content found. This does not mean the account does not exist, and it does not mean there are no brand mentions.</p>
+        <p className="result-note">No Instagram posts were found in the index for this handle. Try another handle. The index does not cover every account or post.</p>
       )}
-      {report.posts.length > 0 && report.entities.length === 0 && report.retrieval.message !== "no indexed content found" && (
-        <p className="result-note">Posts were returned. No grounded names are ready to review.</p>
-      )}
-      {!showPipeline && (
-        <div className="brand-list">
-          {report.entities.map((entity) => {
+      {!showPipeline && report.posts.length > 0 && (
+        <section aria-label="Brands and products">
+          <div className="creator-section-head"><h2>Brands and products</h2><span className="sub">{brands.length} to review</span></div>
+          <p className="sub">Names found in these posts. Review the evidence before confirming an appearance.</p>
+          {brands.length === 0 && report.posts.length > 0 && <p className="result-note">No brand or product names are ready to review.</p>}
+          <div className="brand-list">
+          {brands.map((entity) => {
             const review = reviewOf(entity);
             const amount = review.confirmed ? entityAmount(entity, cpm) : null;
+            const views = postViews(entity.matchingPosts);
             return (
               <article key={entity.id} className="brand-row">
                 <div className="brand-main">
                   <h2>{entity.name}</h2>
-                  {amount != null ? <p className="brand-value">{money(amount)}</p> : <p className="brand-value">—</p>}
+                  <p className={views.total == null ? "creator-views-unknown" : "brand-value"}>{views.total == null ? "Views unknown" : compact(views.total)}</p>
+                  <p className="sub">Post views{views.incomplete && views.total != null ? " · partial count" : ""}</p>
+                  {amount != null && <p className="creator-estimate">{money(amount)} illustrative value at {cpm} CPM</p>}
                   <p className="sub">
                     {labelType(entity.entityType)}
                     {entity.aliases.length > 0 ? ` · also ${entity.aliases.join(", ")}` : ""} · {review.disclosure} ·{" "}
@@ -80,9 +78,9 @@ export function CreatorReportView({
                     <li key={`${item.platformId}-${item.field}-${index}`}>
                       <span>{item.snippet ? `“${item.snippet}”` : "No text quote. The frame itself is the evidence."}</span>
                       <span className="sub">
-                        {item.field}
+                        {item.field.replaceAll("_", " ")}
                         {item.timestampSeconds != null && ` at ${item.timestampSeconds}s`} · {item.platformId} ·{" "}
-                        {item.views == null ? "views unknown" : `${compact(item.views)} views`} · {item.reviewStatus}
+                        {item.views == null ? "views unknown" : `${compact(item.views)} views`} · {review.confirmed ? "appearance confirmed" : "needs review"}
                         {item.source === "vision" && " · a logo is not a contract"}
                       </span>
                     </li>
@@ -106,8 +104,9 @@ export function CreatorReportView({
                     </button>
                   )}
                   <label className="sub">
-                    Status
+                    Disclosure
                     <select
+                      aria-label={`Disclosure for ${entity.name}`}
                       value={review.disclosure}
                       onChange={(event) =>
                         setReviews({
@@ -118,14 +117,29 @@ export function CreatorReportView({
                     >
                       <option value="unknown">unknown</option>
                       <option value="disclosed">disclosed</option>
-                      <option value="paid">paid</option>
                     </select>
                   </label>
                 </div>
               </article>
             );
           })}
-        </div>
+          </div>
+        </section>
+      )}
+      {!showPipeline && otherMentions.length > 0 && (
+        <details className="creator-other" data-testid="other-mentions">
+          <summary>Other mentions ({otherMentions.length})</summary>
+          <p className="sub">People, teams, and publishing platforms are shown as context.</p>
+          <ul>
+            {otherMentions.map((entity) => (
+              <li key={entity.id}>
+                <h3>{entity.name}</h3>
+                <p className="sub">{labelType(entity.entityType)} · {entity.matchingPostCount} {entity.matchingPostCount === 1 ? "post" : "posts"}</p>
+                {entity.evidence.map((item, index) => <p className="sub" key={index}>{item.snippet ?? "Frame evidence"} · {item.field.replaceAll("_", " ")} · {item.platformId}</p>)}
+              </li>
+            ))}
+          </ul>
+        </details>
       )}
       {showPipeline && (
         <ul className="app-rows">
@@ -149,35 +163,40 @@ export function CreatorReportView({
           ))}
         </ul>
       )}
-      {confirmed.length > 0 && <JokeInvoice report={report} entities={confirmed} reviews={reviews} />}
+      {confirmed.length > 0 && cpm != null && <JokeInvoice report={report} entities={confirmed} reviews={reviews} />}
       <OutreachDialog draft={draft} onClose={() => setDraft(null)} />
     </div>
   );
 }
 
 function Assessment({ report }: { report: CreatorReport }) {
-  const text =
-    report.assessment.text === "complete"
-      ? null
-      : report.assessment.text === "failed"
-        ? "Text extraction failed. No substitute list was added."
-        : "Text extraction has not run.";
-  const vision =
-    report.assessment.vision === "complete"
-      ? `Vision looked at ${report.visionFramesSent} frame${report.visionFramesSent === 1 ? "" : "s"}. Names stay unreviewed.`
-      : report.assessment.vision === "failed"
-        ? "Vision failed. No frame names were invented."
-        : "Vision was not run. Live vision validation is blocked.";
+  if (report.retrieval.status === "not_configured") {
+    return <p className="result-note" data-testid="creator-assessment">Instagram search is unavailable. Oriane is not configured.</p>;
+  }
+  if (report.retrieval.status === "failed") {
+    return <p className="result-note" data-testid="creator-assessment">{report.retrieval.message ?? "Instagram posts could not be loaded. Please try again."}</p>;
+  }
+  if (report.posts.length === 0) return null;
+  const reason = report.assessment.visionReason ?? report.assessment.reason;
+  const vision = report.assessment.vision === "complete"
+    ? `Visual analysis checked ${report.visionFramesSent} frame${report.visionFramesSent === 1 ? "" : "s"}. Appearances still need review.`
+    : report.assessment.vision === "failed"
+      ? "Visual analysis failed. These results may miss appearances visible only in video."
+      : reason === "no_frames" || report.posts.every((post) => post.frameCount === 0)
+        ? "No video frames were available for visual analysis."
+        : reason === "gmi_not_configured"
+          ? "Analysis is unavailable. The model is not configured."
+          : reason === "model_vision_not_confirmed"
+            ? "Visual analysis is not enabled. These results use captions, mentions, transcripts, and on-screen text."
+            : "Visual analysis was not run. These results use the available text evidence.";
   return (
-    <p className="result-note">
-      {report.retrieval.status === "not_configured" && "Oriane is not configured. No posts were requested."}
-      {report.retrieval.status === "failed" && (report.retrieval.message ?? "Oriane did not return a page.")}
-      {text && ` ${text}`}
-      {` ${vision}`}
-      {report.illustrativeCpm == null
-        ? " No illustrative CPM is configured."
-        : ` Illustrative CPM ${report.illustrativeCpm} (${report.cpmSource}). Not a market rate.`}
-    </p>
+    <div className="creator-assessment" data-testid="creator-assessment">
+      {report.assessment.text === "failed" && <p>Text analysis failed. Some mentions may be missing.</p>}
+      {report.assessment.text === "unassessed" && <p>Text analysis has not run.</p>}
+      <p>{vision}</p>
+      {report.textWindowTruncated && <p>Some post text was shortened for analysis.</p>}
+      {report.illustrativeCpm != null && <p>Illustrative CPM: {report.illustrativeCpm}. Estimates appear after confirmation and are not a market rate or money owed.</p>}
+    </div>
   );
 }
 
@@ -217,9 +236,8 @@ function JokeInvoice({
 
 function entityAmount(entity: CreatorEntity, cpm: number | null): number | null {
   if (cpm == null) return null;
-  const known = entity.matchingPosts.filter((post) => post.views != null);
-  if (known.length === 0) return null;
-  return Math.round(known.reduce((sum, post) => sum + ((post.views as number) / 1000) * cpm, 0));
+  const { total } = postViews(entity.matchingPosts);
+  return total == null ? null : Math.round((total / 1000) * cpm);
 }
 
 function pitch(report: CreatorReport, entity: CreatorEntity, review: Review, cpm: number | null): OutreachDraft {

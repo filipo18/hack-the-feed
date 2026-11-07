@@ -80,7 +80,7 @@ export function LiveBrandResults() {
             <div className="results-body">
               <details className="search-method" data-testid="search-meta">
                 <summary>About these results</summary>
-                <p className="live-meta">Instagram and TikTok, one page of 10 on each channel. {modelLabel(data)} {HONESTY_NOTE}</p>
+                <p className="live-meta">Instagram, one page of 10 on each channel. {modelLabel(data)} {HONESTY_NOTE}</p>
               </details>
               {copy && (
                 <div className="live-note" data-testid="assessment" role="status">

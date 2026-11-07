@@ -34,7 +34,7 @@ describe("searchBrand", () => {
     expect(JSON.parse(String(init.body))).toEqual({
       brand: "Ryanair",
       aliases: [],
-      platforms: ["instagram", "tiktok"],
+      platforms: ["instagram"],
     });
     vi.unstubAllGlobals();
   });

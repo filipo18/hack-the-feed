@@ -272,3 +272,27 @@ def test_creator_route_does_not_change_brand_search_health():
     missing = client.post("/api/search", json={"brand": "Ryanair"})
     assert missing.status_code == 200
     assert missing.json()["assessment"] == "unassessed"
+
+
+def test_no_frames_reports_missing_evidence_instead_of_disabled_vision(monkeypatch):
+    rows = [dict(FIXTURE["posts"][0], media=[])]
+    response, http = _post(monkeypatch, rows, 1, _model([]))
+    assert response.json()["assessment"]["visionReason"] == "no_frames"
+    assert response.json()["assessment"]["vision"] == "blocked"
+    assert len(http.calls) == 2
+
+
+def test_dedicated_vision_model_runs_without_changing_the_text_model(monkeypatch):
+    monkeypatch.setenv("GMI_VISION_MODEL", "configured-vision-model")
+    response, http = _post(monkeypatch, FIXTURE["posts"], 3, _model([]), _model([], "observations"))
+    assert response.json()["assessment"]["vision"] == "complete"
+    assert response.json()["visionFramesSent"] == 1
+    assert http.calls[1]["body"]["model"] == "configured-by-env"
+    assert http.calls[2]["body"]["model"] == "configured-vision-model"
+
+
+def test_text_failure_does_not_hide_vision_blocker(monkeypatch):
+    response, _ = _post(monkeypatch, FIXTURE["posts"], 3, (500, {}))
+    assessment = response.json()["assessment"]
+    assert assessment["textReason"] == "gmi_error"
+    assert assessment["visionReason"] == "model_vision_not_confirmed"
